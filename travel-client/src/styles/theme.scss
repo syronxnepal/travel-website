@@ -1,0 +1,368 @@
+// Theme variables for consistent design
+:root {
+  // Colors
+  --primary-color: #e79520;
+  --primary-color-rgb: 231, 149, 32;
+  --primary-color-dark: #d17a1a;
+  --primary-dark: #232d4e;
+  --secondary-color: #31a1de;
+  --neutral-color: #92919b;
+  --secondary-dark: #0e8cd7;
+  --accent-color: #f59e0b;
+  --accent-color-rgb: 245, 158, 11;
+  --accent-color-dark: #d97706;
+  
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-light: #9ca3af;
+  --text-tertiary: #d1d5db;
+  --text-white: #ffffff;
+  
+  --background-primary: #ffffff;
+  --background-secondary: #f9fafb;
+  --background-light: #f8fafc;
+  --background-white: #ffffff;
+  --background-dark: #232d4e;
+  --background-blue: #1e40af;
+  
+  --border-color: #e5e7eb;
+  --border-light: #f3f4f6;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  // Spacing
+  --spacing-xs: 0.25rem;    // 4px
+  --spacing-sm: 0.5rem;     // 8px
+  --spacing-md: 1rem;       // 16px
+  --spacing-lg: 1.5rem;     // 24px
+  --spacing-xl: 2rem;       // 32px
+  --spacing-2xl: 3rem;      // 48px
+  --spacing-3xl: 4rem;      // 64px
+  --spacing-4xl: 6rem;      // 96px
+  
+  // Typography - Updated to use Sofia Pro font weights
+  --font-family-primary: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-secondary: 'Titillium Web', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --font-size-xs: 0.75rem;    // 12px
+  --font-size-sm: 0.875rem;   // 14px
+  --font-size-base: 1rem;     // 16px
+  --font-size-lg: 1.125rem;   // 18px
+  --font-size-xl: 1.25rem;    // 20px
+  --font-size-2xl: 1.5rem;    // 24px
+  --font-size-3xl: 1.875rem;  // 30px
+  --font-size-4xl: 2.25rem;   // 36px
+  --font-size-5xl: 3rem;      // 48px
+  --font-size-6xl: 3.75rem;   // 60px
+  
+  // Updated font weights to match Sofia Pro available weights
+  --font-weight-ultralight: 100;  // UltraLight
+  --font-weight-extralight: 200;  // ExtraLight
+  --font-weight-light: 300;       // Light
+  --font-weight-normal: 400;      // Regular
+  --font-weight-medium: 500;      // Medium
+  --font-weight-semibold: 600;    // SemiBold
+  --font-weight-bold: 700;        // Bold
+  --font-weight-black: 900;       // Black
+  
+  // Legacy font weight names for backward compatibility
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  // Border radius
+  --radius-sm: 0.25rem;    // 4px
+  --radius-md: 0.375rem;   // 6px
+  --radius-lg: 0.5rem;     // 8px
+  --radius-xl: 0.75rem;    // 12px
+  --radius-2xl: 1rem;      // 16px
+  --radius-full: 9999px;   // Full circle
+  
+  // Transitions
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+// SCSS variables for breakpoints (not CSS custom properties)
+$breakpoint-xs: 480px;    // Small mobile
+$breakpoint-sm: 640px;    // Mobile / Large mobile
+$breakpoint-md: 768px;    // Tablet
+$breakpoint-lg: 1024px;   // Small laptop
+$breakpoint-xl: 1280px;   // Large laptop
+$breakpoint-2xl: 1536px;  // Extra large desktop
+
+// Comprehensive responsive mixins
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin mobile-small {
+  @media (max-width: #{$breakpoint-xs - 1px}) {
+    @content;
+  }
+}
+
+@mixin mobile-large {
+  @media (min-width: #{$breakpoint-xs}) and (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-md}) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-and-below {
+  @media (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin small-laptop {
+  @media (min-width: #{$breakpoint-lg}) and (max-width: #{$breakpoint-xl - 1px}) {
+    @content;
+  }
+}
+
+@mixin large-laptop {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+@mixin laptop-and-up {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+// Utility mixins for common patterns
+@mixin responsive-grid($mobile: 1, $tablet: 2, $laptop: 3, $desktop: 4) {
+  display: grid;
+  grid-template-columns: repeat($mobile, 1fr);
+  gap: var(--spacing-md);
+  
+  @media (min-width: #{$breakpoint-md}) {
+    grid-template-columns: repeat($tablet, 1fr);
+  }
+  
+  @media (min-width: #{$breakpoint-lg}) {
+    grid-template-columns: repeat($laptop, 1fr);
+    gap: var(--spacing-lg);
+  }
+  
+  @media (min-width: #{$breakpoint-xl}) {
+    grid-template-columns: repeat($desktop, 1fr);
+  }
+}
+
+@mixin responsive-padding {
+  padding: var(--spacing-md);
+  
+  @include mobile {
+    padding: var(--spacing-sm);
+  }
+  
+  @include tablet {
+    padding: var(--spacing-md);
+  }
+  
+  @include laptop-and-up {
+    padding: var(--spacing-lg);
+  }
+}
+
+@mixin responsive-font-size($mobile: 1rem, $tablet: 1.125rem, $laptop: 1.25rem) {
+  font-size: $mobile;
+  
+  @include tablet {
+    font-size: $tablet;
+  }
+  
+  @include laptop-and-up {
+    font-size: $laptop;
+  }
+}
+
+// Utility classes
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  width: 100%;
+  
+  @include mobile {
+    padding: 0 var(--spacing-sm);
+    max-width: 100%;
+  }
+  
+  @include tablet {
+    padding: 0 var(--spacing-md);
+    max-width: 100%;
+  }
+  
+  @include small-laptop {
+    max-width: 1140px;
+    padding: 0 var(--spacing-lg);
+  }
+  
+  @include large-laptop {
+    max-width: 1200px;
+    padding: 0 var(--spacing-xl);
+  }
+}
+.inner{
+    position: relative;
+   
+  }
+   .section-header-outer{
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+
+      @include mobile {
+        margin-bottom: 24px;
+      }
+
+      @include tablet {
+        margin-bottom: 32px;
+      }
+    }
+    .section-right-button{
+      position: absolute;
+      right: 0;
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+
+      @include tablet-and-below {
+        position: static;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: var(--spacing-md);
+      }
+    }
+.section {
+  padding: var(--spacing-3xl) 0;
+  
+  @include mobile {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  @include tablet {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  @include small-laptop {
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  @include large-laptop {
+    padding: var(--spacing-4xl) 0;
+  }
+}
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  
+  @include mobile {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  @include tablet {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  @include laptop-and-up {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: var(--transition-normal);
+  cursor: pointer;
+  border: none;
+  
+  &--primary {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    
+    &:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+  
+  &--secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-white);
+    
+    &:hover {
+      background-color: var(--secondary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+  
+  &--outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    
+    &:hover {
+      background-color: var(--primary-color);
+      color: var(--text-white);
+    }
+  }
+}
+
+.card {
+  background: var(--background-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition-normal);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+}

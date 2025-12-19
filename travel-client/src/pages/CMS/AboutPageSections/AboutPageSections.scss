@@ -1,0 +1,96 @@
+.about-section {
+  &__header {
+    margin-bottom: 2rem;
+
+    h3 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+  }
+
+  &__card {
+    background: var(--background-white);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    overflow: hidden;
+
+    &-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      padding: 1.5rem 2rem;
+      
+      h4 {
+        color: white;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+  }
+
+  &__form {
+    padding: 2rem;
+
+    .btn {
+      margin-top: 1rem;
+    }
+  }
+
+  &__content {
+    padding: 2rem;
+  }
+
+  &__cell {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  &__placeholder {
+    padding: 4rem 2rem;
+    text-align: center;
+    
+    i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+  }
+}
+
+.why-choose-us {
+  &__icon-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+  }
+
+  &__cell {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+

@@ -1,0 +1,117 @@
+@import "src/styles/theme.scss";
+
+.tours-page {
+  min-height: 100vh;
+  background: var(--background-light);
+
+  &__hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+    padding: var(--spacing-4xl) 0;
+    color: var(--text-white);
+    text-align: center;
+
+    @include mobile {
+      padding: var(--spacing-xl) 0;
+    }
+
+    @include tablet {
+      padding: var(--spacing-3xl) 0;
+    }
+
+    @include small-laptop {
+      padding: var(--spacing-4xl) 0;
+    }
+  }
+
+  &__hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+
+    @include mobile {
+      padding: 0 var(--spacing-sm);
+    }
+  }
+
+  &__title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-tight);
+
+    @include mobile {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-md);
+    }
+
+    @include tablet {
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-md);
+    }
+
+    @include small-laptop {
+      font-size: var(--font-size-3xl);
+    }
+  }
+
+  &__subtitle {
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+    line-height: var(--line-height-relaxed);
+
+    @include mobile {
+      font-size: var(--font-size-sm);
+    }
+
+    @include tablet {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  &__main {
+    padding: var(--spacing-4xl) 0;
+
+    @include mobile {
+      padding: var(--spacing-xl) 0;
+    }
+
+    @include tablet {
+      padding: var(--spacing-2xl) 0;
+    }
+
+    @include small-laptop {
+      padding: var(--spacing-3xl) 0;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-2xl);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    @include small-laptop {
+      grid-template-columns: 280px 1fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  &__filters {
+    @include tablet-and-below {
+      display: none;
+    }
+
+    @include laptop-and-up {
+      display: block;
+    }
+  }
+}

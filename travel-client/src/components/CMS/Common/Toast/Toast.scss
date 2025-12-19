@@ -1,0 +1,141 @@
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--background-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  max-width: 400px;
+  pointer-events: auto;
+  animation: slideIn 0.3s ease, slideOut 0.3s ease 2.7s;
+  border-left: 4px solid;
+
+  &--show {
+    animation: slideIn 0.3s ease;
+  }
+
+  &--success {
+    border-left-color: #10b981;
+    background: linear-gradient(90deg, #d1fae5 0%, var(--background-white) 100%);
+
+    .toast__icon {
+      background: #10b981;
+      
+      i {
+        color: var(--text-white);
+      }
+    }
+  }
+
+  &--error {
+    border-left-color: #ef4444;
+    background: linear-gradient(90deg, #fee2e2 0%, var(--background-white) 100%);
+
+    .toast__icon {
+      background: #ef4444;
+      
+      i {
+        color: var(--text-white);
+      }
+    }
+  }
+
+  &--warning {
+    border-left-color: #f59e0b;
+    background: linear-gradient(90deg, #fef3c7 0%, var(--background-white) 100%);
+
+    .toast__icon {
+      background: #f59e0b;
+      
+      i {
+        color: var(--text-white);
+      }
+    }
+  }
+
+  &--info {
+    border-left-color: #3b82f6;
+    background: linear-gradient(90deg, #dbeafe 0%, var(--background-white) 100%);
+
+    .toast__icon {
+      background: #3b82f6;
+      
+      i {
+        color: var(--text-white);
+      }
+    }
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    i {
+      font-size: var(--font-size-lg);
+      color: var(--text-white);
+    }
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__message {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    margin: 0;
+    line-height: var(--line-height-normal);
+  }
+
+  &__close {
+    background: transparent;
+    border: none;
+    padding: var(--spacing-xs);
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition-normal);
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+
+    &:hover {
+      background: var(--background-light);
+      color: var(--text-primary);
+    }
+
+    i {
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+

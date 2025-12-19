@@ -1,0 +1,39 @@
+@import "src/styles/theme.scss";
+
+.homepage {
+  padding-top: 70px; // Account for fixed header
+  
+  @include tablet {
+    padding-top: 60px;
+  }
+
+  @include mobile {
+    padding-top: 60px;
+  }
+  
+  // Ensure proper spacing between sections
+  > * {
+    margin-bottom: 0;
+  }
+  
+  // Add some breathing room between major sections
+  .section {
+    padding-bottom: var(--spacing-4xl);
+    
+    @include mobile {
+      padding-bottom: var(--spacing-xl);
+    }
+
+    @include tablet {
+      padding-bottom: var(--spacing-2xl);
+    }
+
+    @include small-laptop {
+      padding-bottom: var(--spacing-3xl);
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

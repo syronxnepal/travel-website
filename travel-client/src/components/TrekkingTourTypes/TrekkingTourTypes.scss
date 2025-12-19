@@ -1,0 +1,95 @@
+@import "src/styles/theme.scss";
+
+.trekking-tour-types {
+  padding: var(--spacing-4xl) 0;
+  background: var(--background-secondary);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-4xl);
+
+    @include mobile {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--spacing-xl);
+    }
+  }
+
+  &__card {
+    background: var(--background-primary);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    transition: var(--transition-normal);
+    position: relative;
+    border: 2px solid transparent;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    &.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+
+      .trekking-tour-types__icon {
+        color: white;
+      }
+
+      .trekking-tour-types__title {
+        color: white;
+      }
+
+      .trekking-tour-types__description {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+
+  &__number {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-tertiary);
+    opacity: 0.5;
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    background: var(--background-secondary);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    color: var(--primary-color);
+    font-size: var(--font-size-xl);
+    transition: var(--transition-normal);
+
+    .trekking-tour-types__card.active & {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+    transition: var(--transition-normal);
+  }
+
+  &__description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-normal);
+    margin: 0;
+    transition: var(--transition-normal);
+  }
+}

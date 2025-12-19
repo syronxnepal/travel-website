@@ -1,0 +1,123 @@
+@import "src/styles/theme.scss";
+
+.blog-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--background-primary);
+  background: var(--background-secondary);
+
+  @include mobile {
+    padding: var(--spacing-xl) 0;
+  }
+
+  @include tablet {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  @include small-laptop {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  &__content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  &__title {
+    font-size: var(--font-size-3xl);
+    color: var(--primary-color-dark);
+    margin-bottom: var(--spacing-md);
+    font-weight: var(--font-weight-bold);
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+  }
+
+  &__subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-color-medium);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-3xl);
+
+    // 2 rows of 3 cards each
+    .blog-section__card:nth-child(n+4) {
+      margin-top: 0;
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    @include small-laptop {
+      gap: var(--spacing-lg);
+    }
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__view-more {
+    text-align: center;
+  }
+
+  @include mobile {
+    padding: var(--spacing-2xl) 0;
+
+    &__header {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    &__title {
+      font-size: var(--font-size-2xl);
+    }
+
+    &__subtitle {
+      font-size: var(--font-size-base);
+    }
+
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-2xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-sm);
+    }
+  }
+}

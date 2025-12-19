@@ -1,0 +1,76 @@
+@import "src/styles/theme.scss";
+
+.top-tours-and-short-tours {
+  background: var(--background-secondary);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-3xl);
+
+    @include mobile {
+      flex-direction: column;
+      gap: var(--spacing-md);
+      text-align: center;
+    }
+  }
+
+  &__explore {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-normal);
+
+    &:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    @include small-laptop {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-xl);
+    }
+  }
+
+  &__scroll-indicator {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__dots {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--border-color);
+      transition: var(--transition-normal);
+
+      &.active {
+        background: var(--primary-color);
+        transform: scale(1.2);
+      }
+    }
+  }
+}

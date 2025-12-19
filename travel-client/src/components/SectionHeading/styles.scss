@@ -1,0 +1,35 @@
+.section-heading-container {
+    &.center{
+        text-align: center;
+    }
+
+    .section-heading-top {
+        letter-spacing: 1px;
+        position: relative;
+        background: #e3e4e6;
+        padding: 4px 20px 6px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        column-gap: 10px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+
+        .heading-icon {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .heading-text {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 28px;
+        }
+
+    }
+
+    .section-heading {
+        font-size: 32px;
+        text-transform: capitalize;
+    }
+}

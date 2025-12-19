@@ -1,0 +1,68 @@
+@import "src/styles/theme.scss";
+
+.top-treks {
+  background: var(--background-secondary);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-3xl);
+
+    @include mobile {
+      flex-direction: column;
+      gap: var(--spacing-md);
+      text-align: center;
+    }
+  }
+
+  &__explore {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: var(--transition-normal);
+
+    &:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+  }
+
+  &__grid {
+    display: flex;
+
+    gap: 8px;
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+      gap: 4px;
+
+    }
+  }
+
+  &__scroll-indicator {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__dots {
+    display: flex;
+    gap: var(--spacing-sm);
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--border-color);
+      transition: var(--transition-normal);
+
+      &.active {
+        background: var(--primary-color);
+        transform: scale(1.2);
+      }
+    }
+  }
+}

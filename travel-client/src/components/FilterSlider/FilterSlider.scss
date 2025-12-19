@@ -1,0 +1,124 @@
+@import "src/styles/theme.scss";
+
+.filter-slider {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  max-width: 85vw;
+  height: 100vh;
+  background: white;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &.active {
+    right: 0;
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-xl);
+    border-bottom: 1px solid var(--border-light);
+    background: var(--secondary-color);
+    color: white;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: white;
+    margin: 0;
+
+    i {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  &__close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-full);
+    transition: var(--transition-normal);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    i {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-xl);
+    
+    // Override filter component styles inside slider
+    .trekking-filters,
+    .tour-filters {
+      position: static;
+      box-shadow: none;
+      padding: 0;
+      background: transparent;
+    }
+  }
+
+  // Mobile responsiveness
+  @include mobile {
+    width: 85vw;
+    right: -85vw;
+    max-width: 100%;
+
+    &__header {
+      padding: var(--spacing-lg);
+    }
+
+    &__content {
+      padding: var(--spacing-lg);
+    }
+  }
+
+  @include mobile-small {
+    width: 90vw;
+    right: -90vw;
+  }
+}

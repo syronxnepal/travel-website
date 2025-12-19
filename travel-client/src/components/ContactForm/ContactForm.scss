@@ -1,0 +1,102 @@
+@import "src/styles/theme.scss";
+
+.contact-form {
+  padding: var(--spacing-4xl) 0;
+  background: var(--background-secondary);
+
+  // &__content {
+  //   max-width: 800px;
+  //   margin: 0 auto;
+  // }
+
+  &__header {
+  }
+
+  &__form-container {
+    background: var(--background-primary);
+    padding: 40px 20px;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+
+    @include mobile {
+      padding: var(--spacing-2xl);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  &__label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+  }
+
+  &__input,
+  &__textarea {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: 1px solid #DFE0E4;
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--background-primary);
+    transition: var(--transition-normal);
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+    }
+
+    &::placeholder {
+      color: var(--text-tertiary);
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+
+  &__submit {
+    display: flex;
+    // justify-content: center;
+    margin-top: var(--spacing-lg);
+  }
+
+  &__button {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+}

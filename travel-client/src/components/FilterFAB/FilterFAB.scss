@@ -1,0 +1,73 @@
+@import "src/styles/theme.scss";
+
+.filter-fab {
+  position: fixed;
+  bottom: var(--spacing-2xl);
+  right: var(--spacing-2xl);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: var(--font-size-xl);
+
+  &:hover {
+    background: var(--primary-color-dark);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  i {
+    font-size: var(--font-size-lg);
+  }
+
+  &__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    border: 2px solid white;
+  }
+
+  // Hide on desktop/laptop
+  @include laptop-and-up {
+    display: none;
+  }
+
+  // Show only on mobile and tablet
+  @include tablet-and-below {
+    display: flex;
+  }
+
+  @include mobile {
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+    width: 52px;
+    height: 52px;
+
+    i {
+      font-size: var(--font-size-base);
+    }
+  }
+}

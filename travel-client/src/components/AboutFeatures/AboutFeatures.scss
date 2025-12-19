@@ -1,0 +1,138 @@
+@import "src/styles/theme.scss";
+
+.about-features {
+  padding: var(--spacing-4xl) 0;
+  background: var(--background-secondary);
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4xl);
+    align-items: start;
+    margin-bottom: var(--spacing-4xl);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  &__left {
+    padding-right: var(--spacing-xl);
+
+    @include mobile {
+      padding-right: 0;
+    }
+  }
+
+  &__description {
+    margin: var(--spacing-xl) 0;
+    
+    p {
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-relaxed);
+      color: var(--text-secondary);
+      margin: 0;
+    }
+  }
+
+  &__cta {
+    margin-top: var(--spacing-xl);
+  }
+
+  &__right {
+    position: relative;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+
+  &__feature {
+    background: var(--background-primary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: var(--transition-normal);
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    color: white;
+    font-size: var(--font-size-xl);
+  }
+
+  &__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  &__description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: var(--line-height-normal);
+    margin: 0;
+  }
+
+  &__images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xl);
+    position: relative;
+
+    @include mobile {
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+  }
+
+  &__image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-normal);
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &--large {
+      width: 200px;
+      height: 200px;
+    }
+
+    &--small {
+      width: 150px;
+      height: 150px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import "src/styles/theme.scss";
+
+.about-page {
+  min-height: 100vh;
+  background: var(--background-primary);
+
+  @include mobile {
+    padding-top: 60px;
+  }
+
+  @include tablet {
+    padding-top: 60px;
+  }
+}

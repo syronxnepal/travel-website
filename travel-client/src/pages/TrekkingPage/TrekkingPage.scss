@@ -1,0 +1,55 @@
+@import "src/styles/theme.scss";
+
+.trekking-page {
+  min-height: 100vh;
+  background: var(--background-primary);
+
+  &__main {
+    padding: var(--spacing-4xl) 0;
+    background: var(--background-secondary);
+
+    @include mobile {
+      padding: var(--spacing-xl) 0;
+    }
+
+    @include tablet {
+      padding: var(--spacing-2xl) 0;
+    }
+
+    @include small-laptop {
+      padding: var(--spacing-3xl) 0;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    align-items: start;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    @include small-laptop {
+      grid-template-columns: 280px 1fr;
+      gap: var(--spacing-xl);
+    }
+  }
+
+  &__filters {
+    @include tablet-and-below {
+      display: none;
+    }
+
+    @include laptop-and-up {
+      display: block;
+    }
+  }
+}

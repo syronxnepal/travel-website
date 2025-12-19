@@ -1,0 +1,397 @@
+@import "src/styles/theme.scss";
+
+// Shared styles for all CMS pages
+
+.cms-page {
+  padding: 0;
+  min-height: 100vh;
+  background: var(--background-light);
+}
+
+.cms-section {
+  &__header {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: var(--background-white);
+    border-bottom: 1px solid var(--border-light);
+
+    @include mobile {
+      padding: var(--spacing-md) var(--spacing-xs);
+    }
+
+    &-content {
+      h3 {
+        font-size: var(--font-size-xxl);
+        font-weight: var(--font-weight-bold);
+        color: var(--text-primary);
+        margin: 0 0 var(--spacing-xs) 0;
+
+        @include mobile {
+          font-size: var(--font-size-xl);
+        }
+      }
+
+      p {
+        font-size: var(--font-size-md);
+        color: var(--text-secondary);
+        margin: 0;
+
+        @include mobile {
+          font-size: var(--font-size-sm);
+        }
+      }
+    }
+  }
+
+  &__content {
+    padding: var(--spacing-xl);
+
+    @include mobile {
+      padding: var(--spacing-md) var(--spacing-xs);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+      padding-top: var(--spacing-lg);
+      border-top: 1px solid var(--border-light);
+    }
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-light);
+
+  .btn-danger {
+    background: #ef4444;
+    color: var(--text-white);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    &:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+  }
+}
+
+// Common cell styles for CMS tables
+.trek-cms__image-cell,
+.tour-cms__image-cell,
+.short-tour-cms__image-cell,
+.blog-cms__image-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+}
+
+.trek-cms__image-placeholder,
+.tour-cms__image-placeholder,
+.short-tour-cms__image-placeholder,
+.blog-cms__image-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-sm);
+  background: var(--background-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+  }
+}
+
+.trek-cms__title-cell,
+.tour-cms__title-cell,
+.short-tour-cms__title-cell,
+.blog-cms__title-cell,
+.booking-cms__title-cell,
+.contact-cms__title-cell,
+.testimonial-cms__title-cell {
+  strong {
+    color: var(--text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.trek-cms__difficulty,
+.tour-cms__category,
+.short-tour-cms__category,
+.blog-cms__category {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: capitalize;
+
+  &--easy {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  &--moderate {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  &--challenging {
+    background: #fed7aa;
+    color: #9a3412;
+  }
+
+  &--expert {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  &--adventure {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  &--cultural {
+    background: #ede9fe;
+    color: #6b21a8;
+  }
+
+  &--nature {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  &--historical {
+    background: #fef3c7;
+    color: #92400e;
+  }
+}
+
+.trek-cms__featured-badge,
+.tour-cms__featured-badge,
+.short-tour-cms__featured-badge,
+.blog-cms__featured-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: capitalize;
+
+  &.featured {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  &.regular {
+    background: var(--background-light);
+    color: var(--text-secondary);
+  }
+}
+
+.trek-cms__rating,
+.tour-cms__rating,
+.short-tour-cms__rating,
+.blog-cms__rating,
+.testimonial-cms__rating {
+  .trek-cms__stars,
+  .tour-cms__stars,
+  .short-tour-cms__stars,
+  .blog-cms__stars,
+  .testimonial-cms__stars {
+    display: flex;
+    gap: 2px;
+
+    i {
+      font-size: var(--font-size-xs);
+      color: var(--text-tertiary);
+
+      &.active {
+        color: #fbbf24;
+      }
+    }
+  }
+}
+
+.testimonial-cms__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-cms__text {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.booking-cms__status-cell,
+.contact-cms__status-cell,
+.testimonial-cms__status-cell {
+  .status-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: capitalize;
+
+    &.new {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    &.read {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    &.replied {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    &.active {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    &.inactive {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    &.pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    &.confirmed {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    &.cancelled {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    &.completed {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+  }
+}
+
+.contact-cms__message {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.active {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  &.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+}
+
+.hero-slider-cell__image {
+  width: 100%;
+  height: 60px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--background-light);
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.hero-slider-cell__paragraph {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

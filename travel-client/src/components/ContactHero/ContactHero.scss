@@ -1,0 +1,97 @@
+@import "src/styles/theme.scss";
+
+.contact-hero {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-color) 100%);
+  overflow: hidden;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=500&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(35, 45, 78, 0.8);
+    backdrop-filter: blur(2px);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+
+    @include mobile {
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  &__breadcrumb-item {
+    color: rgba(255, 255, 255, 0.8);
+    transition: var(--transition-normal);
+
+    &.active {
+      color: var(--primary-color);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    &:not(.active):hover {
+      color: white;
+    }
+  }
+
+  &__breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &__subtitle {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    @include mobile {
+      font-size: var(--font-size-base);
+    }
+  }
+
+  &__title {
+    font-size: var(--font-size-6xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    @include mobile {
+      font-size: var(--font-size-4xl);
+    }
+  }
+}

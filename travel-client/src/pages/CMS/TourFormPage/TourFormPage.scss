@@ -1,0 +1,29 @@
+@import "src/styles/theme.scss";
+
+.tour-form-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+
+  @include mobile {
+    flex-direction: column-reverse;
+    gap: var(--spacing-sm);
+  }
+
+  .btn {
+    min-width: 120px;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+
