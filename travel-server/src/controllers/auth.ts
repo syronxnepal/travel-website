@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../config/database';
 import { User } from '../models/User';
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
@@ -12,13 +12,17 @@ export const login = async (req: Request, res: Response) => {
     const user = await userRepository.findOne({ where: { email } });
     
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ success: false, message: 'Invalid credentials' });
+      res.status(401).json({ success: false, message: 'Invalid credentials' });
+      return;
     }
 
+    const jwtSecret = process.env.JWT_SECRET || 'fallback-secret';
+    const jwtExpire = process.env.JWT_EXPIRE || '7d';
+    
     const token = jwt.sign(
       { userId: user.id, role: user.role },
-      process.env.JWT_SECRET || 'fallback-secret',
-      { expiresIn: process.env.JWT_EXPIRE || '7d' }
+      jwtSecret,
+      { expiresIn: jwtExpire }
     );
 
     res.json({
@@ -37,7 +41,7 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -46,7 +50,8 @@ export const register = async (req: Request, res: Response) => {
     // Check if user already exists
     const existingUser = await userRepository.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(400).json({ success: false, message: 'User already exists' });
+      res.status(400).json({ success: false, message: 'User already exists' });
+      return;
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -60,10 +65,13 @@ export const register = async (req: Request, res: Response) => {
 
     const savedUser = await userRepository.save(user);
 
+    const jwtSecret = process.env.JWT_SECRET || 'fallback-secret';
+    const jwtExpire = process.env.JWT_EXPIRE || '7d';
+    
     const token = jwt.sign(
       { userId: savedUser.id, role: savedUser.role },
-      process.env.JWT_SECRET || 'fallback-secret',
-      { expiresIn: process.env.JWT_EXPIRE || '7d' }
+      jwtSecret,
+      { expiresIn: jwtExpire }
     );
 
     res.status(201).json({
@@ -82,7 +90,7 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const getMe = async (req: Request, res: Response) => {
+export const getMe = async (req: Request, res: Response): Promise<void> => {
   try {
     const userRepository = AppDataSource.getRepository(User);
     const user = await userRepository.findOne({ 
@@ -91,7 +99,8 @@ export const getMe = async (req: Request, res: Response) => {
     });
     
     if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
+      res.status(404).json({ success: false, message: 'User not found' });
+      return;
     }
 
     res.json({
