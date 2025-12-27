@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import { AppDataSource } from '../config/database';
 import { User } from '../models/User';
 
@@ -19,10 +19,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const jwtSecret = process.env.JWT_SECRET || 'fallback-secret';
     const jwtExpire = process.env.JWT_EXPIRE || '7d';
     
+    const signOptions: SignOptions = {
+      expiresIn: jwtExpire
+    };
+    
     const token = jwt.sign(
       { userId: user.id, role: user.role },
       jwtSecret,
-      { expiresIn: jwtExpire }
+      signOptions
     );
 
     res.json({
@@ -68,10 +72,14 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const jwtSecret = process.env.JWT_SECRET || 'fallback-secret';
     const jwtExpire = process.env.JWT_EXPIRE || '7d';
     
+    const signOptions: SignOptions = {
+      expiresIn: jwtExpire
+    };
+    
     const token = jwt.sign(
       { userId: savedUser.id, role: savedUser.role },
       jwtSecret,
-      { expiresIn: jwtExpire }
+      signOptions
     );
 
     res.status(201).json({
