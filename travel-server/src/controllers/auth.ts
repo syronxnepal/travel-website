@@ -1,20 +1,22 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import { AppDataSource } from '../config/database';
+import { User } from '../models/User';
 
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({ where: { email } });
     
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
     const token = jwt.sign(
-      { userId: user._id, role: user.role },
+      { userId: user.id, role: user.role },
       process.env.JWT_SECRET || 'fallback-secret',
       { expiresIn: process.env.JWT_EXPIRE || '7d' }
     );
@@ -23,7 +25,7 @@ export const login = async (req: Request, res: Response) => {
       success: true,
       token,
       user: {
-        id: user._id,
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role,
@@ -39,17 +41,27 @@ export const register = async (req: Request, res: Response) => {
   try {
     const { name, email, password, role } = req.body;
 
+    const userRepository = AppDataSource.getRepository(User);
+    
+    // Check if user already exists
+    const existingUser = await userRepository.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: 'User already exists' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    const user = await User.create({
+    const user = userRepository.create({
       name,
       email,
       password: hashedPassword,
       role: role || 'viewer'
     });
 
+    const savedUser = await userRepository.save(user);
+
     const token = jwt.sign(
-      { userId: user._id, role: user.role },
+      { userId: savedUser.id, role: savedUser.role },
       process.env.JWT_SECRET || 'fallback-secret',
       { expiresIn: process.env.JWT_EXPIRE || '7d' }
     );
@@ -58,11 +70,11 @@ export const register = async (req: Request, res: Response) => {
       success: true,
       token,
       user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        avatar: user.avatar
+        id: savedUser.id,
+        name: savedUser.name,
+        email: savedUser.email,
+        role: savedUser.role,
+        avatar: savedUser.avatar
       }
     });
   } catch (error: any) {
@@ -72,7 +84,11 @@ export const register = async (req: Request, res: Response) => {
 
 export const getMe = async (req: Request, res: Response) => {
   try {
-    const user = await User.findById(req.user?.userId).select('-password');
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({ 
+      where: { id: parseInt(req.user?.userId as string) },
+      select: ['id', 'name', 'email', 'role', 'avatar', 'createdAt']
+    });
     
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
@@ -81,7 +97,7 @@ export const getMe = async (req: Request, res: Response) => {
     res.json({
       success: true,
       user: {
-        id: user._id,
+        id: user.id,
         name: user.name,
         email: user.email,
         role: user.role,

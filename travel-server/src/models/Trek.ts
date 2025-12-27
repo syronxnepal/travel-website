@@ -1,38 +1,112 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
-export interface ITrek extends Document {
+export interface ItineraryDay {
+  day: number;
+  title: string;
+  description: string;
+  activities?: string[];
+  meals?: string[];
+  accommodation?: string;
+  highlights?: string[];
+}
+
+export interface TourInfo {
+  icon: string;
+  title: string;
+  value: string;
+}
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface ITrek {
+  id: number;
   title: string;
   location: string;
   difficulty: 'Easy' | 'Moderate' | 'Challenging' | 'Expert';
   duration: string;
-  price: number;
-  rating: number;
+  price: string;
+  originalPrice?: string;
+  rating: string;
+  reviewCount: number;
   image: string;
   images?: string[];
   description: string;
-  itinerary: string[];
-  included: string[];
-  excluded: string[];
+  highlights?: string[];
+  included?: string[];
+  excluded?: string[];
+  itinerary?: ItineraryDay[];
+  tourInfo?: TourInfo[];
+  faqs?: FAQ[];
   featured: boolean;
   createdAt: Date;
 }
 
-const TrekSchema = new Schema({
-  title: { type: String, required: true },
-  location: { type: String, required: true },
-  difficulty: { type: String, enum: ['Easy', 'Moderate', 'Challenging', 'Expert'], required: true },
-  duration: { type: String, required: true },
-  price: { type: Number, required: true },
-  rating: { type: Number, default: 0 },
-  image: { type: String, required: true },
-  images: [String],
-  description: { type: String, required: true },
-  itinerary: [String],
-  included: [String],
-  excluded: [String],
-  featured: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now }
-});
+@Entity('treks')
+export class Trek implements ITrek {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-export default mongoose.model<ITrek>('Trek', TrekSchema);
+  @Column({ type: 'varchar', length: 255 })
+  title!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  location!: string;
+
+  @Column({ 
+    type: 'enum', 
+    enum: ['Easy', 'Moderate', 'Challenging', 'Expert'] 
+  })
+  difficulty!: 'Easy' | 'Moderate' | 'Challenging' | 'Expert';
+
+  @Column({ type: 'varchar', length: 100 })
+  duration!: string;
+
+  @Column({ type: 'varchar', length: 50 })
+  price!: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  originalPrice?: string;
+
+  @Column({ type: 'varchar', length: 10 })
+  rating!: string;
+
+  @Column({ type: 'int', default: 0 })
+  reviewCount!: number;
+
+  @Column({ type: 'varchar', length: 500 })
+  image!: string;
+
+  @Column({ type: 'jsonb', nullable: true })
+  images?: string[];
+
+  @Column({ type: 'text' })
+  description!: string;
+
+  @Column({ type: 'jsonb', nullable: true })
+  highlights?: string[];
+
+  @Column({ type: 'jsonb', nullable: true })
+  included?: string[];
+
+  @Column({ type: 'jsonb', nullable: true })
+  excluded?: string[];
+
+  @Column({ type: 'jsonb', nullable: true })
+  itinerary?: ItineraryDay[];
+
+  @Column({ type: 'jsonb', nullable: true })
+  tourInfo?: TourInfo[];
+
+  @Column({ type: 'jsonb', nullable: true })
+  faqs?: FAQ[];
+
+  @Column({ type: 'boolean', default: false })
+  featured!: boolean;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+}
 

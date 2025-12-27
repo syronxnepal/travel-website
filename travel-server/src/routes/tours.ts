@@ -1,12 +1,20 @@
 import express from 'express';
+import { 
+  getTours, 
+  getTour, 
+  createTour, 
+  updateTour, 
+  deleteTour 
+} from '../controllers/tours';
 import { authenticate, authorize } from '../middleware/auth';
 
 const router = express.Router();
 
-// Placeholder routes - similar structure to treks
-router.get('/', (req, res) => {
-  res.json({ success: true, message: 'Tours route' });
-});
+router.get('/', getTours);
+router.get('/:id', getTour);
+router.post('/', authenticate, authorize('admin', 'editor'), createTour);
+router.put('/:id', authenticate, authorize('admin', 'editor'), updateTour);
+router.delete('/:id', authenticate, authorize('admin', 'editor'), deleteTour);
 
 export default router;
 

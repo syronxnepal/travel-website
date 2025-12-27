@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
-export interface IBlog extends Document {
+export interface IBlog {
+  id: number;
   title: string;
   author: string;
   category: string;
@@ -12,17 +13,36 @@ export interface IBlog extends Document {
   createdAt: Date;
 }
 
-const BlogSchema = new Schema({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  category: { type: String, required: true },
-  image: { type: String, required: true },
-  content: { type: String, required: true },
-  excerpt: { type: String, required: true },
-  date: { type: Date, required: true },
-  published: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now }
-});
+@Entity('blogs')
+export class Blog implements IBlog {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-export default mongoose.model<IBlog>('Blog', BlogSchema);
+  @Column({ type: 'varchar', length: 255 })
+  title!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  author!: string;
+
+  @Column({ type: 'varchar', length: 100 })
+  category!: string;
+
+  @Column({ type: 'varchar', length: 500 })
+  image!: string;
+
+  @Column({ type: 'text' })
+  content!: string;
+
+  @Column({ type: 'text' })
+  excerpt!: string;
+
+  @Column({ type: 'timestamp' })
+  date!: Date;
+
+  @Column({ type: 'boolean', default: false })
+  published!: boolean;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+}
 

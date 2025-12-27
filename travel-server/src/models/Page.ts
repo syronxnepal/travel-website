@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
-export interface IPage extends Document {
+export interface IPage {
+  id: number;
   image: string;
   topTitle: string;
   heading: string;
@@ -8,13 +9,28 @@ export interface IPage extends Document {
   createdAt: Date;
 }
 
-const PageSchema = new Schema({
-  image: { type: String, required: true },
-  topTitle: { type: String, required: true },
-  heading: { type: String, required: true },
-  status: { type: String, enum: ['published', 'draft'], default: 'draft' },
-  createdAt: { type: Date, default: Date.now }
-});
+@Entity('pages')
+export class Page implements IPage {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-export default mongoose.model<IPage>('Page', PageSchema);
+  @Column({ type: 'varchar', length: 500 })
+  image!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  topTitle!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  heading!: string;
+
+  @Column({ 
+    type: 'enum', 
+    enum: ['published', 'draft'], 
+    default: 'draft' 
+  })
+  status!: 'published' | 'draft';
+
+  @CreateDateColumn()
+  createdAt!: Date;
+}
 

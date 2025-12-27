@@ -10,7 +10,7 @@ travel-server/
 │   ├── config/          # Database configuration
 │   ├── controllers/     # Route controllers
 │   ├── middleware/      # Auth & error handling
-│   ├── models/          # Mongoose models
+│   ├── models/          # TypeORM entities
 │   ├── routes/          # API routes
 │   └── index.ts         # Entry point
 ├── dist/                # Compiled JavaScript
@@ -21,7 +21,7 @@ travel-server/
 
 - **Framework**: Express.js
 - **Language**: TypeScript
-- **Database**: MongoDB with Mongoose
+- **Database**: PostgreSQL with TypeORM
 - **Authentication**: JWT
 - **Security**: Helmet, bcrypt, CORS
 
@@ -41,7 +41,11 @@ Create a `.env` file:
 ```env
 NODE_ENV=development
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/travel-cms
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=travel_cms
 JWT_SECRET=your-secret-key
 JWT_EXPIRE=7d
 CORS_ORIGIN=http://localhost:5173

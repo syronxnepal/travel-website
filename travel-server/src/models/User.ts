@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
-export interface IUser extends Document {
+export interface IUser {
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -9,14 +10,31 @@ export interface IUser extends Document {
   createdAt: Date;
 }
 
-const UserSchema = new Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['admin', 'editor', 'viewer'], default: 'viewer' },
-  avatar: { type: String },
-  createdAt: { type: Date, default: Date.now }
-});
+@Entity('users')
+export class User implements IUser {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-export default mongoose.model<IUser>('User', UserSchema);
+  @Column({ type: 'varchar', length: 255 })
+  name!: string;
+
+  @Column({ type: 'varchar', length: 255, unique: true })
+  email!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  password!: string;
+
+  @Column({ 
+    type: 'enum', 
+    enum: ['admin', 'editor', 'viewer'], 
+    default: 'viewer' 
+  })
+  role!: 'admin' | 'editor' | 'viewer';
+
+  @Column({ type: 'varchar', length: 500, nullable: true })
+  avatar?: string;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+}
 

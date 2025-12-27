@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
-export interface ITestimonial extends Document {
+export interface ITestimonial {
+  id: number;
   name: string;
   role: string;
   image: string;
@@ -10,15 +11,30 @@ export interface ITestimonial extends Document {
   createdAt: Date;
 }
 
-const TestimonialSchema = new Schema({
-  name: { type: String, required: true },
-  role: { type: String, required: true },
-  image: { type: String, required: true },
-  rating: { type: Number, required: true, min: 1, max: 5 },
-  comment: { type: String, required: true },
-  isActive: { type: Boolean, default: true },
-  createdAt: { type: Date, default: Date.now }
-});
+@Entity('testimonials')
+export class Testimonial implements ITestimonial {
+  @PrimaryGeneratedColumn()
+  id!: number;
 
-export default mongoose.model<ITestimonial>('Testimonial', TestimonialSchema);
+  @Column({ type: 'varchar', length: 255 })
+  name!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  role!: string;
+
+  @Column({ type: 'varchar', length: 500 })
+  image!: string;
+
+  @Column({ type: 'int' })
+  rating!: number;
+
+  @Column({ type: 'text' })
+  comment!: string;
+
+  @Column({ type: 'boolean', default: true })
+  isActive!: boolean;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+}
 
