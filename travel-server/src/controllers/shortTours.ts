@@ -2,19 +2,19 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../config/database';
 import { ShortTour } from '../models/ShortTour';
 
-export const getShortTours = async (req: Request, res: Response) => {
+export const getShortTours = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const shortTourRepository = AppDataSource.getRepository(ShortTour);
     const shortTours = await shortTourRepository.find({
       order: { createdAt: 'DESC' }
     });
-    res.json({ success: true, data: shortTours });
+    return res.json({ success: true, data: shortTours });
   } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
-export const getShortTour = async (req: Request, res: Response) => {
+export const getShortTour = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const shortTourRepository = AppDataSource.getRepository(ShortTour);
     const shortTour = await shortTourRepository.findOne({
@@ -25,24 +25,24 @@ export const getShortTour = async (req: Request, res: Response) => {
       return res.status(404).json({ success: false, message: 'Short tour not found' });
     }
     
-    res.json({ success: true, data: shortTour });
+    return res.json({ success: true, data: shortTour });
   } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
-export const createShortTour = async (req: Request, res: Response) => {
+export const createShortTour = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const shortTourRepository = AppDataSource.getRepository(ShortTour);
     const shortTour = shortTourRepository.create(req.body);
     const savedShortTour = await shortTourRepository.save(shortTour);
-    res.status(201).json({ success: true, data: savedShortTour });
+    return res.status(201).json({ success: true, data: savedShortTour });
   } catch (error: any) {
-    res.status(400).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
-export const updateShortTour = async (req: Request, res: Response) => {
+export const updateShortTour = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const shortTourRepository = AppDataSource.getRepository(ShortTour);
     const shortTour = await shortTourRepository.findOne({
@@ -55,13 +55,13 @@ export const updateShortTour = async (req: Request, res: Response) => {
     
     Object.assign(shortTour, req.body);
     const updatedShortTour = await shortTourRepository.save(shortTour);
-    res.json({ success: true, data: updatedShortTour });
+    return res.json({ success: true, data: updatedShortTour });
   } catch (error: any) {
-    res.status(400).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 };
 
-export const deleteShortTour = async (req: Request, res: Response) => {
+export const deleteShortTour = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const shortTourRepository = AppDataSource.getRepository(ShortTour);
     const shortTour = await shortTourRepository.findOne({
@@ -73,9 +73,9 @@ export const deleteShortTour = async (req: Request, res: Response) => {
     }
     
     await shortTourRepository.remove(shortTour);
-    res.json({ success: true, message: 'Short tour deleted successfully' });
+    return res.json({ success: true, message: 'Short tour deleted successfully' });
   } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
 
