@@ -1,0 +1,5 @@
+import { DataSource } from 'typeorm';
+export declare const AppDataSource: DataSource;
+declare const connectDB: () => Promise<void>;
+export default connectDB;
+//# sourceMappingURL=database.d.ts.map
