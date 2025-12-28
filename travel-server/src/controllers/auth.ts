@@ -17,10 +17,10 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const jwtSecret = process.env.JWT_SECRET || 'fallback-secret';
-    const jwtExpire = process.env.JWT_EXPIRE || '7d';
+    const jwtExpire = (process.env.JWT_EXPIRE || '7d') as string;
     
     const signOptions: SignOptions = {
-      expiresIn: jwtExpire
+      expiresIn: jwtExpire as string | number
     };
     
     const token = jwt.sign(
@@ -70,10 +70,10 @@ export const register = async (req: Request, res: Response): Promise<void> => {
     const savedUser = await userRepository.save(user);
 
     const jwtSecret = process.env.JWT_SECRET || 'fallback-secret';
-    const jwtExpire = process.env.JWT_EXPIRE || '7d';
+    const jwtExpire = (process.env.JWT_EXPIRE || '7d') as string;
     
     const signOptions: SignOptions = {
-      expiresIn: jwtExpire
+      expiresIn: jwtExpire as string | number
     };
     
     const token = jwt.sign(
