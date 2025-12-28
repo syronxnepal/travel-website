@@ -1,4 +1,7 @@
 import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
@@ -7,9 +10,6 @@ import morgan from 'morgan';
 import compression from 'compression';
 import connectDB from './config/database';
 import errorHandler from './middleware/errorHandler';
-
-// Load environment variables
-dotenv.config();
 
 const app = express();
 

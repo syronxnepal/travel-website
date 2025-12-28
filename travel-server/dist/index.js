@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
+// Load environment variables
+dotenv_1.default.config();
 require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
@@ -12,8 +14,6 @@ const morgan_1 = __importDefault(require("morgan"));
 const compression_1 = __importDefault(require("compression"));
 const database_1 = __importDefault(require("./config/database"));
 const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));
-// Load environment variables
-dotenv_1.default.config();
 const app = (0, express_1.default)();
 // Security middleware
 app.use((0, helmet_1.default)());
