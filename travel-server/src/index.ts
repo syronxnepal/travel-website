@@ -1,10 +1,10 @@
+import dotenv from 'dotenv';
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
-import dotenv from 'dotenv';
 import connectDB from './config/database';
 import errorHandler from './middleware/errorHandler';
 
