@@ -38,18 +38,7 @@ npm install
 
 Create a `.env` file:
 
-```env
-NODE_ENV=development
-PORT=5000
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_NAME=travel_cms
-JWT_SECRET=your-secret-key
-JWT_EXPIRE=7d
-CORS_ORIGIN=http://localhost:5173
-```
+
 
 ### Run Server
 
