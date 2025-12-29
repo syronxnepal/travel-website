@@ -26,6 +26,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from uploads directory
+app.use('/uploads', express.static('uploads'));
+
 // Compression middleware
 app.use(compression());
 
@@ -55,6 +58,7 @@ import bookingRoutes from './routes/bookings';
 import contactRoutes from './routes/contacts';
 import pageRoutes from './routes/pages';
 import cmsRoutes from './routes/cms';
+import uploadRoutes from './routes/upload';
 
 // Mount routes
 app.use('/api/auth', authRoutes);
@@ -68,6 +72,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/pages', pageRoutes);
 app.use('/api/cms', cmsRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

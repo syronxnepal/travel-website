@@ -38,6 +38,19 @@ npm install
 
 Create a `.env` file:
 
+```env
+NODE_ENV=development
+PORT=5000
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=travel_cms
+JWT_SECRET=your-secret-key
+JWT_EXPIRE=7d
+CORS_ORIGIN=http://localhost:5173
+```
+
 
 
 ### Run Server
@@ -64,6 +77,16 @@ npm start
 - `POST /api/treks` - Create trek (protected)
 - `PUT /api/treks/:id` - Update trek (protected)
 - `DELETE /api/treks/:id` - Delete trek (protected)
+
+### File Uploads
+- `POST /api/upload/image` - Upload single image (protected, admin/editor only)
+  - Files are stored locally in the `uploads/` directory
+  - Returns URL: `/uploads/{filename}`
+  - Images are accessible via: `http://localhost:5000/uploads/{filename}`
+- `POST /api/upload/images` - Upload multiple images (protected, admin/editor only)
+  - Max 10 images per request
+  - Each file max 5MB
+  - Supported formats: JPEG, PNG, GIF, WebP
 
 ### Other Resources
 - Tours, Blogs, Testimonials, Bookings, Contacts, Pages

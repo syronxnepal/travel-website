@@ -4,35 +4,60 @@ import './ImageUpload.scss';
 interface ImageUploadProps {
   value?: string | string[];
   onChange: (value: string | string[]) => void;
+  onFileUpload?: (file: File) => Promise<string>;
   multiple?: boolean;
   maxImages?: number;
   accept?: string;
   className?: string;
   placeholder?: string;
   aspectRatio?: string;
+  label?: string;
+  name?: string;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
   value,
   onChange,
+  onFileUpload,
   multiple = false,
   maxImages = 5,
   accept = 'image/*',
   className = '',
   placeholder = 'Click to upload images',
-  aspectRatio = '16/9'
+  aspectRatio = '16/9',
+  label,
+  name
 }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const currentImages = Array.isArray(value) ? value : (value ? [value] : []);
 
-  const handleFileSelect = (files: FileList | null) => {
+  const handleFileSelect = async (files: FileList | null) => {
     if (!files) return;
 
     const fileArray = Array.from(files);
-    const newImages: string[] = [];
+    
+    // If onFileUpload is provided, upload to server
+    if (onFileUpload && fileArray.length > 0 && !multiple) {
+      const file = fileArray[0];
+      if (file.type.startsWith('image/')) {
+        setUploading(true);
+        try {
+          const imageUrl = await onFileUpload(file);
+          onChange(imageUrl);
+        } catch (error) {
+          console.error('Upload failed:', error);
+        } finally {
+          setUploading(false);
+        }
+        return;
+      }
+    }
 
+    // Otherwise, use local preview
+    const newImages: string[] = [];
     fileArray.forEach((file) => {
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
@@ -103,10 +128,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   return (
     <div className={`image-upload ${className}`}>
+      {label && (
+        <label className="image-upload__label" htmlFor={name}>
+          {label}
+        </label>
+      )}
       <div
         className={`image-upload__dropzone ${isDragging ? 'dragging' : ''} ${
           currentImages.length > 0 ? 'has-images' : ''
-        }`}
+        } ${uploading ? 'uploading' : ''}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -121,7 +151,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           className="image-upload__input"
         />
 
-        {currentImages.length === 0 ? (
+        {uploading ? (
+          <div className="image-upload__placeholder">
+            <i className="fa-solid fa-spinner fa-spin"></i>
+            <p className="image-upload__placeholder-text">Uploading...</p>
+          </div>
+        ) : currentImages.length === 0 ? (
           <div className="image-upload__placeholder">
             <i className="fa-solid fa-cloud-upload-alt"></i>
             <p className="image-upload__placeholder-text">{placeholder}</p>

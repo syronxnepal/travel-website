@@ -1,85 +1,17 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CMSLayout from 'src/components/CMS/CMSLayout/CMSLayout';
 import DataTable from 'src/components/CMS/Common/DataTable/DataTable';
 import CRUDProvider, { useCRUD } from 'src/components/CMS/Common/CRUDProvider/CRUDProvider';
+import { useTreks, useDeleteTrek, type Trek } from 'src/hooks/useTreks';
 import 'src/pages/CMS/CMSPage.scss';
-
-interface Trek {
-  id: string;
-  image: string;
-  title: string;
-  location: string;
-  difficulty: string;
-  duration: string;
-  price: string;
-  originalPrice?: string;
-  rating: string;
-  reviewCount: number;
-  description: string;
-  highlights?: string[];
-  included?: string[];
-  excluded?: string[];
-  itinerary?: Array<{
-    day: number;
-    title: string;
-    description: string;
-    activities?: string[];
-    meals?: string[];
-    accommodation?: string;
-    highlights?: string[];
-  }>;
-  tourInfo?: Array<{
-    icon: string;
-    title: string;
-    value: string;
-  }>;
-  faqs?: Array<{
-    question: string;
-    answer: string;
-  }>;
-  featured: boolean;
-}
 
 const TrekManagementContent: React.FC = () => {
   const navigate = useNavigate();
-  const { performAction, showDeleteConfirmation } = useCRUD();
-  const [treks, setTreks] = useState<Trek[]>([
-    {
-      id: '1',
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400',
-      title: 'Everest Base Camp Trek',
-      location: 'Nepal',
-      difficulty: 'Challenging',
-      duration: '14 days',
-      price: '$1,500',
-      rating: '4.8',
-      featured: true
-    },
-    {
-      id: '2',
-      image: 'https://images.unsplash.com/photo-1579192199754-e5d35f5b78e5?w=400',
-      title: 'Annapurna Circuit Trek',
-      location: 'Nepal',
-      difficulty: 'Moderate',
-      duration: '12 days',
-      price: '$1,200',
-      rating: '4.7',
-      featured: false
-    },
-    {
-      id: '3',
-      image: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400',
-      title: 'Langtang Valley Trek',
-      location: 'Nepal',
-      difficulty: 'Moderate',
-      duration: '10 days',
-      price: '$900',
-      rating: '4.6',
-      featured: false
-    }
-  ]);
+  const { showDeleteConfirmation } = useCRUD();
+  const { data: treks = [], isLoading, error } = useTreks();
+  const deleteTrekMutation = useDeleteTrek();
 
 
   const columns = [
@@ -172,13 +104,15 @@ const TrekManagementContent: React.FC = () => {
 
   const handleDeleteClick = (trek: Trek) => {
     showDeleteConfirmation(trek, () => {
-      performAction(
-        () => setTreks(treks.filter(t => t.id !== trek.id)),
-        'Trek deleted successfully',
-        'success'
-      );
+      deleteTrekMutation.mutate(trek.id);
     });
   };
+
+  // Format treks for display (convert id to string for compatibility)
+  const formattedTreks = treks.map(trek => ({
+    ...trek,
+    id: trek.id.toString() as any // Type assertion for display compatibility
+  }));
 
 
   return (
@@ -193,15 +127,25 @@ const TrekManagementContent: React.FC = () => {
           </div>
 
           <div className="cms-section__content">
-            <DataTable
-              data={treks}
-              columns={columns}
-              onAdd={handleAdd}
-              onEdit={handleEdit}
-              onDelete={handleDeleteClick}
-              searchable
-              emptyMessage="No treks found"
-            />
+            {isLoading ? (
+              <div style={{ padding: '2rem', textAlign: 'center' }}>
+                <p>Loading treks...</p>
+              </div>
+            ) : error ? (
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>
+                <p>Error loading treks: {error.message}</p>
+              </div>
+            ) : (
+              <DataTable
+                data={formattedTreks}
+                columns={columns}
+                onAdd={handleAdd}
+                onEdit={handleEdit}
+                onDelete={handleDeleteClick}
+                searchable
+                emptyMessage="No treks found"
+              />
+            )}
           </div>
 
         </div>

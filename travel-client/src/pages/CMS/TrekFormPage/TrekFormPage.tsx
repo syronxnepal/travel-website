@@ -7,50 +7,20 @@ import ImageUpload from 'src/components/CMS/Common/ImageUpload/ImageUpload';
 import RepeaterField from 'src/components/CMS/Common/RepeaterField/RepeaterField';
 import StringRepeaterField from 'src/components/CMS/Common/StringRepeaterField/StringRepeaterField';
 import CRUDProvider, { useCRUD } from 'src/components/CMS/Common/CRUDProvider/CRUDProvider';
+import { useTrek, useCreateTrek, useUpdateTrek, useUploadImage, type Trek } from 'src/hooks/useTreks';
 import 'src/pages/CMS/CMSPage.scss';
 import './TrekFormPage.scss';
-
-interface Trek {
-  id: string;
-  image: string;
-  title: string;
-  location: string;
-  difficulty: string;
-  duration: string;
-  price: string;
-  originalPrice?: string;
-  rating: string;
-  reviewCount: number;
-  description: string;
-  highlights?: string[];
-  included?: string[];
-  excluded?: string[];
-  itinerary?: Array<{
-    day: number;
-    title: string;
-    description: string;
-    activities?: string[];
-    meals?: string[];
-    accommodation?: string;
-    highlights?: string[];
-  }>;
-  tourInfo?: Array<{
-    icon: string;
-    title: string;
-    value: string;
-  }>;
-  faqs?: Array<{
-    question: string;
-    answer: string;
-  }>;
-  featured: boolean;
-}
 
 const TrekFormPageContent: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
-  const { performAction } = useCRUD();
   const isEditing = !!id;
+  
+  // React Query hooks
+  const { data: trek, isLoading: isLoadingTrek } = useTrek(id);
+  const createTrekMutation = useCreateTrek();
+  const updateTrekMutation = useUpdateTrek();
+  const uploadImageMutation = useUploadImage();
 
   const [formData, setFormData] = useState<Partial<Trek>>({
     title: '',
@@ -64,22 +34,70 @@ const TrekFormPageContent: React.FC = () => {
     featured: false
   });
 
+  // Load trek data when editing
   useEffect(() => {
-    if (isEditing && id) {
-      // In a real app, fetch trek by id
+    if (trek) {
+      setFormData({
+        image: trek.image || '',
+        title: trek.title || '',
+        location: trek.location || '',
+        difficulty: trek.difficulty || 'Moderate',
+        duration: trek.duration || '',
+        price: trek.price || '',
+        originalPrice: trek.originalPrice,
+        rating: trek.rating || '4.5',
+        reviewCount: trek.reviewCount || 0,
+        description: trek.description || '',
+        highlights: trek.highlights || [],
+        included: trek.included || [],
+        excluded: trek.excluded || [],
+        itinerary: trek.itinerary || [],
+        tourInfo: trek.tourInfo || [],
+        faqs: trek.faqs || [],
+        featured: trek.featured || false
+      });
     }
-  }, [id, isEditing]);
+  }, [trek]);
+
+  const handleImageUpload = async (file: File) => {
+    try {
+      const imageUrl = await uploadImageMutation.mutateAsync(file);
+      setFormData({ ...formData, image: imageUrl });
+    } catch (error) {
+      // Error is handled by the mutation hook
+    }
+  };
 
   const handleSave = () => {
-    performAction(
-      () => {
-        // In a real app, save to API
-        navigate('/cms/treks/manage');
-      },
-      isEditing ? 'Trek updated successfully' : 'Trek added successfully',
-      'success'
-    );
+    // Prepare data for API (remove id for create, keep for update)
+    const apiData: Partial<Trek> = {
+      image: formData.image || '',
+      title: formData.title || '',
+      location: formData.location || '',
+      difficulty: formData.difficulty || 'Moderate',
+      duration: formData.duration || '',
+      price: formData.price || '',
+      originalPrice: formData.originalPrice,
+      rating: formData.rating || '4.5',
+      reviewCount: formData.reviewCount || 0,
+      description: formData.description || '',
+      highlights: formData.highlights || [],
+      included: formData.included || [],
+      excluded: formData.excluded || [],
+      itinerary: formData.itinerary || [],
+      tourInfo: formData.tourInfo || [],
+      faqs: formData.faqs || [],
+      featured: formData.featured || false
+    };
+
+    if (isEditing && id) {
+      updateTrekMutation.mutate({ id, data: apiData });
+    } else {
+      createTrekMutation.mutate(apiData);
+    }
   };
+
+  const isLoading = isLoadingTrek || createTrekMutation.isPending || updateTrekMutation.isPending;
 
   return (
     <CMSLayout>
@@ -93,12 +111,18 @@ const TrekFormPageContent: React.FC = () => {
           </div>
 
           <div className="cms-section__content">
-            <div className="cms-section__form trek-form-page">
+            {isLoadingTrek && isEditing ? (
+              <div style={{ padding: '2rem', textAlign: 'center' }}>
+                <p>Loading trek data...</p>
+              </div>
+            ) : (
+              <div className="cms-section__form trek-form-page">
               <ImageUpload
                 label="Trek Image"
                 name="image"
                 value={formData.image || ''}
                 onChange={(value) => setFormData({ ...formData, image: value })}
+                onFileUpload={handleImageUpload}
                 placeholder="Upload or enter image URL"
               />
               
@@ -354,14 +378,25 @@ const TrekFormPageContent: React.FC = () => {
               />
               
               <div className="form-actions">
-                <button className="btn btn-secondary" onClick={() => navigate('/cms/treks/manage')}>
+                <button 
+                  className="btn btn-secondary" 
+                  onClick={() => navigate('/cms/treks/manage')}
+                  disabled={isLoading}
+                >
                   Cancel
                 </button>
-                <button className="btn btn-primary" onClick={handleSave}>
-                  {isEditing ? 'Update' : 'Add'} Trek
+                <button 
+                  className="btn btn-primary" 
+                  onClick={handleSave}
+                  disabled={isLoading}
+                >
+                  {isLoading 
+                    ? (isLoadingTrek ? 'Loading...' : 'Saving...') 
+                    : (isEditing ? 'Update' : 'Add')} Trek
                 </button>
               </div>
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

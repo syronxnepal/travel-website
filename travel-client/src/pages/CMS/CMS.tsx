@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 const CMS: React.FC = () => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
+  useEffect(() => {
     // Redirect to dashboard by default
-    // navigate('/cms/dashboard', { replace: true });
-  // }, [navigate]);
+    navigate('/cms/dashboard', { replace: true });
+  }, [navigate]);
 
   return null;
 };
