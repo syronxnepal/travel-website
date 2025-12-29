@@ -25,6 +25,8 @@ app.use((0, cors_1.default)({
 // Body parsing middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+// Serve static files from uploads directory
+app.use('/uploads', express_1.default.static('uploads'));
 // Compression middleware
 app.use((0, compression_1.default)());
 // Logging middleware
@@ -51,6 +53,7 @@ const bookings_1 = __importDefault(require("./routes/bookings"));
 const contacts_1 = __importDefault(require("./routes/contacts"));
 const pages_1 = __importDefault(require("./routes/pages"));
 const cms_1 = __importDefault(require("./routes/cms"));
+const upload_1 = __importDefault(require("./routes/upload"));
 // Mount routes
 app.use('/api/auth', auth_1.default);
 app.use('/api/users', users_1.default);
@@ -63,6 +66,7 @@ app.use('/api/bookings', bookings_1.default);
 app.use('/api/contacts', contacts_1.default);
 app.use('/api/pages', pages_1.default);
 app.use('/api/cms', cms_1.default);
+app.use('/api/upload', upload_1.default);
 // Error handling middleware
 app.use(errorHandler_1.default);
 // 404 handler

@@ -42,16 +42,12 @@ async function apiFetch<T>(
     console.log(`[API] ${options.method || 'GET'} ${fullUrl}`, { baseUrl, endpoint });
   }
   
+  // Build headers conditionally - don't include Content-Type for FormData
   const headers: HeadersInit = {
-    'Content-Type': 'application/json',
+    ...(!(options.body instanceof FormData) && { 'Content-Type': 'application/json' }),
     ...(token && { Authorization: `Bearer ${token}` }),
     ...options.headers,
   };
-
-  // Remove Content-Type for FormData
-  if (options.body instanceof FormData) {
-    delete headers['Content-Type'];
-  }
 
   const response = await fetch(fullUrl, {
     ...options,
