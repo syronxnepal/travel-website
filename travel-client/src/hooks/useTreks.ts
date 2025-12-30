@@ -193,6 +193,7 @@ export const useDeleteTrek = () => {
 // Hook to upload image
 export const useUploadImage = () => {
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (file: File) => {
@@ -209,6 +210,8 @@ export const useUploadImage = () => {
       throw new Error(response.message || 'Failed to upload image');
     },
     onSuccess: () => {
+      // Invalidate media library cache to show newly uploaded image
+      queryClient.invalidateQueries({ queryKey: ['media', 'list'] });
       showToast('Image uploaded successfully', 'success');
     },
     onError: (error: Error) => {

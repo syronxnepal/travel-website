@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 import { authenticate, authorize } from '../middleware/auth';
 import { uploadSingle, uploadMultiple } from '../utils/upload';
+import path from 'path';
+import fs from 'fs';
 
 const router = express.Router();
 
@@ -71,6 +73,61 @@ router.post('/images', authenticate, authorize('admin', 'editor'), uploadMultipl
     return res.status(500).json({
       success: false,
       message: error.message || 'Failed to upload images'
+    });
+  }
+});
+
+/**
+ * Get list of all uploaded images
+ * GET /api/upload/list
+ * Returns array of image metadata
+ */
+router.get('/list', authenticate, authorize('admin', 'editor'), async (req: Request, res: Response): Promise<Response | void> => {
+  try {
+    const uploadsDir = path.join(process.cwd(), 'uploads');
+    
+    // Check if uploads directory exists
+    if (!fs.existsSync(uploadsDir)) {
+      return res.json({
+        success: true,
+        data: []
+      });
+    }
+
+    // Read all files from uploads directory
+    const files = fs.readdirSync(uploadsDir);
+    
+    // Filter only image files and get their metadata
+    const imageFiles = files
+      .filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+      })
+      .map(file => {
+        const filePath = path.join(uploadsDir, file);
+        const stats = fs.statSync(filePath);
+        
+        return {
+          url: `/uploads/${file}`,
+          filename: file,
+          size: stats.size,
+          uploadedAt: stats.birthtime,
+          modifiedAt: stats.mtime
+        };
+      })
+      .sort((a, b) => {
+        // Sort by upload date, newest first
+        return new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime();
+      });
+
+    return res.json({
+      success: true,
+      data: imageFiles
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to list images'
     });
   }
 });

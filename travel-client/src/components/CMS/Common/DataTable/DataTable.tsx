@@ -16,6 +16,8 @@ interface DataTableProps {
   onDelete?: (item: any) => void;
   onAdd?: () => void;
   loading?: boolean;
+  error?: Error | null;
+  onRetry?: () => void;
   emptyMessage?: string;
   searchable?: boolean;
   onSearch?: (query: string) => void;
@@ -34,6 +36,8 @@ const DataTable: React.FC<DataTableProps> = ({
   onDelete,
   onAdd,
   loading = false,
+  error = null,
+  onRetry,
   emptyMessage = 'No data available',
   searchable = false,
   onSearch,
@@ -82,17 +86,6 @@ const DataTable: React.FC<DataTableProps> = ({
     );
   };
 
-  if (loading) {
-    return (
-      <div className="data-table data-table--loading">
-        <div className="data-table__loading">
-          <i className="fa-solid fa-spinner fa-spin"></i>
-          <span>Loading...</span>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="data-table">
       {(searchable || onAdd) && (
@@ -140,7 +133,41 @@ const DataTable: React.FC<DataTableProps> = ({
             </tr>
           </thead>
           <tbody className="data-table__tbody">
-            {data.length === 0 ? (
+            {loading ? (
+              <tr className="data-table__tr">
+                <td
+                  className="data-table__td data-table__td--loading"
+                  colSpan={columns.length + (onEdit || onDelete ? 1 : 0)}
+                >
+                  <div className="data-table__loading-state">
+                    <i className="fa-solid fa-spinner fa-spin"></i>
+                    <span>Fetching data...</span>
+                  </div>
+                </td>
+              </tr>
+            ) : error ? (
+              <tr className="data-table__tr">
+                <td
+                  className="data-table__td data-table__td--error"
+                  colSpan={columns.length + (onEdit || onDelete ? 1 : 0)}
+                >
+                  <div className="data-table__error-state">
+                    <i className="fa-solid fa-exclamation-triangle"></i>
+                    <span>Fetching failed</span>
+                    {onRetry && (
+                      <button
+                        className="data-table__retry-btn"
+                        onClick={onRetry}
+                        type="button"
+                      >
+                        <i className="fa-solid fa-refresh"></i>
+                        Retry
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ) : data.length === 0 ? (
               <tr className="data-table__tr">
                 <td
                   className="data-table__td data-table__td--empty"

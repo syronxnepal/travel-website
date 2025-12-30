@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import MediaLibrary from '../MediaLibrary/MediaLibrary';
 import './ImageUpload.scss';
 
 interface ImageUploadProps {
@@ -13,6 +14,7 @@ interface ImageUploadProps {
   aspectRatio?: string;
   label?: string;
   name?: string;
+  showMediaLibrary?: boolean; // Show media library button
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -26,10 +28,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   placeholder = 'Click to upload images',
   aspectRatio = '16/9',
   label,
-  name
+  name,
+  showMediaLibrary = true
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [isMediaLibraryOpen, setIsMediaLibraryOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const currentImages = Array.isArray(value) ? value : (value ? [value] : []);
@@ -37,45 +41,55 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const handleFileSelect = async (files: FileList | null) => {
     if (!files) return;
 
-    const fileArray = Array.from(files);
-    
-    // If onFileUpload is provided, upload to server
-    if (onFileUpload && fileArray.length > 0 && !multiple) {
-      const file = fileArray[0];
-      if (file.type.startsWith('image/')) {
-        setUploading(true);
-        try {
+    const fileArray = Array.from(files).filter(file => file.type.startsWith('image/'));
+    if (fileArray.length === 0) return;
+
+    // If onFileUpload is provided, upload to server immediately
+    if (onFileUpload) {
+      setUploading(true);
+      try {
+        const uploadedUrls: string[] = [];
+        
+        // Upload all files
+        for (const file of fileArray) {
           const imageUrl = await onFileUpload(file);
-          onChange(imageUrl);
-        } catch (error) {
-          console.error('Upload failed:', error);
-        } finally {
-          setUploading(false);
+          uploadedUrls.push(imageUrl);
         }
-        return;
+
+        // Update form data with uploaded URLs
+        if (multiple) {
+          const updatedImages = [...currentImages, ...uploadedUrls].slice(0, maxImages);
+          onChange(updatedImages);
+        } else {
+          onChange(uploadedUrls[0]);
+        }
+      } catch (error) {
+        console.error('Upload failed:', error);
+        // Error is handled by the mutation hook
+      } finally {
+        setUploading(false);
       }
+      return;
     }
 
-    // Otherwise, use local preview
+    // Otherwise, use local preview (fallback)
     const newImages: string[] = [];
     fileArray.forEach((file) => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const result = e.target?.result as string;
-          newImages.push(result);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        newImages.push(result);
 
-          if (newImages.length === fileArray.length) {
-            if (multiple) {
-              const updatedImages = [...currentImages, ...newImages].slice(0, maxImages);
-              onChange(updatedImages);
-            } else {
-              onChange(newImages[0]);
-            }
+        if (newImages.length === fileArray.length) {
+          if (multiple) {
+            const updatedImages = [...currentImages, ...newImages].slice(0, maxImages);
+            onChange(updatedImages);
+          } else {
+            onChange(newImages[0]);
           }
-        };
-        reader.readAsDataURL(file);
-      }
+        }
+      };
+      reader.readAsDataURL(file);
     });
   };
 
@@ -95,8 +109,25 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     setIsDragging(false);
   };
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    // Don't trigger file input if clicking on media library button
+    if ((e.target as HTMLElement).closest('.image-upload__media-library-btn')) {
+      return;
+    }
     fileInputRef.current?.click();
+  };
+
+  const handleMediaLibrarySelect = (url: string) => {
+    if (multiple) {
+      // For multiple, add to existing images if not already present
+      if (!currentImages.includes(url)) {
+        const updatedImages = [...currentImages, url].slice(0, maxImages);
+        onChange(updatedImages);
+      }
+    } else {
+      // For single, replace
+      onChange(url);
+    }
   };
 
   const removeImage = (index: number) => {
@@ -191,6 +222,34 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             {currentImages.length} of {maxImages} images
           </span>
         </div>
+      )}
+
+      {/* Media Library Button */}
+      {showMediaLibrary && onFileUpload && (
+        <div className="image-upload__actions">
+          <button
+            type="button"
+            className="image-upload__media-library-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMediaLibraryOpen(true);
+            }}
+          >
+            <i className="fa-solid fa-images"></i>
+            Media Library
+          </button>
+        </div>
+      )}
+
+      {/* Media Library Modal */}
+      {showMediaLibrary && onFileUpload && (
+        <MediaLibrary
+          isOpen={isMediaLibraryOpen}
+          onClose={() => setIsMediaLibraryOpen(false)}
+          onSelect={handleMediaLibrarySelect}
+          multiple={multiple}
+          selectedUrls={currentImages}
+        />
       )}
     </div>
   );

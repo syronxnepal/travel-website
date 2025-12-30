@@ -10,7 +10,7 @@ import 'src/pages/CMS/CMSPage.scss';
 const TrekManagementContent: React.FC = () => {
   const navigate = useNavigate();
   const { showDeleteConfirmation } = useCRUD();
-  const { data: treks = [], isLoading, error } = useTreks();
+  const { data: treks = [], isLoading, error, refetch } = useTreks();
   const deleteTrekMutation = useDeleteTrek();
 
 
@@ -127,25 +127,18 @@ const TrekManagementContent: React.FC = () => {
           </div>
 
           <div className="cms-section__content">
-            {isLoading ? (
-              <div style={{ padding: '2rem', textAlign: 'center' }}>
-                <p>Loading treks...</p>
-              </div>
-            ) : error ? (
-              <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>
-                <p>Error loading treks: {error.message}</p>
-              </div>
-            ) : (
-              <DataTable
-                data={formattedTreks}
-                columns={columns}
-                onAdd={handleAdd}
-                onEdit={handleEdit}
-                onDelete={handleDeleteClick}
-                searchable
-                emptyMessage="No treks found"
-              />
-            )}
+            <DataTable
+              data={formattedTreks}
+              columns={columns}
+              onAdd={handleAdd}
+              onEdit={handleEdit}
+              onDelete={handleDeleteClick}
+              loading={isLoading}
+              error={error}
+              onRetry={() => refetch()}
+              searchable
+              emptyMessage="No treks found"
+            />
           </div>
 
         </div>

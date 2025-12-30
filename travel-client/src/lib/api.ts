@@ -132,5 +132,15 @@ export const uploadApi = {
       return response.json();
     });
   },
+
+  getMediaList: () => {
+    return apiFetch<Array<{
+      url: string;
+      filename: string;
+      size: number;
+      uploadedAt: string;
+      modifiedAt: string;
+    }>>('/upload/list');
+  },
 };
 
