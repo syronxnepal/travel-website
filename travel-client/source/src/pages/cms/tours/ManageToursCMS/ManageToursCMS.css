@@ -1,0 +1,6 @@
+.cms-page__header {
+  margin-bottom: 24px;
+}
+
+.cms-page__header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.cms-page__header p { font-size: 14px; color: var(--color-text-light); }

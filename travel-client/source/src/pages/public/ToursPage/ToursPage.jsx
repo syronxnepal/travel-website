@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react'
+import Header from '../../../components/common/Header/Header'
+import Footer from '../../../components/common/Footer/Footer'
+import PageHero from '../../../components/common/PageHero/PageHero'
+import TourCard from '../../../components/tours/TourCard/TourCard'
+import TourFilters from '../../../components/tours/TourFilters/TourFilters'
+import { toursApi } from '../../../services/api'
+import './ToursPage.css'
+
+function ToursPage() {
+  const [tours, setTours] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [sort, setSort] = useState('default')
+  const [filters, setFilters] = useState({ maxPrice: 5000, maxDuration: 30, difficulty: '' })
+
+  useEffect(() => {
+    setLoading(true)
+    toursApi.getAll()
+      .then((res) => setTours(res?.data || res || []))
+      .catch(() => setTours([]))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const filtered = tours.filter((t) => {
+    if (filters.maxPrice < 5000 && t.price > filters.maxPrice) return false
+    if (filters.maxDuration < 30) {
+      const days = parseInt(t.duration) || 0
+      if (days > filters.maxDuration) return false
+    }
+    if (filters.difficulty) {
+      const active = filters.difficulty.split(',').filter(Boolean)
+      if (active.length && !active.some((d) => t.difficulty?.toLowerCase() === d.toLowerCase())) return false
+    }
+    return true
+  })
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sort === 'price_asc') return (a.price || 0) - (b.price || 0)
+    if (sort === 'price_desc') return (b.price || 0) - (a.price || 0)
+    return 0
+  })
+
+  return (
+    <div className="tours-page">
+      <Header />
+      <PageHero title="Tours" breadcrumb="Home / Tours" backgroundImage="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&h=400&fit=crop" />
+
+      <div className="container">
+        <div className="tours-page__layout">
+          <aside className="tours-page__sidebar">
+            <TourFilters filters={filters} onChange={setFilters} />
+          </aside>
+
+          <main className="tours-page__main">
+            <div className="tours-page__sort-bar">
+              <select value={sort} onChange={(e) => setSort(e.target.value)} className="tours-page__sort-select">
+                <option value="default">Recently Added</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+              </select>
+            </div>
+
+            {loading ? (
+              <div className="loading-spinner" />
+            ) : (
+              <div className="tours-page__grid">
+                {sorted.map((tour) => <TourCard key={tour._id} tour={tour} type="tour" />)}
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  )
+}
+
+export default ToursPage

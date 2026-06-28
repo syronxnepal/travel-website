@@ -1,0 +1,22 @@
+.tour-form-page__grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+.tour-form-page__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.tour-form-page__sidebar .cms-section {
+  position: sticky;
+  top: 84px;
+}
+
+@media (max-width: 1024px) {
+  .tour-form-page__grid { grid-template-columns: 1fr; }
+  .tour-form-page__row { grid-template-columns: 1fr 1fr; }
+}

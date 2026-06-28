@@ -1,0 +1,55 @@
+.our-story-page__timeline {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 40px;
+}
+
+.our-story-page__timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-primary);
+}
+
+.our-story-page__timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.our-story-page__timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -46px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px var(--color-primary);
+}
+
+.our-story-page__timeline-year {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+.our-story-page__timeline-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.our-story-page__timeline-content p {
+  font-size: 14px;
+  color: var(--color-text-light);
+  line-height: 1.7;
+}

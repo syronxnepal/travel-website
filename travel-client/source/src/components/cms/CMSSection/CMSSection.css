@@ -1,0 +1,15 @@
+.cms-section {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  max-width: 860px;
+}
+
+.form-actions {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: 12px;
+}

@@ -1,0 +1,52 @@
+.tour-card {
+  display: block; background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  overflow: hidden; text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.tour-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+.tour-card__image-wrap { position: relative; overflow: hidden; height: 200px; }
+
+.tour-card__image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+
+.tour-card:hover .tour-card__image { transform: scale(1.05); }
+
+.tour-card__wishlist {
+  position: absolute; top: 10px; right: 10px;
+  width: 34px; height: 34px;
+  background: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: none; cursor: pointer; font-size: 15px; color: #999;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: var(--transition); z-index: 1;
+}
+
+.tour-card__wishlist:hover, .tour-card__wishlist--active { color: var(--color-primary); }
+
+.tour-card__body { padding: 14px 16px 16px; }
+
+.tour-card__meta-row {
+  display: flex; gap: 12px; margin-bottom: 8px;
+  font-size: 12px; color: #555;
+}
+
+.tour-card__meta-item { display: flex; align-items: center; gap: 5px; }
+
+.tour-card__dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tour-card__dot--red { background: #e63329; }
+.tour-card__dot--orange { background: var(--color-primary); }
+
+.tour-card__title { font-size: 15px; font-weight: 700; color: #222; margin-bottom: 10px; line-height: 1.4; }
+
+.tour-card__footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+
+.tour-card__stars { color: var(--color-primary); font-size: 12px; }
+.tour-card__rating-count { color: #777; font-size: 11px; }
+.tour-card__price { font-size: 13px; color: var(--color-primary); font-weight: 600; }
+.tour-card__price strong { font-size: 15px; }

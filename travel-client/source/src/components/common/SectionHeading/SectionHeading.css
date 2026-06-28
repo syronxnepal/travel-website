@@ -1,0 +1,24 @@
+.section-heading {
+  margin-bottom: 48px;
+}
+
+.section-heading--center {
+  text-align: center;
+}
+
+.section-heading--left {
+  text-align: left;
+}
+
+.section-heading__subtitle {
+  font-size: 16px;
+  color: var(--color-text-light);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+.section-heading--center .section-heading__subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}

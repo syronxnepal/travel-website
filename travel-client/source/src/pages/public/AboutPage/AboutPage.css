@@ -1,0 +1,111 @@
+.about-section__intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about-section__intro p {
+  font-size: 15px;
+  color: var(--color-text-light);
+  line-height: 1.8;
+}
+
+.about-section__intro-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-section__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.about-section__stat strong {
+  display: block;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-display);
+}
+
+.about-section__stat span {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-why-choose-us-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.about-why-choose-us-section__card {
+  padding: 28px;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.about-why-choose-us-section__card:hover {
+  background: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.about-why-choose-us-section__card i {
+  font-size: 32px;
+  color: var(--color-primary);
+  margin-bottom: 16px;
+}
+
+.about-why-choose-us-section__card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.about-why-choose-us-section__card p {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+.destination-experts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.destination-experts__card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  border: 3px solid var(--color-primary);
+}
+
+.destination-experts__card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.destination-experts__card p {
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+@media (max-width: 1024px) {
+  .about-section__intro { grid-template-columns: 1fr; gap: 32px; }
+  .about-section__stats { grid-template-columns: repeat(2, 1fr); }
+  .about-why-choose-us-section { grid-template-columns: repeat(2, 1fr); }
+  .destination-experts { grid-template-columns: repeat(2, 1fr); }
+}

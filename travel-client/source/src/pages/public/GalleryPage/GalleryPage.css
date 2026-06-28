@@ -1,0 +1,53 @@
+.gallery-page__filters {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center; padding: 32px 0 24px;
+}
+
+.gallery-page__pill {
+  padding: 8px 20px; border: 2px solid var(--color-border); border-radius: 24px;
+  background: #fff; cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+  color: #555; transition: var(--transition);
+}
+.gallery-page__pill:hover, .gallery-page__pill.active {
+  border-color: var(--color-primary); background: var(--color-primary); color: #fff;
+}
+
+.gallery-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-bottom: 64px;
+}
+
+.gallery-page__item {
+  position: relative; overflow: hidden; border-radius: var(--radius-md);
+  aspect-ratio: 1 / 1; cursor: pointer;
+}
+.gallery-page__item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.gallery-page__item:hover img { transform: scale(1.08); }
+
+.gallery-page__item-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  color: #fff; opacity: 0; transition: opacity 0.3s;
+}
+.gallery-page__item:hover .gallery-page__item-overlay { opacity: 1; }
+.gallery-page__item-overlay i { font-size: 28px; }
+.gallery-page__item-overlay span { font-size: 13px; font-weight: 600; }
+
+/* Lightbox */
+.gallery-lightbox {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;
+}
+.gallery-lightbox img { max-width: 90vw; max-height: 80vh; object-fit: contain; border-radius: var(--radius-md); }
+.gallery-lightbox__close {
+  position: absolute; top: 20px; right: 20px;
+  width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.2);
+  border: none; cursor: pointer; color: #fff; font-size: 18px; display: flex; align-items: center; justify-content: center;
+}
+.gallery-lightbox__caption { color: rgba(255,255,255,0.8); font-size: 14px; margin-top: 14px; }
+
+@media (max-width: 768px) { .gallery-page__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .gallery-page__grid { grid-template-columns: 1fr; } }

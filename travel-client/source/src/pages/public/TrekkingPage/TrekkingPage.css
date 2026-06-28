@@ -1,0 +1,97 @@
+.trekking-page__layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  padding: 32px 0 48px;
+  align-items: start;
+}
+
+.trekking-page__sidebar { position: sticky; top: 60px; }
+
+.trekking-page__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.trekking-page__search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+}
+
+.trekking-page__search i { color: #999; }
+
+.trekking-page__search input {
+  border: none; outline: none; font-size: 13px; flex: 1; background: none;
+}
+
+.trekking-page__sort {
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px; background: #fff; cursor: pointer;
+}
+
+.trekking-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* CTA Banner */
+.trekking-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 48px 0;
+}
+
+.trekking-cta__bg {
+  position: absolute; inset: 0;
+  background: var(--color-secondary);
+  opacity: 0.92;
+}
+
+.trekking-cta__inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+}
+
+.trekking-cta__content { color: #fff; }
+
+.trekking-cta__badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--color-primary);
+  color: #fff; font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+
+.trekking-cta__content h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+.trekking-cta__content p { opacity: 0.8; margin-bottom: 24px; max-width: 500px; }
+
+.trekking-cta__image-wrap { position: relative; }
+
+.trekking-cta__image-wrap img { width: 260px; height: 180px; object-fit: cover; border-radius: var(--radius-md); }
+
+.trekking-cta__discount-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--color-primary); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 4px;
+}
+
+@media (max-width: 900px) {
+  .trekking-page__layout { grid-template-columns: 1fr; }
+  .trekking-page__grid { grid-template-columns: repeat(2, 1fr); }
+  .trekking-cta__inner { grid-template-columns: 1fr; }
+  .trekking-cta__image-wrap { display: none; }
+}
+
+@media (max-width: 600px) { .trekking-page__grid { grid-template-columns: 1fr; } }

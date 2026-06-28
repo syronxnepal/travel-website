@@ -1,0 +1,92 @@
+.repeater-field__label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--color-text);
+}
+
+.repeater-field__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.repeater-field__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.repeater-field__content {
+  flex: 1;
+}
+
+.repeater-field__remove {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffebee;
+  color: #c62828;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: var(--transition);
+}
+
+.repeater-field__remove:hover {
+  background: #c62828;
+  color: #fff;
+}
+
+.repeater-field__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px dashed var(--color-primary);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.repeater-field__add:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* String repeater field (simple list of strings) */
+.string-repeater-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.string-repeater-field__input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.string-repeater-field__input-row input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+.string-repeater-field__input-row input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
