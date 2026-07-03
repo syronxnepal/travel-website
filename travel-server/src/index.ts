@@ -54,13 +54,18 @@ app.use('/uploads', (req, res, next): void => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
-  
+
+  // helmet() sets Cross-Origin-Resource-Policy: same-origin globally, which
+  // blocks <img> tags on a different origin (e.g. the frontend's own domain)
+  // from loading these files at all — CORS headers alone don't override this.
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
     return;
   }
-  
+
   next();
 }, express.static('uploads', {
   maxAge: '1d',
