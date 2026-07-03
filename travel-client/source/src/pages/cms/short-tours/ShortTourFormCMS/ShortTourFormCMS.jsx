@@ -3,11 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { shortToursApi } from '../../../../services/api'
 import { useToast } from '../../../../context/ToastContext'
 import ImageUpload from '../../../../components/common/ImageUpload/ImageUpload'
+import GalleryImagesField from '../../../../components/common/GalleryImagesField/GalleryImagesField'
 import RichTextEditor from '../../../../components/common/RichTextEditor/RichTextEditor'
 import StringRepeaterField from '../../../../components/common/StringRepeaterField/StringRepeaterField'
 import '../../tours/TourFormCMS/TourFormCMS.css'
 
-const defaultForm = { title: '', category: '', price: '', duration: '', location: '', image: '', description: '', overview: '', highlights: [], includes: [], excludes: [] }
+const defaultForm = { title: '', category: '', price: '', duration: '', location: '', image: '', images: [], description: '', overview: '', highlights: [], includes: [], excludes: [] }
 
 function ShortTourFormCMS() {
   const { id } = useParams()
@@ -64,6 +65,10 @@ function ShortTourFormCMS() {
             <div className="cms-section">
               <h3>Image</h3>
               <ImageUpload value={form.image} onChange={(f) => update('image', f)} />
+            </div>
+            <div className="cms-section" style={{ marginTop: 20 }}>
+              <h3>Gallery Images</h3>
+              <GalleryImagesField images={form.images || []} onChange={(v) => update('images', v)} />
             </div>
             <div className="cms-section" style={{ marginTop: 20 }}>
               <button type="submit" className="btn btn--primary" style={{ width: '100%', justifyContent: 'center' }} disabled={saving}>{saving ? 'Saving...' : id ? 'Update' : 'Create'}</button>

@@ -185,11 +185,15 @@ export const usersApi = {
 // Media
 export const mediaApi = {
   upload: (formData) =>
-    fetch(`${BASE_URL}/upload`, {
+    fetch(`${BASE_URL}/upload/image`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${getToken()}` },
       body: formData,
-    }).then((r) => r.json()),
+    }).then(async (r) => {
+      const body = await r.json().catch(() => ({}))
+      if (!r.ok) throw new Error(body.message || 'Upload failed')
+      return body
+    }),
   getAll: () => request('/media'),
   delete: (id) => request(`/media/${id}`, { method: 'DELETE' }),
 }
