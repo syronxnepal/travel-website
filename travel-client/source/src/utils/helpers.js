@@ -29,7 +29,11 @@ export function truncate(str, length = 120) {
 export function getImageUrl(path) {
   if (!path) return ''
   if (path.startsWith('http')) return path
-  return `${API_BASE_URL}/uploads/${path}`
+  // The upload endpoint already returns paths like "/uploads/filename.jpg",
+  // so strip any leading slash and/or "uploads/" before re-adding it, instead
+  // of blindly prepending and ending up with ".../uploads//uploads/...".
+  const filename = path.replace(/^\/?(uploads\/)?/, '')
+  return `${API_BASE_URL}/uploads/${filename}`
 }
 
 export function getDifficultyLabel(level) {
