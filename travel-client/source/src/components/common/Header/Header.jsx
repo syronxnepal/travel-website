@@ -139,7 +139,7 @@ function Header() {
         <div className="container">
           <div className="header-topbar__inner">
             <Link to="/" className="header-topbar__logo">
-              <img src="/Images/Brand/logo.png" alt="Travel Adventure Nepal" />
+              <img src="/Images/Brand/logo.svg" alt="Travel Adventure Nepal" />
             </Link>
 
             <div className="header-topbar__info">
@@ -182,7 +182,7 @@ function Header() {
           <div className="header-nav__inner">
             {isScrolled && (
               <Link to="/" className="header-nav__sticky-logo">
-                <img src="/Images/Brand/logo.png" alt="Travel Adventure Nepal" />
+                <img src="/Images/Brand/logo.svg" alt="Travel Adventure Nepal" />
               </Link>
             )}
             <div className="header-nav__links">

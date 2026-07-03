@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" width="110" height="110">
+  <defs>
+    <linearGradient id="sunGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="55%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FF7A00"/>
+    </linearGradient>
+    <clipPath id="badgeClip">
+      <circle cx="55" cy="55" r="52"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#badgeClip)">
+    <circle cx="55" cy="55" r="52" fill="url(#sunGradient)"/>
+    <circle cx="40" cy="38" r="19" fill="#FFF3C4" opacity="0.85"/>
+    <polygon points="-10,95 30,45 55,72 75,50 120,95" fill="#1B2948"/>
+    <polygon points="20,95 52,58 78,95" fill="#28395F"/>
+    <polygon points="30,45 40,58 20,58" fill="#FFF3C4" opacity="0.9"/>
+    <polygon points="75,50 84,62 66,62" fill="#FFF3C4" opacity="0.9"/>
+  </g>
+  <circle cx="55" cy="55" r="52" fill="none" stroke="#ffffff" stroke-width="3"/>
+</svg>

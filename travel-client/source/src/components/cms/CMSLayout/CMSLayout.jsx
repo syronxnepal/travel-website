@@ -164,7 +164,7 @@ function CMSLayout() {
       {/* Sidebar */}
       <aside className={`cms-layout__sidebar${sidebarOpen ? ' open' : ''}`}>
         <div className="cms-layout__brand">
-          <img src="/Images/Brand/logo.png" alt="Adventure Nepal" />
+          <img src="/Images/Brand/logo.svg" alt="Adventure Nepal" />
           <div>
             <div className="cms-layout__brand-name">Content Management</div>
             <div className="cms-layout__brand-sub">System</div>

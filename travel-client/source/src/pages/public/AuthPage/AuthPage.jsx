@@ -45,7 +45,7 @@ function AuthPage() {
       <div className="auth-container">
         <div className="auth-card">
           <Link to="/" className="auth-card__logo">
-            <img src="/Images/Brand/logo.png" alt="Adventure Nepal" />
+            <img src="/Images/Brand/logo.svg" alt="Adventure Nepal" />
           </Link>
 
           {!isCMS && (
