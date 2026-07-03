@@ -111,7 +111,21 @@ function Header() {
   const { wishlist } = useWishlist()
   const scrollY = useScrollPosition()
   const navigate = useNavigate()
-  const isScrolled = scrollY > 60
+  const topbarRef = useRef(null)
+  const [topbarHeight, setTopbarHeight] = useState(90)
+
+  // The nav only switches to its fixed "small header" state once the topbar
+  // has fully scrolled out of view — never while it's still visible, so we
+  // never yank the topbar out of flow (via display:none) mid-scroll, which
+  // used to cause the whole page to jump by the topbar's height.
+  useEffect(() => {
+    if (!topbarRef.current) return
+    const observer = new ResizeObserver(([entry]) => setTopbarHeight(entry.contentRect.height))
+    observer.observe(topbarRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const isScrolled = scrollY > topbarHeight
 
   function handleLogout() {
     logout()
@@ -121,7 +135,7 @@ function Header() {
   return (
     <div className="header-wrap">
       {/* Top info bar */}
-      <div className={'header-topbar' + (isScrolled ? ' header-topbar--hidden' : '')}>
+      <div className="header-topbar" ref={topbarRef}>
         <div className="container">
           <div className="header-topbar__inner">
             <Link to="/" className="header-topbar__logo">

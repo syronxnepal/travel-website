@@ -11,8 +11,6 @@
   z-index: 1000;
 }
 
-.header-topbar--hidden { display: none; }
-
 .header-topbar__inner {
   display: flex;
   align-items: center;
