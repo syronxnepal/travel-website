@@ -247,18 +247,20 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .home-trek-grid { grid-template-columns: repeat(2, 1fr); }
-  .home-tour-grid { grid-template-columns: repeat(2, 1fr); }
   .home-why__layout { grid-template-columns: 1fr; }
   .home-why__media { order: -1; margin-bottom: 20px; height: 360px; }
 }
 
 @media (max-width: 900px) {
   .hero__title { font-size: 36px; }
-  .home-trek-grid { grid-template-columns: repeat(2, 1fr); }
   .home-blog-grid { grid-template-columns: repeat(2, 1fr); }
   .home-gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
   .home-gallery-item--1, .home-gallery-item--2, .home-gallery-item--3, .home-gallery-item--4, .home-gallery-item--5, .home-gallery-item--6 { grid-column: span 1; grid-row: span 1; }
+}
+
+@media (max-width: 768px) {
+  .home-trek-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-tour-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
