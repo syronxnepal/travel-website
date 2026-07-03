@@ -1,4 +1,5 @@
-const BASE_URL = import.meta.env.VITE_API_URL
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://72.61.151.220/api'
+const BASE_URL = API_BASE_URL
 
 function getToken() {
   return localStorage.getItem('token')

@@ -4,7 +4,7 @@ import Header from '../../../components/common/Header/Header'
 import Footer from '../../../components/common/Footer/Footer'
 import TourCard from '../../../components/tours/TourCard/TourCard'
 import HeroSearchWidget from '../../../components/home/HeroSearchWidget/HeroSearchWidget'
-import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi } from '../../../services/api'
+import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi, API_BASE_URL } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
 import './HomePage.css'
 
@@ -109,7 +109,7 @@ function HomePage() {
         const slides = (r?.data || r || []).filter((s) => s.isActive)
         if (slides.length > 0) {
           setHeroSlides(slides.map((s) => ({
-            image: s.image?.startsWith('http') ? s.image : `${import.meta.env.VITE_API_URL}/uploads/${s.image}`,
+            image: s.image?.startsWith('http') ? s.image : `${API_BASE_URL}/uploads/${s.image}`,
             subtitle: '',
             title: s.title,
             desc: s.paragraph,

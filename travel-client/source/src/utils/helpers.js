@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../services/api'
+
 export function formatCurrency(amount, currency = 'USD') {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount)
 }
@@ -27,7 +29,7 @@ export function truncate(str, length = 120) {
 export function getImageUrl(path) {
   if (!path) return ''
   if (path.startsWith('http')) return path
-  return `${import.meta.env.VITE_API_URL}/uploads/${path}`
+  return `${API_BASE_URL}/uploads/${path}`
 }
 
 export function getDifficultyLabel(level) {
