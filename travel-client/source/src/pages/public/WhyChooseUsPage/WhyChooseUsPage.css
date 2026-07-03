@@ -14,32 +14,3 @@
   color: var(--color-text-light);
   line-height: 1.8;
 }
-
-.why-choose-us-page__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px 48px;
-}
-
-.why-choose-us-page__card {
-  text-align: center;
-  padding: 8px;
-}
-
-.why-choose-us-page__icon {
-  width: 68px;
-  height: 68px;
-  background: var(--color-primary);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  margin: 0 auto 20px;
-}
-
-.why-choose-us-page__card h3 { font-size: 18px; font-weight: 700; color: var(--color-primary); margin-bottom: 10px; }
-.why-choose-us-page__card p { font-size: 14px; color: var(--color-text-light); line-height: 1.7; max-width: 340px; margin: 0 auto; }
-
-@media (max-width: 640px) { .why-choose-us-page__grid { grid-template-columns: 1fr; } }

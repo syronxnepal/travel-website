@@ -39,43 +39,6 @@
   letter-spacing: 1px;
 }
 
-.about-why-choose-us-section {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.about-why-choose-us-section__card {
-  padding: 28px;
-  background: var(--color-bg-light);
-  border-radius: var(--radius-md);
-  text-align: center;
-  transition: var(--transition);
-}
-
-.about-why-choose-us-section__card:hover {
-  background: #fff;
-  box-shadow: var(--shadow-md);
-}
-
-.about-why-choose-us-section__card i {
-  font-size: 32px;
-  color: var(--color-primary);
-  margin-bottom: 16px;
-}
-
-.about-why-choose-us-section__card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.about-why-choose-us-section__card p {
-  font-size: 13px;
-  color: var(--color-text-light);
-  line-height: 1.6;
-}
-
 .destination-experts {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -106,6 +69,5 @@
 @media (max-width: 1024px) {
   .about-section__intro { grid-template-columns: 1fr; gap: 32px; }
   .about-section__stats { grid-template-columns: repeat(2, 1fr); }
-  .about-why-choose-us-section { grid-template-columns: repeat(2, 1fr); }
   .destination-experts { grid-template-columns: repeat(2, 1fr); }
 }

@@ -2,6 +2,7 @@ import Header from '../../../components/common/Header/Header'
 import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import SectionHeading from '../../../components/common/SectionHeading/SectionHeading'
+import WhyChooseUsGrid from '../../../components/common/WhyChooseUsGrid/WhyChooseUsGrid'
 import './AboutPage.css'
 
 function AboutPage() {
@@ -48,20 +49,7 @@ function AboutPage() {
       <section className="section">
         <div className="container">
           <SectionHeading eyebrow="Our Promise" title="Why Choose Adventure Nepal" />
-          <div className="about-why-choose-us-section">
-            {[
-              { icon: 'fa-shield-halved', title: 'Safety First', desc: 'All guides certified in wilderness first aid. Emergency evacuation covered.' },
-              { icon: 'fa-leaf', title: 'Sustainable Tourism', desc: 'We are committed to eco-friendly practices and supporting local communities.' },
-              { icon: 'fa-certificate', title: 'Licenced & Certified', desc: 'Registered with Nepal Tourism Board and TAAN.' },
-              { icon: 'fa-star', title: '5-Star Reviews', desc: 'Consistently top-rated on TripAdvisor, Google, and Booking.com.' },
-            ].map((item) => (
-              <div key={item.title} className="about-why-choose-us-section__card">
-                <i className={`fa-solid ${item.icon}`}></i>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
-          </div>
+          <WhyChooseUsGrid />
         </div>
       </section>
 
