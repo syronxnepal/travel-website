@@ -1,5 +1,5 @@
 .search-results-page__hero {
-  background: var(--color-secondary); color: #fff; padding: 36px 0 40px;
+  background: var(--color-secondary); color: #fff; padding: calc(var(--header-height) + 36px) 0 40px;
 }
 .search-results-page__hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
 

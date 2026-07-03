@@ -27,7 +27,9 @@
   --radius-md: 10px;
   --radius-lg: 16px;
   --container-max: 1280px;
-  --header-height: 110px;
+  /* Height of the nav bar only — the part that overlays the hero below the
+     topbar (the topbar itself sits in normal document flow). */
+  --header-height: 64px;
 }
 
 body {

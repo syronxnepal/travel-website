@@ -2,7 +2,7 @@
 
 .booking-page__hero {
   background: linear-gradient(135deg, #1B2948 0%, #17AACF 100%);
-  padding: 40px 0 32px;
+  padding: calc(var(--header-height) + 40px) 0 32px;
   color: #fff;
 }
 .booking-page__breadcrumb { font-size: 13px; margin-bottom: 12px; opacity: .8; }

@@ -3,7 +3,7 @@
 /* Hero */
 .cpkg-hero {
   background: linear-gradient(135deg, #1B2948 0%, #17AACF 100%);
-  padding: 48px 0 40px;
+  padding: calc(var(--header-height) + 48px) 0 40px;
   color: #fff;
   text-align: center;
 }

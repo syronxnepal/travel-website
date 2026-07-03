@@ -119,7 +119,7 @@ function Header() {
   }
 
   return (
-    <>
+    <div className="header-wrap">
       {/* Top info bar */}
       <div className={'header-topbar' + (isScrolled ? ' header-topbar--hidden' : '')}>
         <div className="container">
@@ -215,7 +215,7 @@ function Header() {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
 
