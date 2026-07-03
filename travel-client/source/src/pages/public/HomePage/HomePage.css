@@ -125,7 +125,7 @@
 .section-header__cta { margin-top: 4px; }
 
 /* Grids */
-.home-trek-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.home-trek-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .home-tour-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .home-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
@@ -247,6 +247,7 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .home-trek-grid { grid-template-columns: repeat(2, 1fr); }
   .home-tour-grid { grid-template-columns: repeat(2, 1fr); }
   .home-why__layout { grid-template-columns: 1fr; }
   .home-why__media { order: -1; margin-bottom: 20px; height: 360px; }
