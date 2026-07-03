@@ -60,7 +60,10 @@ function TourDetailPage() {
       <Header />
 
       {/* Hero */}
-      <div className="detail-page__hero">
+      <div
+        className="detail-page__hero"
+        style={getImageUrl(tour.image) ? { backgroundImage: `url(${getImageUrl(tour.image)})` } : undefined}
+      >
         <div className="container">
           <div className="detail-page__breadcrumb">
             <Link to="/">Home</Link> / <Link to="/tours">Tours</Link> / <span>{tour.title}</span>

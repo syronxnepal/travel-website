@@ -51,7 +51,10 @@ function TrekkingDetailPage() {
     <div className="detail-page">
       <Header />
 
-      <div className="detail-page__hero">
+      <div
+        className="detail-page__hero"
+        style={getImageUrl(trek.image) ? { backgroundImage: `url(${getImageUrl(trek.image)})` } : undefined}
+      >
         <div className="container">
           <div className="detail-page__breadcrumb">
             <Link to="/">Home</Link> / <Link to="/trekking">Trekking</Link> / <span>{trek.title}</span>
