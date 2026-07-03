@@ -44,6 +44,7 @@ import WhyChooseUsSectionCMS from './pages/cms/home/WhyChooseUsSectionCMS/WhyCho
 // CMS - About
 import AboutIntroSectionCMS from './pages/cms/about/AboutIntroSectionCMS/AboutIntroSectionCMS'
 import AboutWhyChooseUsCMS from './pages/cms/about/AboutWhyChooseUsCMS/AboutWhyChooseUsCMS'
+import AboutMissionItemsCMS from './pages/cms/about/AboutMissionItemsCMS/AboutMissionItemsCMS'
 
 // CMS - Hero
 import HeroCMS from './pages/cms/HeroCMS/HeroCMS'
@@ -136,6 +137,7 @@ const router = createBrowserRouter([
 
       // About
       { path: 'about/intro-section', element: <AboutIntroSectionCMS /> },
+      { path: 'about/mission-items', element: <AboutMissionItemsCMS /> },
       { path: 'about/why-choose-us', element: <AboutWhyChooseUsCMS /> },
 
       // Gallery

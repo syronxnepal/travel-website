@@ -22,6 +22,7 @@ const NAV = [
   {
     label: 'About Page', icon: 'fa-circle-info', children: [
       { label: 'Intro Section', path: '/cms/about/intro-section', icon: 'fa-circle-info' },
+      { label: 'Our Story — Mission Pillars', path: '/cms/about/mission-items', icon: 'fa-flag' },
       { label: 'Why Choose Us', path: '/cms/about/why-choose-us', icon: 'fa-check-circle' },
     ],
   },
@@ -137,6 +138,7 @@ function CMSLayout() {
     if (path.includes('testimonials-section')) return { title: 'Testimonials Section', sub: 'Configure testimonials on the homepage' }
     if (path.includes('reach-us')) return { title: 'Reach Us Section', sub: 'Configure contact info on the homepage' }
     if (path.includes('about/intro')) return { title: 'About Intro Section', sub: 'Configure the About page intro' }
+    if (path.includes('about/mission')) return { title: 'Our Story — Mission Pillars', sub: 'Manage the mission pillar cards on the Our Story page' }
     if (path.includes('about/why')) return { title: 'About - Why Choose Us', sub: 'Configure why choose us items' }
     if (path.includes('treks/manage')) return { title: 'Trek Management', sub: 'Manage all trekking packages with full control over details' }
     if (path.includes('treks/form')) return { title: location.search.includes('id') ? 'Edit Trek' : 'Add New Trek', sub: 'Create a new trek with all necessary information' }
