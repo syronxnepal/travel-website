@@ -16,6 +16,27 @@
   margin-bottom: 16px;
 }
 
+.our-story-page__features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.our-story-page__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.our-story-page__features i {
+  color: var(--color-primary);
+  margin-top: 3px;
+}
+
 .our-story-page__mission-section { padding-top: 0; }
 
 .our-story-page__pillars {

@@ -9,6 +9,7 @@ const DEFAULT_INTRO = {
   heading: 'How It All Began',
   paragraph: 'Our journey started in 2010 when our founder, Sarah Johnson, embarked on her first trek to Everest Base Camp. What began as a personal adventure quickly transformed into a passion for sharing the beauty and culture of Nepal with travelers from around the world.',
   description: 'After years of exploring the Himalayas and understanding the unique needs of travelers, Sarah founded Travel Adventures with a simple mission: to create authentic, sustainable, and unforgettable travel experiences that connect people with the natural beauty and rich culture of Nepal.',
+  features: ['Certified & experienced guides', 'Sustainable & responsible tourism', 'Personalised itineraries for every traveler'],
   missionHeading: 'Our Mission',
   missionParagraph: 'We believe that travel has the power to transform lives, build bridges between cultures, and create lasting memories. Our mission is to provide exceptional travel experiences that are not only memorable but also responsible and sustainable.',
 }
@@ -32,6 +33,7 @@ function OurStoryPage() {
             heading: data.heading,
             paragraph: data.paragraph || '',
             description: data.description || '',
+            features: Array.isArray(data.features) ? data.features : [],
             missionHeading: data.missionHeading || 'Our Mission',
             missionParagraph: data.missionParagraph || '',
           })
@@ -56,6 +58,13 @@ function OurStoryPage() {
           <h2>{intro.heading}</h2>
           {intro.paragraph && <p>{intro.paragraph}</p>}
           {intro.description && <p>{intro.description}</p>}
+          {intro.features?.length > 0 && (
+            <ul className="our-story-page__features">
+              {intro.features.map((f, i) => (
+                <li key={i}><i className="fa-solid fa-circle-check"></i> {f}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </section>
 
