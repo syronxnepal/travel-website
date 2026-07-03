@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { aboutWhyChooseUsItemsApi } from '../../../../services/api'
+import { aboutWhyChooseUsItemsApi, aboutPageSectionsApi } from '../../../../services/api'
 import { useToast } from '../../../../context/ToastContext'
 import DataTable from '../../../../components/common/DataTable/DataTable'
 import DeleteConfirmationModal from '../../../../components/common/DeleteConfirmationModal/DeleteConfirmationModal'
@@ -7,6 +7,10 @@ import DeleteConfirmationModal from '../../../../components/common/DeleteConfirm
 const emptyForm = { heading: '', paragraph: '', icon: '', order: 0, isActive: true }
 
 function AboutWhyChooseUsCMS() {
+  const [intro, setIntro] = useState({ heading: '', paragraph: '' })
+  const [loadingIntro, setLoadingIntro] = useState(true)
+  const [savingIntro, setSavingIntro] = useState(false)
+
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [editTarget, setEditTarget] = useState(null)
@@ -15,12 +19,33 @@ function AboutWhyChooseUsCMS() {
   const [saving, setSaving] = useState(false)
   const toast = useToast()
 
+  function loadIntro() {
+    setLoadingIntro(true)
+    aboutPageSectionsApi.getByKey('about-why-choose-us-section')
+      .then((res) => {
+        const data = res?.data || res || {}
+        setIntro({ heading: data.heading || '', paragraph: data.paragraph || '' })
+      })
+      .catch(() => toast.error('Failed to load section heading.'))
+      .finally(() => setLoadingIntro(false))
+  }
+
   function load() {
     setLoading(true)
     aboutWhyChooseUsItemsApi.getAll().then((res) => setItems(res?.data || res || [])).finally(() => setLoading(false))
   }
 
-  useEffect(load, [])
+  useEffect(() => { loadIntro(); load() }, [])
+
+  async function handleSaveIntro(e) {
+    e.preventDefault()
+    setSavingIntro(true)
+    try {
+      await aboutPageSectionsApi.update('about-why-choose-us-section', intro)
+      toast.success('Section heading saved.')
+    } catch (err) { toast.error(err.message) }
+    finally { setSavingIntro(false) }
+  }
 
   function startEdit(item) {
     setEditTarget(item)
@@ -60,7 +85,18 @@ function AboutWhyChooseUsCMS() {
 
   return (
     <div className="about-why-choose-us-cms cms-page">
-      <div className="cms-page__header"><h1>About — Why Choose Us</h1></div>
+      <div className="cms-page__header"><h1>Why Choose Us Page</h1></div>
+
+      {loadingIntro ? <div className="loading-spinner" /> : (
+        <form className="cms-section" onSubmit={handleSaveIntro}>
+          <h3>Section Heading</h3>
+          <div className="form-field"><label>Heading</label><input type="text" value={intro.heading} onChange={(e) => setIntro({ ...intro, heading: e.target.value })} placeholder="What Sets Us Apart" /></div>
+          <div className="form-field"><label>Paragraph</label><textarea value={intro.paragraph} onChange={(e) => setIntro({ ...intro, paragraph: e.target.value })} rows={3} placeholder="With over a decade of experience..." /></div>
+          <button type="submit" className="btn btn--primary" disabled={savingIntro}>{savingIntro ? 'Saving...' : 'Save Heading'}</button>
+        </form>
+      )}
+
+      <div className="cms-page__header" style={{ marginTop: 32 }}><h1>Reasons</h1></div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 24, alignItems: 'start' }}>
         <DataTable
           columns={[
