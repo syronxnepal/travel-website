@@ -191,6 +191,14 @@
   z-index: 100; overflow: hidden;
 }
 
+/* The last item sits near the right edge of the nav — anchor its dropdown
+   to the right so it opens leftward instead of running off-screen. */
+.header-nav__links > .nav__item:last-child .nav__dropdown {
+  left: auto;
+  right: 0;
+  border-radius: 8px 0 8px 8px;
+}
+
 .nav__dropdown-link {
   display: block; padding: 12px 20px;
   font-size: 13px; color: #333;

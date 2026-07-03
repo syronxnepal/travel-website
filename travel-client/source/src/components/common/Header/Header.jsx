@@ -44,7 +44,7 @@ const navItems = [
     ],
   },
   {
-    label: 'MORE', path: '/more',
+    label: 'MORE', path: '/custom-packages',
     dropdown: [
       { label: 'Gallery', path: '/gallery' },
       { label: 'Blogs', path: '/blogs' },
