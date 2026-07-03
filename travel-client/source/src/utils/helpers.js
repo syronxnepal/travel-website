@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../services/api'
+import { SERVER_ORIGIN } from '../services/api'
 
 export function formatCurrency(amount, currency = 'USD') {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount)
@@ -33,7 +33,7 @@ export function getImageUrl(path) {
   // so strip any leading slash and/or "uploads/" before re-adding it, instead
   // of blindly prepending and ending up with ".../uploads//uploads/...".
   const filename = path.replace(/^\/?(uploads\/)?/, '')
-  return `${API_BASE_URL}/uploads/${filename}`
+  return `${SERVER_ORIGIN}/uploads/${filename}`
 }
 
 export function getDifficultyLabel(level) {

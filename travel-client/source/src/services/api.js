@@ -1,4 +1,7 @@
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://72.61.151.220/api'
+// Uploaded files are served from the server's root (e.g. /uploads/x.jpg),
+// not under /api — strip a trailing /api so getImageUrl() hits the right path.
+export const SERVER_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '')
 const BASE_URL = API_BASE_URL
 
 function getToken() {
