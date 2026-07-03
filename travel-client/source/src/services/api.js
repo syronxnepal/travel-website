@@ -99,7 +99,7 @@ export const blogCategoriesApi = {
 export const galleryApi = {
   getAll: (params) => request(`/gallery-images${params ? `?${new URLSearchParams(params)}` : ''}`),
   getById: (id) => request(`/gallery-images/${id}`),
-  create: (formData) => request('/gallery-images', { method: 'POST', body: formData }),
+  create: (data) => request('/gallery-images', { method: 'POST', body: JSON.stringify(data) }),
   update: (id, data) => request(`/gallery-images/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   delete: (id) => request(`/gallery-images/${id}`, { method: 'DELETE' }),
 }
