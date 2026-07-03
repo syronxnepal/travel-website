@@ -6,9 +6,17 @@ import PageHero from '../../../components/common/PageHero/PageHero'
 import TrekCard from '../../../components/tours/TrekCard/TrekCard'
 import TourFilters from '../../../components/tours/TourFilters/TourFilters'
 import { treksApi } from '../../../services/api'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './TrekkingPage.css'
 
+const DEFAULT_HERO = {
+  title: 'Trekking Adventures',
+  subtitle: 'EXPLORE THE HIMALAYAS',
+  backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=400&fit=crop',
+}
+
 function TrekkingPage() {
+  const hero = usePageHero('trek-listing', DEFAULT_HERO)
   const [treks, setTreks] = useState([])
   const [loading, setLoading] = useState(true)
   const [sort, setSort] = useState('default')
@@ -47,9 +55,9 @@ function TrekkingPage() {
     <div className="trekking-page">
       <Header />
       <PageHero
-        title="Trekking Adventures"
-        subtitle="EXPLORE THE HIMALAYAS"
-        backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=400&fit=crop"
+        title={hero.title}
+        subtitle={hero.subtitle}
+        backgroundImage={hero.backgroundImage}
         breadcrumb="Home / Trekking"
       />
 

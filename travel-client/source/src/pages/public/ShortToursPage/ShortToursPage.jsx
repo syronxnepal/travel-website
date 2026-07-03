@@ -5,9 +5,13 @@ import PageHero from '../../../components/common/PageHero/PageHero'
 import TourCard from '../../../components/tours/TourCard/TourCard'
 import TourFilters from '../../../components/tours/TourFilters/TourFilters'
 import { shortToursApi } from '../../../services/api'
+import { usePageHero } from '../../../hooks/usePageHero'
 import '../ToursPage/ToursPage.css'
 
+const DEFAULT_HERO = { title: 'Short Tours', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=400&fit=crop' }
+
 function ShortToursPage() {
+  const hero = usePageHero('short-tour-listing', DEFAULT_HERO)
   const [tours, setTours] = useState([])
   const [loading, setLoading] = useState(true)
   const [sort, setSort] = useState('default')
@@ -35,7 +39,7 @@ function ShortToursPage() {
   return (
     <div className="tours-page short-tours-page">
       <Header />
-      <PageHero title="Short Tours" breadcrumb="Home / Short Tours" backgroundImage="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1920&h=400&fit=crop" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} breadcrumb="Home / Short Tours" backgroundImage={hero.backgroundImage} />
 
       <div className="container">
         <div className="tours-page__layout">

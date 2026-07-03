@@ -4,7 +4,10 @@ import Footer from '../../../components/common/Footer/Footer'
 import { treksApi, toursApi, shortToursApi, bookingsApi } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
 import { useToast } from '../../../context/ToastContext'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './CustomPackagesPage.css'
+
+const DEFAULT_HERO = { title: 'Create Your Custom Package', subtitle: 'DESIGN YOUR TRIP', backgroundImage: '' }
 
 const PACKAGE_OPTIONS = [
   { group: 'Accommodation', options: [
@@ -61,6 +64,7 @@ function Counter({ label, value, onChange, min = 1 }) {
 }
 
 function CustomPackagesPage() {
+  const hero = usePageHero('custom-listing', DEFAULT_HERO)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [selected, setSelected] = useState([]) // array of { id, type, item }
@@ -188,10 +192,17 @@ function CustomPackagesPage() {
     <div className="custom-packages-page">
       <Header />
 
-      <div className="cpkg-hero">
+      <div
+        className="cpkg-hero"
+        style={hero.backgroundImage ? {
+          backgroundImage: `linear-gradient(135deg, rgba(27,41,72,.85), rgba(23,170,207,.85)), url(${hero.backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        } : undefined}
+      >
         <div className="container">
-          <p className="cpkg-hero__sub">DESIGN YOUR TRIP</p>
-          <h1>Create Your Custom Package</h1>
+          {hero.subtitle && <p className="cpkg-hero__sub">{hero.subtitle}</p>}
+          <h1>{hero.title}</h1>
           <p className="cpkg-hero__desc">Select a trip, choose your preferences, and let our experts build the perfect adventure for you.</p>
         </div>
       </div>

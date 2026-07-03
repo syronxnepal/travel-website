@@ -3,9 +3,13 @@ import Header from '../../../components/common/Header/Header'
 import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import { contactsApi } from '../../../services/api'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './ContactPage.css'
 
+const DEFAULT_HERO = { title: 'Contact Us', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=400&fit=crop' }
+
 function ContactPage() {
+  const hero = usePageHero('contact', DEFAULT_HERO)
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -24,7 +28,7 @@ function ContactPage() {
   return (
     <div className="contact-page">
       <Header />
-      <PageHero title="Contact Us" breadcrumb="Home / Contact" backgroundImage="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=400&fit=crop" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} breadcrumb="Home / Contact" backgroundImage={hero.backgroundImage} />
 
       <div className="container">
         <div className="contact-page__grid">

@@ -4,9 +4,13 @@ import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import { galleryApi } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './GalleryPage.css'
 
+const DEFAULT_HERO = { title: 'Gallery', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=400&fit=crop' }
+
 function GalleryPage() {
+  const hero = usePageHero('gallery', DEFAULT_HERO)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('All')
@@ -26,7 +30,7 @@ function GalleryPage() {
   return (
     <div className="gallery-page">
       <Header />
-      <PageHero title="Gallery" breadcrumb="Home / Gallery" backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=400&fit=crop" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} breadcrumb="Home / Gallery" backgroundImage={hero.backgroundImage} />
 
       <div className="container">
         <div className="gallery-page__filters">

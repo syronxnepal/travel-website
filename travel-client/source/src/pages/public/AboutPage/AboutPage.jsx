@@ -3,13 +3,18 @@ import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import SectionHeading from '../../../components/common/SectionHeading/SectionHeading'
 import WhyChooseUsGrid from '../../../components/common/WhyChooseUsGrid/WhyChooseUsGrid'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './AboutPage.css'
 
+const DEFAULT_HERO = { title: 'About Us', subtitle: 'Your trusted Nepal adventure partner', backgroundImage: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&h=600&fit=crop' }
+
 function AboutPage() {
+  const hero = usePageHero('about', DEFAULT_HERO)
+
   return (
     <div className="about-section">
       <Header />
-      <PageHero title="About Us" subtitle="Your trusted Nepal adventure partner" backgroundImage="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&h=600&fit=crop" breadcrumb="Home / About" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} backgroundImage={hero.backgroundImage} breadcrumb="Home / About" />
 
       {/* Intro section */}
       <section className="section">

@@ -3,7 +3,10 @@ import Header from '../../../components/common/Header/Header'
 import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import { aboutPageSectionsApi, aboutMissionItemsApi } from '../../../services/api'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './OurStoryPage.css'
+
+const DEFAULT_HERO = { title: 'Our Story', subtitle: 'How Adventure Nepal began', backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=600&fit=crop' }
 
 const DEFAULT_INTRO = {
   heading: 'How It All Began',
@@ -23,6 +26,7 @@ const DEFAULT_PILLARS = [
 function OurStoryPage() {
   const [intro, setIntro] = useState(DEFAULT_INTRO)
   const [pillars, setPillars] = useState(DEFAULT_PILLARS)
+  const hero = usePageHero('about-our-story', DEFAULT_HERO)
 
   useEffect(() => {
     aboutPageSectionsApi.getByKey('about-intro-section')
@@ -51,7 +55,7 @@ function OurStoryPage() {
   return (
     <div className="our-story-page">
       <Header />
-      <PageHero title="Our Story" subtitle="How Adventure Nepal began" backgroundImage="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=600&fit=crop" breadcrumb="Home / Our Story" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} backgroundImage={hero.backgroundImage} breadcrumb="Home / Our Story" />
 
       <section className="section">
         <div className="container our-story-page__block">

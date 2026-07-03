@@ -5,11 +5,14 @@ import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import { blogsApi } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './BlogsPage.css'
 
 const CATEGORIES = ['All', 'Adventure', 'News', 'Culture', 'Travel Tips']
+const DEFAULT_HERO = { title: 'Latest Blogs', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&h=400&fit=crop' }
 
 function BlogsPage() {
+  const hero = usePageHero('blogs', DEFAULT_HERO)
   const [blogs, setBlogs] = useState([])
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('All')
@@ -32,7 +35,7 @@ function BlogsPage() {
   return (
     <div className="blogs-page">
       <Header />
-      <PageHero title="Latest Blogs" breadcrumb="Home / Blogs" backgroundImage="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&h=400&fit=crop" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} breadcrumb="Home / Blogs" backgroundImage={hero.backgroundImage} />
 
       <div className="container">
         {/* Category Pills */}

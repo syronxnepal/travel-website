@@ -5,9 +5,13 @@ import PageHero from '../../../components/common/PageHero/PageHero'
 import TourCard from '../../../components/tours/TourCard/TourCard'
 import TourFilters from '../../../components/tours/TourFilters/TourFilters'
 import { toursApi } from '../../../services/api'
+import { usePageHero } from '../../../hooks/usePageHero'
 import './ToursPage.css'
 
+const DEFAULT_HERO = { title: 'Tours', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&h=400&fit=crop' }
+
 function ToursPage() {
+  const hero = usePageHero('tour-listing', DEFAULT_HERO)
   const [tours, setTours] = useState([])
   const [loading, setLoading] = useState(true)
   const [sort, setSort] = useState('default')
@@ -43,7 +47,7 @@ function ToursPage() {
   return (
     <div className="tours-page">
       <Header />
-      <PageHero title="Tours" breadcrumb="Home / Tours" backgroundImage="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&h=400&fit=crop" />
+      <PageHero title={hero.title} subtitle={hero.subtitle} breadcrumb="Home / Tours" backgroundImage={hero.backgroundImage} />
 
       <div className="container">
         <div className="tours-page__layout">
