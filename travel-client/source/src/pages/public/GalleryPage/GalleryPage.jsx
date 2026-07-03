@@ -11,7 +11,8 @@ function GalleryPage() {
   const [loading, setLoading] = useState(true)
   const [category, setCategory] = useState('All')
   const [lightbox, setLightbox] = useState(null)
-  const categories = ['All', ...new Set(items.map((i) => i.category).filter(Boolean))]
+  // item.category is the full GalleryCategory relation object ({ id, name, ... }), not a string.
+  const categories = ['All', ...new Set(items.map((i) => i.category?.name).filter(Boolean))]
 
   useEffect(() => {
     galleryApi.getAll()
@@ -20,7 +21,7 @@ function GalleryPage() {
       .finally(() => setLoading(false))
   }, [])
 
-  const filtered = category === 'All' ? items : items.filter((i) => i.category?.toLowerCase() === category.toLowerCase())
+  const filtered = category === 'All' ? items : items.filter((i) => i.category?.name?.toLowerCase() === category.toLowerCase())
 
   return (
     <div className="gallery-page">
