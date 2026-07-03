@@ -17,8 +17,22 @@ const app = express();
 app.use(helmet());
 
 // CORS
+// CORS_ORIGIN accepts a single origin or a comma-separated list, e.g.
+// "https://traveladventurenepal.com.au,https://www.traveladventurenepal.com.au,http://localhost:5173"
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no Origin header (e.g. curl, server-to-server, mobile apps)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
   credentials: true
 }));
 

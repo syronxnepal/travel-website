@@ -9,7 +9,7 @@ function Footer() {
   const [subscribed, setSubscribed] = useState(false)
 
   useEffect(() => {
-    treksApi.getAll({ limit: 5 }).then((r) => setLatestTreks(r?.data || r || [])).catch(() => {})
+    treksApi.getAll({ limit: 5 }).then((r) => setLatestTreks((r?.data || r || []).slice(0, 5))).catch(() => {})
   }, [])
 
   const companyLinks = [

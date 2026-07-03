@@ -5,8 +5,10 @@ import { Blog } from '../models/Blog';
 export const getBlogs = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const blogRepository = AppDataSource.getRepository(Blog);
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
     const blogs = await blogRepository.find({
-      order: { createdAt: 'DESC' }
+      order: { createdAt: 'DESC' },
+      take: limit
     });
     return res.json({ success: true, data: blogs });
   } catch (error: any) {

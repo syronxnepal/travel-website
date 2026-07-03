@@ -5,8 +5,10 @@ import { ShortTour } from '../models/ShortTour';
 export const getShortTours = async (req: Request, res: Response): Promise<Response | void> => {
   try {
     const shortTourRepository = AppDataSource.getRepository(ShortTour);
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
     const shortTours = await shortTourRepository.find({
-      order: { createdAt: 'DESC' }
+      order: { createdAt: 'DESC' },
+      take: limit
     });
     return res.json({ success: true, data: shortTours });
   } catch (error: any) {

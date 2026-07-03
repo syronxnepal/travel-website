@@ -12,9 +12,12 @@ export const getTreks = async (req: Request, res: Response): Promise<Response | 
       where.customActivity = true;
     }
 
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
+
     const treks = await trekRepository.find({
       where: Object.keys(where).length ? where : undefined,
-      order: { createdAt: 'DESC' }
+      order: { createdAt: 'DESC' },
+      take: limit
     });
     return res.json({ success: true, data: treks });
   } catch (error: any) {
