@@ -1,15 +1,15 @@
 import CMSSection from '../../../../components/cms/CMSSection/CMSSection'
-import { pagesApi } from '../../../../services/api'
+import { homePageSectionsApi } from '../../../../services/api'
 
 function BlogSectionCMS() {
   return (
     <CMSSection
       title="Blog Section"
-      onLoad={() => pagesApi.getBySlug('home-blog-section')}
-      onSave={(data) => pagesApi.update('home-blog-section', data)}
+      onLoad={() => homePageSectionsApi.getByKey('blog-section')}
+      onSave={(data) => homePageSectionsApi.update('blog-section', data)}
       fields={[
-        { key: 'eyebrow', label: 'Eyebrow Text', type: 'text' },
-        { key: 'title', label: 'Section Title', type: 'text' },
+        { key: 'topTitle', label: 'Eyebrow Text', type: 'text' },
+        { key: 'heading', label: 'Section Title', type: 'text' },
         { key: 'subtitle', label: 'Section Subtitle', type: 'text' },
       ]}
     />

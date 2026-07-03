@@ -38,42 +38,34 @@ function Footer() {
     <footer className="footer">
       <div className="footer__newsletter">
         <div className="container">
-          <div className="footer__newsletter-card">
-            <div>
-              <h3>Get Travel Updates</h3>
-              <p>Sign up for our newsletter to receive the latest deals and travel stories.</p>
+          <span className="footer__newsletter-label">NEWSLETTER</span>
+          <h3>Receive Inspiration In Your Inbox</h3>
+          <form className="footer__newsletter-form" onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button type="submit" aria-label="Subscribe"><i className="fa-solid fa-paper-plane"></i></button>
+          </form>
+          {subscribed ? (
+            <span className="footer__newsletter-thanks">Thanks for subscribing!</span>
+          ) : (
+            <div className="footer__rating">
+              {[1,2,3,4,5].map((i) => <i key={i} className="fa-solid fa-star"></i>)}
+              <span>Rated 4.9/5 based on 75,947 reviews</span>
             </div>
-            <form className="footer__newsletter-form" onSubmit={handleSubscribe}>
-              <input
-                type="email"
-                placeholder="Your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <button type="submit" className="btn btn--primary">Subscribe</button>
-            </form>
-            {subscribed && <span className="footer__newsletter-thanks">Thanks for subscribing!</span>}
-          </div>
+          )}
         </div>
       </div>
 
       <div className="footer__main">
         <div className="container">
           <div className="footer__grid">
-            <div className="footer__col footer__col--brand">
-              <p className="footer__brand-name">Travel Adventure Nepal</p>
-              <p className="footer__brand-desc">Creating unforgettable Himalayan adventures with expert guides and personalised trip planning since day one.</p>
-              <div className="footer__socials">
-                <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook-f"></i></a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram"></i></a>
-                <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
-                <a href="https://tripadvisor.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-tripadvisor"></i></a>
-              </div>
-            </div>
-
             <div className="footer__col">
-              <h4 className="footer__heading">Destinations</h4>
+              <h4 className="footer__heading">Destination</h4>
               <ul className="footer__links">
                 {(latestTreks.length > 0 ? latestTreks : []).map((t) => (
                   <li key={t._id}><Link to={`/trekking/${t._id}`}>{t.title}</Link></li>
@@ -109,25 +101,40 @@ function Footer() {
             </div>
 
             <div className="footer__col">
-              <h4 className="footer__heading">Contact Info</h4>
-              <ul className="footer__contact">
-                <li><i className="fa-solid fa-location-dot"></i> Suite 502/155 Castlereagh Street, Sydney - Australia 2000</li>
-                <li><i className="fa-solid fa-phone"></i> +61 2 0000 0000</li>
-                <li><i className="fa-solid fa-envelope"></i> sales@traveladventurenepal.com.au</li>
-                <li><i className="fa-solid fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</li>
-              </ul>
+              <h4 className="footer__heading">Address</h4>
+              <p className="footer__text">Suite 502/155 Castlereagh Street, Sydney - Australia 2000</p>
+            </div>
+
+            <div className="footer__col">
+              <h4 className="footer__heading">Contact</h4>
+              <p className="footer__text">+61 2 0000 0000<br />sales@traveladventurenepal.com.au</p>
+            </div>
+
+            <div className="footer__col">
+              <h4 className="footer__heading">Working Hours</h4>
+              <p className="footer__text">Monday - Friday: 09:00 - 17:00<br />Saturday, Sunday: 09:00 - 15:00</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="footer__copyright">
-        <div className="container footer__copyright-inner">
-          <p>© 2026 Travel Adventure Nepal. All Rights Reserved.</p>
-          <div className="footer__legal-links">
-            <Link to="/about">Privacy Policy</Link>
-            <Link to="/about">Terms of Service</Link>
+      <div className="footer__brand-bar">
+        <div className="container footer__brand-bar-inner">
+          <div className="footer__socials">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
+            <a href="https://pinterest.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-pinterest-p"></i></a>
+            <a href="https://youtube.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube"></i></a>
           </div>
+          <p className="footer__brand-name">Travel Adventure Nepal</p>
+          <p className="footer__help">Need help? Call us <a href="tel:+61200000000">+61 2 0000 0000</a></p>
+        </div>
+      </div>
+
+      <div className="footer__copyright">
+        <div className="container">
+          <p>© 2026 Travel Adventure Nepal. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

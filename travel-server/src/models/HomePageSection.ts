@@ -3,12 +3,15 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 export interface IHomePageSection {
   id: number;
   sectionKey: string; // e.g., 'top-trek-section', 'top-tours-section', etc.
-  topTitle: string;
-  heading: string;
+  topTitle?: string;
+  heading?: string;
+  subtitle?: string;
   adventureTitle?: string;
   adventureDescription?: string;
   adventureImage?: string;
   adventureOptions?: string; // JSON string array of options
+  ctaLabel?: string;
+  backgroundImage?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -21,11 +24,14 @@ export class HomePageSection implements IHomePageSection {
   @Column({ type: 'varchar', length: 100, unique: true })
   sectionKey!: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  topTitle!: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  topTitle?: string;
 
-  @Column({ type: 'text' })
-  heading!: string;
+  @Column({ type: 'text', nullable: true })
+  heading?: string;
+
+  @Column({ type: 'text', nullable: true })
+  subtitle?: string;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   adventureTitle?: string;
@@ -38,6 +44,12 @@ export class HomePageSection implements IHomePageSection {
 
   @Column({ type: 'text', nullable: true })
   adventureOptions?: string; // JSON string array
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  ctaLabel?: string;
+
+  @Column({ type: 'varchar', length: 500, nullable: true })
+  backgroundImage?: string;
 
   @CreateDateColumn()
   createdAt!: Date;

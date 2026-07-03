@@ -4,7 +4,7 @@ import Header from '../../../components/common/Header/Header'
 import Footer from '../../../components/common/Footer/Footer'
 import TourCard from '../../../components/tours/TourCard/TourCard'
 import HeroSearchWidget from '../../../components/home/HeroSearchWidget/HeroSearchWidget'
-import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi, API_BASE_URL } from '../../../services/api'
+import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi, homePageSectionsApi, API_BASE_URL } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
 import './HomePage.css'
 
@@ -78,6 +78,8 @@ const SAMPLE_BLOGS = [
   { _id: 's-blog-3', title: 'Trekking Gear Checklist for Every Season', image: 'https://images.unsplash.com/photo-1445264718234-a457a9a68a5e?w=500&h=340&fit=crop', category: 'Guides', createdAt: '2026-03-01', excerpt: 'Pack smart with our season-by-season guide to trekking gear in Nepal.' },
 ]
 
+const SECTION_KEYS = ['top-trek-section', 'top-tours-section', 'why-choose-us-section', 'testimonials-section', 'blog-section', 'gallery-section', 'reach-us-section']
+
 const SAMPLE_GALLERY = [
   { _id: 's-gal-1', image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&h=600&fit=crop' },
   { _id: 's-gal-2', image: 'https://images.unsplash.com/photo-1516434636545-99a25787ba90?w=600&h=800&fit=crop' },
@@ -97,6 +99,23 @@ function HomePage() {
   const [testimonials, setTestimonials] = useState(SAMPLE_TESTIMONIALS)
   const [slide, setSlide] = useState(0)
   const [testiIndex, setTestiIndex] = useState(0)
+  const [sections, setSections] = useState({})
+
+  // Returns a CMS-editable section field, falling back to the given default
+  // when the section hasn't been configured (or the API is unreachable).
+  function sVal(sectionKey, field, fallback) {
+    return sections[sectionKey]?.[field] || fallback
+  }
+
+  useEffect(() => {
+    Promise.all(
+      SECTION_KEYS.map((key) =>
+        homePageSectionsApi.getByKey(key).then((r) => [key, r?.data || r]).catch(() => [key, null])
+      )
+    ).then((pairs) => {
+      setSections(Object.fromEntries(pairs.filter(([, data]) => data)))
+    })
+  }, [])
 
   useEffect(() => {
     treksApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setTreks(list.slice(0, 4)) }).catch(() => {})
@@ -186,8 +205,9 @@ function HomePage() {
         <section className="home-section">
           <div className="container">
             <SectionHead
-              badge="OUR DESTINATIONS"
-              title="Explore Our Top Trekking Destinations"
+              badge={sVal('top-trek-section', 'topTitle', 'OUR DESTINATIONS')}
+              title={sVal('top-trek-section', 'heading', 'Explore Our Top Trekking Destinations')}
+              subtitle={sVal('top-trek-section', 'subtitle')}
               cta={{ label: 'View More', link: '/trekking' }}
             />
             <div className="home-trek-grid">
@@ -202,8 +222,9 @@ function HomePage() {
         <section className="home-section home-section--gray">
           <div className="container">
             <SectionHead
-              badge="TOP TOURS & SHORT TOURS"
-              title="Explore Our Tours & Short Tours"
+              badge={sVal('top-tours-section', 'topTitle', 'TOP TOURS & SHORT TOURS')}
+              title={sVal('top-tours-section', 'heading', 'Explore Our Tours & Short Tours')}
+              subtitle={sVal('top-tours-section', 'subtitle')}
               cta={{ label: 'View More', link: '/tours' }}
             />
             <div className="home-tour-grid">
@@ -216,7 +237,11 @@ function HomePage() {
       {/* Why Book With Us */}
       <section className="home-section home-why">
         <div className="container">
-          <SectionHead badge="CHOOSE US" title="Why Book With Us" />
+          <SectionHead
+            badge={sVal('why-choose-us-section', 'topTitle', 'CHOOSE US')}
+            title={sVal('why-choose-us-section', 'heading', 'Why Book With Us')}
+            subtitle={sVal('why-choose-us-section', 'subtitle')}
+          />
           <div className="home-why__layout">
             <ul className="home-why__list">
               {WHY_ITEMS.map((item, i) => (
@@ -230,7 +255,7 @@ function HomePage() {
               ))}
             </ul>
             <div className="home-why__media">
-              <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=700&h=850&fit=crop" alt="Adventure with us" />
+              <img src={getImageUrl(sVal('why-choose-us-section', 'adventureImage', '')) || 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=700&h=850&fit=crop'} alt="Adventure with us" />
               <div className="home-why__stat home-why__stat--top">
                 <strong>50+</strong>
                 <span>Tours</span>
@@ -248,7 +273,10 @@ function HomePage() {
       {activeTesti && (
         <section className="home-section home-section--gray">
           <div className="container">
-            <SectionHead badge="TESTIMONIALS" title="What Others Are Saying About Us" />
+            <SectionHead
+              badge={sVal('testimonials-section', 'topTitle', 'TESTIMONIALS')}
+              title={sVal('testimonials-section', 'heading', 'What Others Are Saying About Us')}
+            />
             <div className="home-testimonial">
               <i className="fa-solid fa-quote-left home-testimonial__quote-icon"></i>
               <div className="home-testimonial__stars">
@@ -278,15 +306,17 @@ function HomePage() {
         <section className="home-section">
           <div className="container">
             <SectionHead
-              badge="OUR BLOG"
-              title="Keep Updated With Our Stories"
+              badge={sVal('blog-section', 'topTitle', 'OUR BLOG')}
+              title={sVal('blog-section', 'heading', 'Keep Updated With Our Stories')}
+              subtitle={sVal('blog-section', 'subtitle')}
               cta={{ label: 'View More', link: '/blogs' }}
             />
             <div className="home-blog-grid">
               {blogs.map((blog, i) => {
                 const blogId = blog._id || blog.id
+                const isRealBlog = /^\d+$/.test(String(blogId))
                 return (
-                  <Link key={blogId} to={`/blogs/${blogId}`} className="home-blog-card">
+                  <Link key={blogId} to={isRealBlog ? `/blogs/${blogId}` : '/blogs'} className="home-blog-card">
                     <div className="home-blog-card__img-wrap">
                       <img src={getImageUrl(blog.image) || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=240&fit=crop'} alt={blog.title} />
                       <span className={`home-blog-card__date${i % 2 === 1 ? ' home-blog-card__date--alt' : ''}`}>
@@ -311,7 +341,11 @@ function HomePage() {
       {gallery.length > 0 && (
         <section className="home-section home-section--gray">
           <div className="container">
-            <SectionHead badge="OUR GALLERY" title="Discover The Beauty Of Our Trips" />
+            <SectionHead
+              badge={sVal('gallery-section', 'topTitle', 'OUR GALLERY')}
+              title={sVal('gallery-section', 'heading', 'Discover The Beauty Of Our Trips')}
+              subtitle={sVal('gallery-section', 'subtitle')}
+            />
             <div className="home-gallery-grid">
               {gallery.map((item, i) => (
                 <Link key={item._id || i} to="/gallery" className={`home-gallery-item home-gallery-item--${i + 1}`}>
@@ -329,15 +363,18 @@ function HomePage() {
 
       {/* CTA Banner */}
       <section className="home-cta">
-        <div className="home-cta__bg" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1600&h=700&fit=crop')" }} />
+        <div
+          className="home-cta__bg"
+          style={{ backgroundImage: `url('${getImageUrl(sVal('reach-us-section', 'backgroundImage', '')) || 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=1600&h=700&fit=crop'}')` }}
+        />
         <div className="home-cta__overlay" />
         <div className="container">
           <div className="home-cta__content">
-            <h2>We Are Available 24/7</h2>
-            <p>Reach out any time and let our team craft your perfect Nepal adventure.</p>
+            <h2>{sVal('reach-us-section', 'heading', 'We Are Available 24/7')}</h2>
+            <p>{sVal('reach-us-section', 'subtitle', 'Reach out any time and let our team craft your perfect Nepal adventure.')}</p>
             <div className="home-cta__actions">
               <a href="tel:+61200000000" className="btn btn--outline-white btn--lg">Call Us <i className="fa-solid fa-phone"></i></a>
-              <Link to="/contact" className="btn btn--primary btn--lg">Book Now <i className="fa-solid fa-arrow-right"></i></Link>
+              <Link to="/contact" className="btn btn--primary btn--lg">{sVal('reach-us-section', 'ctaLabel', 'Book Now')} <i className="fa-solid fa-arrow-right"></i></Link>
             </div>
           </div>
         </div>

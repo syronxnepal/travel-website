@@ -20,7 +20,12 @@ function TourCard({ tour, type = 'tour' }) {
   const itemId = tour._id || tour.id
   const isWishlisted = isInWishlist(itemId, type)
 
-  const detailPath =
+  // Real records always have a numeric backend id. Anything else (e.g. sample/
+  // placeholder content shown while the API is unreachable) has no real detail
+  // page to link to, so send it to the listing page instead of a dead link.
+  const isRealItem = /^\d+$/.test(String(itemId))
+  const listPath = type === 'trek' ? '/trekking' : type === 'short-tour' ? '/short-tours' : '/tours'
+  const detailPath = !isRealItem ? listPath :
     type === 'trek' ? `/trekking/${itemId}` :
     type === 'short-tour' ? `/short-tour/${itemId}` :
     `/tour/${itemId}`

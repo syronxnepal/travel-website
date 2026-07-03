@@ -7,6 +7,7 @@ function TrekCard({ trek }) {
   const { isInWishlist, toggleWishlist } = useWishlist()
   const itemId = trek._id || trek.id
   const isWishlisted = isInWishlist(itemId, 'trek')
+  const isRealItem = /^\d+$/.test(String(itemId))
 
   function handleWishlist(e) {
     e.preventDefault()
@@ -15,7 +16,7 @@ function TrekCard({ trek }) {
   }
 
   return (
-    <Link to={`/trekking/${itemId}`} className="trek-card">
+    <Link to={isRealItem ? `/trekking/${itemId}` : '/trekking'} className="trek-card">
       <img
         src={getImageUrl(trek.image) || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'}
         alt={trek.title}

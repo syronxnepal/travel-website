@@ -1,15 +1,15 @@
 import CMSSection from '../../../../components/cms/CMSSection/CMSSection'
-import { pagesApi } from '../../../../services/api'
+import { homePageSectionsApi } from '../../../../services/api'
 
 function TestimonialsSectionCMS() {
   return (
     <CMSSection
       title="Testimonials Section"
-      onLoad={() => pagesApi.getBySlug('home-testimonials')}
-      onSave={(data) => pagesApi.update('home-testimonials', data)}
+      onLoad={() => homePageSectionsApi.getByKey('testimonials-section')}
+      onSave={(data) => homePageSectionsApi.update('testimonials-section', data)}
       fields={[
-        { key: 'eyebrow', label: 'Eyebrow Text', type: 'text' },
-        { key: 'title', label: 'Section Title', type: 'text' },
+        { key: 'topTitle', label: 'Eyebrow Text', type: 'text' },
+        { key: 'heading', label: 'Section Title', type: 'text' },
       ]}
     />
   )

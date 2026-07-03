@@ -160,11 +160,14 @@ export const contactsApi = {
   deleteSocialLink: (id) => request(`/contact-social-links/${id}`, { method: 'DELETE' }),
 }
 
-// Pages
+// Pages (simple hero-banner records per page, keyed by numeric id — see pageType for lookup by type)
 export const pagesApi = {
   getAll: () => request('/pages'),
-  getBySlug: (slug) => request(`/pages/${slug}`),
+  getByType: (pageType) => request(`/pages/type/${pageType}`),
+  getById: (id) => request(`/pages/${id}`),
   update: (id, data) => request(`/pages/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  create: (data) => request('/pages', { method: 'POST', body: JSON.stringify(data) }),
+  delete: (id) => request(`/pages/${id}`, { method: 'DELETE' }),
 }
 
 // Users (admin)
@@ -188,21 +191,38 @@ export const mediaApi = {
   delete: (id) => request(`/media/${id}`, { method: 'DELETE' }),
 }
 
-// Contact Page Sections
+// Contact Page Sections (keyed by sectionKey, not numeric id)
 export const contactPageSectionsApi = {
-  getAll: () => request('/contact-page-sections'),
-  update: (id, data) => request(`/contact-page-sections/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  getByKey: (sectionKey) => request(`/contact-page-sections/${sectionKey}`),
+  update: (sectionKey, data) => request(`/contact-page-sections/${sectionKey}`, { method: 'PUT', body: JSON.stringify(data) }),
 }
 
-// About Page Sections
+// About Page Sections (keyed by sectionKey, not numeric id)
 export const aboutPageSectionsApi = {
-  getAll: () => request('/about-page-sections'),
-  update: (id, data) => request(`/about-page-sections/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  getByKey: (sectionKey) => request(`/about-page-sections/${sectionKey}`),
+  update: (sectionKey, data) => request(`/about-page-sections/${sectionKey}`, { method: 'PUT', body: JSON.stringify(data) }),
 }
 
-// Home Page Sections
+// About "Why Choose Us" reason items (list)
+export const aboutWhyChooseUsItemsApi = {
+  getAll: () => request('/about-why-choose-us-items'),
+  getById: (id) => request(`/about-why-choose-us-items/${id}`),
+  create: (data) => request('/about-why-choose-us-items', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) => request(`/about-why-choose-us-items/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id) => request(`/about-why-choose-us-items/${id}`, { method: 'DELETE' }),
+}
+
+// About Mission Items (list)
+export const aboutMissionItemsApi = {
+  getAll: () => request('/about-mission-items'),
+  getById: (id) => request(`/about-mission-items/${id}`),
+  create: (data) => request('/about-mission-items', { method: 'POST', body: JSON.stringify(data) }),
+  update: (id, data) => request(`/about-mission-items/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  delete: (id) => request(`/about-mission-items/${id}`, { method: 'DELETE' }),
+}
+
+// Home Page Sections (keyed by sectionKey, not numeric id)
 export const homePageSectionsApi = {
-  getAll: () => request('/home-page-sections'),
-  getByKey: (key) => request(`/home-page-sections/${key}`),
-  update: (id, data) => request(`/home-page-sections/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  getByKey: (sectionKey) => request(`/home-page-sections/${sectionKey}`),
+  update: (sectionKey, data) => request(`/home-page-sections/${sectionKey}`, { method: 'PUT', body: JSON.stringify(data) }),
 }

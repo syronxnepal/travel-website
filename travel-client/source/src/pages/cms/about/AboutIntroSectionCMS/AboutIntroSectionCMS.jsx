@@ -1,17 +1,20 @@
 import CMSSection from '../../../../components/cms/CMSSection/CMSSection'
-import { pagesApi } from '../../../../services/api'
+import { aboutPageSectionsApi } from '../../../../services/api'
 
 function AboutIntroSectionCMS() {
   return (
     <CMSSection
       title="About Intro Section"
-      onLoad={() => pagesApi.getBySlug('about-intro')}
-      onSave={(data) => pagesApi.update('about-intro', data)}
+      onLoad={() => aboutPageSectionsApi.getByKey('about-intro-section')}
+      onSave={(data) => aboutPageSectionsApi.update('about-intro-section', data)}
       fields={[
-        { key: 'eyebrow', label: 'Eyebrow Text', type: 'text' },
-        { key: 'title', label: 'Title', type: 'text' },
-        { key: 'content', label: 'Content', type: 'richtext' },
-        { key: 'image', label: 'Section Image', type: 'image' },
+        { key: 'topTitle', label: 'Eyebrow Text', type: 'text' },
+        { key: 'heading', label: 'Title', type: 'text' },
+        { key: 'paragraph', label: 'Intro Paragraph', type: 'textarea' },
+        { key: 'description', label: 'Description', type: 'richtext' },
+        { key: 'features', label: 'Feature Bullets', type: 'list', placeholder: 'Add feature...' },
+        { key: 'missionHeading', label: 'Mission Heading', type: 'text' },
+        { key: 'missionParagraph', label: 'Mission Paragraph', type: 'textarea' },
       ]}
     />
   )

@@ -7,9 +7,9 @@ function PageHero({ title, subtitle, backgroundImage, breadcrumb }) {
       style={{ backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined }}
     >
       <div className="page-hero__content">
+        {breadcrumb && <p className="page-hero__breadcrumb">{breadcrumb}</p>}
         <h1 className="page-hero__title">{title}</h1>
         {subtitle && <p className="page-hero__subtitle">{subtitle}</p>}
-        {breadcrumb && <p className="page-hero__breadcrumb">{breadcrumb}</p>}
       </div>
     </section>
   )
