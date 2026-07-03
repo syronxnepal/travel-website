@@ -65,11 +65,15 @@ const SAMPLE_TREKS = [
 const SAMPLE_TOURS = [
   { _id: 's-tour-1', title: 'Kathmandu City Highlights', image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=500&h=380&fit=crop', duration: '1 Day', price: 129, rating: 4.6, reviewCount: 54, location: 'Kathmandu' },
   { _id: 's-tour-2', title: 'Pokhara Day Trip', image: 'https://images.unsplash.com/photo-1571401835393-8c5f35328320?w=500&h=380&fit=crop', duration: '1 Day', price: 99, rating: 4.7, reviewCount: 47, location: 'Pokhara' },
+  { _id: 's-tour-3', title: 'Chitwan Jungle Safari', image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=500&h=380&fit=crop', duration: '2 Days', price: 189, rating: 4.8, reviewCount: 62, location: 'Chitwan' },
+  { _id: 's-tour-4', title: 'Bhaktapur Heritage Tour', image: 'https://images.unsplash.com/photo-1558431382-27e303142255?w=500&h=380&fit=crop', duration: '1 Day', price: 89, rating: 4.6, reviewCount: 41, location: 'Bhaktapur' },
 ]
 
 const SAMPLE_SHORT_TOURS = [
   { _id: 's-short-1', title: 'Boudhanath Stupa Tour', image: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=500&h=380&fit=crop', duration: '3 Hours', price: 39, rating: 4.5, reviewCount: 32, location: 'Kathmandu' },
   { _id: 's-short-2', title: 'Sunrise at Nagarkot', image: 'https://images.unsplash.com/photo-1585504198199-20277593b94f?w=500&h=380&fit=crop', duration: '5 Hours', price: 59, rating: 4.8, reviewCount: 28, location: 'Nagarkot' },
+  { _id: 's-short-3', title: 'Patan Durbar Square Walk', image: 'https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=500&h=380&fit=crop', duration: '2 Hours', price: 29, rating: 4.6, reviewCount: 24, location: 'Lalitpur' },
+  { _id: 's-short-4', title: 'Pokhara Lakeside Evening', image: 'https://images.unsplash.com/photo-1626621341169-ba5c6c4e4c3b?w=500&h=380&fit=crop', duration: '3 Hours', price: 35, rating: 4.7, reviewCount: 19, location: 'Pokhara' },
 ]
 
 const SAMPLE_BLOGS = [
@@ -119,8 +123,8 @@ function HomePage() {
 
   useEffect(() => {
     treksApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setTreks(list.slice(0, 4)) }).catch(() => {})
-    toursApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setTours(list.slice(0, 2)) }).catch(() => {})
-    shortToursApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setShortTours(list.slice(0, 2)) }).catch(() => {})
+    toursApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setTours(list.slice(0, 4)) }).catch(() => {})
+    shortToursApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setShortTours(list.slice(0, 4)) }).catch(() => {})
     blogsApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setBlogs(list.slice(0, 3)) }).catch(() => {})
     galleryApi.getAll().then((r) => { const list = (r?.data || r || []); if (list.length > 0) setGallery(list.slice(0, 6)) }).catch(() => {})
     heroSlidersApi.getAll()
