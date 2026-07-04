@@ -134,6 +134,27 @@ function Header() {
 
   return (
     <div className="header-wrap">
+      {/* Mobile header — hamburger, centered logo, search + wishlist. Always
+          sticky; everything else (social, sign in/profile) lives in the
+          hamburger slide-out panel below. */}
+      <div className="header-mobile">
+        <button className="header-mobile__icon" onClick={() => setMobileOpen(true)}>
+          <i className="fa-solid fa-bars"></i>
+        </button>
+        <Link to="/" className="header-mobile__logo">
+          <img src="/Images/Brand/logo.png" alt="Travel Adventure Nepal" />
+        </Link>
+        <div className="header-mobile__actions">
+          <button className="header-mobile__icon" onClick={() => setSearchOpen(true)}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button className="header-mobile__icon header-mobile__wishlist" onClick={() => setWishlistOpen(true)}>
+            <i className="fa-regular fa-heart"></i>
+            {wishlist.length > 0 && <span className="header-mobile__wishlist-count">{wishlist.length}</span>}
+          </button>
+        </div>
+      </div>
+
       {/* Top info bar */}
       <div className="header-topbar" ref={topbarRef}>
         <div className="container">
@@ -190,9 +211,6 @@ function Header() {
                 <DropdownItem key={item.label} item={item} />
               ))}
             </div>
-            <button className="header-nav__hamburger" onClick={() => setMobileOpen(true)}>
-              <i className="fa-solid fa-bars"></i>
-            </button>
           </div>
         </div>
       </nav>
@@ -220,12 +238,37 @@ function Header() {
                   ))}
                 </div>
               ))}
-              {isAuthenticated ? (
-                <button className="mobile-menu__link" onClick={() => { handleLogout(); setMobileOpen(false) }}>Sign Out</button>
-              ) : (
-                <Link to="/signin" className="mobile-menu__link" onClick={() => setMobileOpen(false)}>Sign/Register</Link>
-              )}
             </nav>
+
+            <div className="mobile-menu__account">
+              {isAuthenticated ? (
+                <div className="mobile-menu__user">
+                  <i className="fa-solid fa-circle-user"></i>
+                  <span>{user?.name}</span>
+                  <button onClick={() => { handleLogout(); setMobileOpen(false) }} className="btn btn--nav">Sign Out</button>
+                </div>
+              ) : (
+                <Link to="/auth" className="mobile-menu__signin" onClick={() => setMobileOpen(false)}>
+                  Sign/Register <i className="fa-solid fa-arrow-right"></i>
+                </Link>
+              )}
+            </div>
+
+            <div className="mobile-menu__contact">
+              <span className="mobile-menu__contact-item">
+                <i className="fa-solid fa-location-dot"></i> Suite 502/155 Castlereagh Street, Sydney - Australia 2000
+              </span>
+              <span className="mobile-menu__contact-item">
+                <i className="fa-regular fa-envelope"></i> sales@traveladventurenepal.com.au
+              </span>
+            </div>
+
+            <div className="mobile-menu__socials">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-facebook-f"></i></a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-instagram"></i></a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-twitter"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-linkedin-in"></i></a>
+            </div>
           </div>
         </div>
       )}
