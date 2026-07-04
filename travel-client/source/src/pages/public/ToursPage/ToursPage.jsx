@@ -4,6 +4,7 @@ import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import TourCard from '../../../components/tours/TourCard/TourCard'
 import TourFilters from '../../../components/tours/TourFilters/TourFilters'
+import FilterSidebar from '../../../components/tours/FilterSidebar/FilterSidebar'
 import { toursApi } from '../../../services/api'
 import { usePageHero } from '../../../hooks/usePageHero'
 import './ToursPage.css'
@@ -51,9 +52,9 @@ function ToursPage() {
 
       <div className="container">
         <div className="tours-page__layout">
-          <aside className="tours-page__sidebar">
+          <FilterSidebar className="tours-page__sidebar">
             <TourFilters filters={filters} onChange={setFilters} />
-          </aside>
+          </FilterSidebar>
 
           <main className="tours-page__main">
             <div className="tours-page__sort-bar">

@@ -5,6 +5,7 @@ import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import TrekCard from '../../../components/tours/TrekCard/TrekCard'
 import TourFilters from '../../../components/tours/TourFilters/TourFilters'
+import FilterSidebar from '../../../components/tours/FilterSidebar/FilterSidebar'
 import { treksApi } from '../../../services/api'
 import { usePageHero } from '../../../hooks/usePageHero'
 import './TrekkingPage.css'
@@ -63,14 +64,14 @@ function TrekkingPage() {
 
       <div className="container">
         <div className="trekking-page__layout">
-          <aside className="trekking-page__sidebar">
+          <FilterSidebar className="trekking-page__sidebar">
             <TourFilters
               filters={filters}
               onChange={setFilters}
               label="Criteria"
               difficulties={['Easy', 'Moderate', 'Challenging', 'Expert']}
             />
-          </aside>
+          </FilterSidebar>
 
           <main className="trekking-page__main">
             <div className="trekking-page__toolbar">
