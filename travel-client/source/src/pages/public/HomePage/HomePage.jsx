@@ -9,13 +9,25 @@ import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi
 import { getImageUrl } from '../../../utils/helpers'
 import './HomePage.css'
 
-function SectionHead({ badge, title, subtitle, cta }) {
+function SectionHead({ badge, title, subtitle, cta, icon = 'fa-solid fa-compass' }) {
+  if (!cta) {
+    return (
+      <div className="section-header section-header--center">
+        <span className="section-header__badge"><i className={icon}></i> {badge}</span>
+        <h2>{title}</h2>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+    )
+  }
+
   return (
-    <div className="section-header section-header--center">
-      <span className="section-header__badge">{badge}</span>
-      <h2>{title}</h2>
-      {subtitle && <p>{subtitle}</p>}
-      {cta && <Link to={cta.link} className="btn btn--outline section-header__cta">{cta.label}</Link>}
+    <div className="section-header section-header--row">
+      <div className="section-header__text">
+        <span className="section-header__badge"><i className={icon}></i> {badge}</span>
+        <h2>{title}</h2>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+      <Link to={cta.link} className="section-header__cta">{cta.label} <i className="fa-solid fa-arrow-right"></i></Link>
     </div>
   )
 }
@@ -214,6 +226,7 @@ function HomePage() {
               title={sVal('top-trek-section', 'heading', 'Explore Our Top Trekking Destinations')}
               subtitle={sVal('top-trek-section', 'subtitle')}
               cta={{ label: 'View More', link: '/trekking' }}
+              icon="fa-solid fa-mountain"
             />
             <div className="home-trek-grid">
               {treks.map((trek) => <TrekCard key={trek._id || trek.id} trek={trek} />)}
@@ -231,6 +244,7 @@ function HomePage() {
               title={sVal('top-tours-section', 'heading', 'Explore Our Tours & Short Tours')}
               subtitle={sVal('top-tours-section', 'subtitle')}
               cta={{ label: 'View More', link: '/tours' }}
+              icon="fa-solid fa-paper-plane"
             />
             <div className="home-tour-grid">
               {combinedTours.map(({ item, type }) => <TourCard key={item._id || item.id} tour={item} type={type} />)}
@@ -246,6 +260,7 @@ function HomePage() {
             badge={sVal('why-choose-us-section', 'topTitle', 'CHOOSE US')}
             title={sVal('why-choose-us-section', 'heading', 'Why Book With Us')}
             subtitle={sVal('why-choose-us-section', 'subtitle')}
+            icon="fa-solid fa-award"
           />
           <div className="home-why__layout">
             <ul className="home-why__list">
@@ -281,6 +296,7 @@ function HomePage() {
             <SectionHead
               badge={sVal('testimonials-section', 'topTitle', 'TESTIMONIALS')}
               title={sVal('testimonials-section', 'heading', 'What Others Are Saying About Us')}
+              icon="fa-solid fa-quote-left"
             />
             <div className="home-testimonial">
               <i className="fa-solid fa-quote-left home-testimonial__quote-icon"></i>
@@ -315,6 +331,7 @@ function HomePage() {
               title={sVal('blog-section', 'heading', 'Keep Updated With Our Stories')}
               subtitle={sVal('blog-section', 'subtitle')}
               cta={{ label: 'View More', link: '/blogs' }}
+              icon="fa-solid fa-newspaper"
             />
             <div className="home-blog-grid">
               {blogs.map((blog, i) => {
@@ -350,6 +367,8 @@ function HomePage() {
               badge={sVal('gallery-section', 'topTitle', 'OUR GALLERY')}
               title={sVal('gallery-section', 'heading', 'Discover The Beauty Of Our Trips')}
               subtitle={sVal('gallery-section', 'subtitle')}
+              cta={{ label: 'View More', link: '/gallery' }}
+              icon="fa-solid fa-images"
             />
             <div className="home-gallery-grid">
               {gallery.map((item, i) => (
