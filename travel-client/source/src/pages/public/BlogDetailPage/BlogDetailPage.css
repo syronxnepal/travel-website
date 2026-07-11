@@ -73,4 +73,11 @@
 @media (max-width: 900px) {
   .blog-detail-page__layout { grid-template-columns: 1fr; }
   .blog-detail-page__sidebar { position: static; }
+  .blog-detail-page__hero { height: 320px; }
+  .blog-detail-page__title { font-size: 26px; }
+}
+
+@media (max-width: 480px) {
+  .blog-detail-page__hero { height: 260px; }
+  .blog-detail-page__title { font-size: 22px; }
 }

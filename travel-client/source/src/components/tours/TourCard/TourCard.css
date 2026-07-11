@@ -50,3 +50,8 @@
 .tour-card__rating-count { color: #777; font-size: 11px; }
 .tour-card__price { font-size: 13px; color: var(--color-primary); font-weight: 600; }
 .tour-card__price strong { font-size: 15px; }
+
+@media (max-width: 600px) {
+  .tour-card__image-wrap { height: 160px; }
+  .tour-card__title { font-size: 14px; }
+}

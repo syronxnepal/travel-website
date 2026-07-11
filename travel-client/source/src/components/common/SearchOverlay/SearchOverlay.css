@@ -56,14 +56,14 @@
 .search-overlay__form {
   display: flex;
   border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 999px;
   overflow: hidden;
   margin-bottom: 24px;
 }
 
 .search-overlay__input {
   flex: 1;
-  padding: 13px 16px;
+  padding: 13px 16px 13px 24px;
   font-size: 14px;
   border: none;
   outline: none;
@@ -72,7 +72,7 @@
 }
 
 .search-overlay__btn {
-  padding: 0 20px;
+  padding: 0 28px;
   background: linear-gradient(135deg, #e79520 0%, #e8c832 50%, #4caf50 100%);
   border: none;
   color: #fff;

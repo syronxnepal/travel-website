@@ -49,14 +49,24 @@
 
 @media (max-width: 768px) {
   .page-hero {
-    height: 280px;
+    height: 240px;
   }
 
   .page-hero__title {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .page-hero__subtitle {
-    font-size: 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-hero {
+    height: 200px;
+  }
+
+  .page-hero__title {
+    font-size: 24px;
   }
 }

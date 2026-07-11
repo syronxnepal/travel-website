@@ -171,4 +171,12 @@
   .detail-page__sidebar { position: static; }
   .detail-info-cards { grid-template-columns: repeat(2, 1fr); }
   .detail-highlights { grid-template-columns: 1fr; }
+  .detail-page__title { font-size: 24px; }
+  .detail-gallery__main { height: 260px; }
+  .detail-gallery__thumb { width: 64px; height: 44px; }
+}
+
+@media (max-width: 480px) {
+  .detail-page__title { font-size: 21px; }
+  .detail-gallery__main { height: 210px; }
 }
