@@ -4,12 +4,14 @@ import Footer from '../../../components/common/Footer/Footer'
 import PageHero from '../../../components/common/PageHero/PageHero'
 import { contactsApi } from '../../../services/api'
 import { usePageHero } from '../../../hooks/usePageHero'
+import { useSocialLinks } from '../../../hooks/useSocialLinks'
 import './ContactPage.css'
 
 const DEFAULT_HERO = { title: 'Contact Us', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=400&fit=crop' }
 
 function ContactPage() {
   const hero = usePageHero('contact', DEFAULT_HERO)
+  const socialLinks = useSocialLinks()
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -73,10 +75,9 @@ function ContactPage() {
             <div className="contact-page__follow">
               <h4>Follow Us</h4>
               <div className="contact-page__socials">
-                <a href="#" className="contact-social"><i className="fa-brands fa-facebook-f"></i></a>
-                <a href="#" className="contact-social"><i className="fa-brands fa-instagram"></i></a>
-                <a href="#" className="contact-social"><i className="fa-brands fa-youtube"></i></a>
-                <a href="#" className="contact-social"><i className="fa-brands fa-tiktok"></i></a>
+                {socialLinks.map((link) => (
+                  <a key={link._id || link.id} href={link.url} target="_blank" rel="noreferrer" className="contact-social"><i className={link.icon || 'fa-solid fa-link'}></i></a>
+                ))}
               </div>
             </div>
           </div>

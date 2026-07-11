@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/AuthContext'
 import { useWishlist } from '../../../context/WishlistContext'
 import { useScrollPosition } from '../../../hooks/useScrollPosition'
+import { useSocialLinks } from '../../../hooks/useSocialLinks'
 import SearchOverlay from '../SearchOverlay/SearchOverlay'
 import WishlistPanel from '../WishlistPanel/WishlistPanel'
 import './Header.css'
@@ -109,6 +110,7 @@ function Header() {
   const [wishlistOpen, setWishlistOpen] = useState(false)
   const { isAuthenticated, user, logout, isAdmin } = useAuth()
   const { wishlist } = useWishlist()
+  const socialLinks = useSocialLinks()
   const scrollY = useScrollPosition()
   const navigate = useNavigate()
   const topbarRef = useRef(null)
@@ -181,10 +183,11 @@ function Header() {
             </div>
 
             <div className="header-topbar__actions">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-facebook-f"></i></a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-instagram"></i></a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-twitter"></i></a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-linkedin-in"></i></a>
+              {socialLinks.map((link) => (
+                <a key={link._id || link.id} href={link.url} target="_blank" rel="noreferrer" className="header-topbar__social">
+                  <i className={link.icon || 'fa-solid fa-link'}></i>
+                </a>
+              ))}
               <button className="header-topbar__icon" onClick={() => setSearchOpen(true)}><i className="fa-solid fa-magnifying-glass"></i></button>
               <button className="header-topbar__icon header-topbar__wishlist" onClick={() => setWishlistOpen(true)}>
                 <i className="fa-regular fa-heart"></i>
@@ -270,10 +273,11 @@ function Header() {
             </div>
 
             <div className="mobile-menu__socials">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-facebook-f"></i></a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-instagram"></i></a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-twitter"></i></a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="header-topbar__social"><i className="fa-brands fa-linkedin-in"></i></a>
+              {socialLinks.map((link) => (
+                <a key={link._id || link.id} href={link.url} target="_blank" rel="noreferrer" className="header-topbar__social">
+                  <i className={link.icon || 'fa-solid fa-link'}></i>
+                </a>
+              ))}
             </div>
           </div>
         </div>

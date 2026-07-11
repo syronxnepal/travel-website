@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { treksApi } from '../../../services/api'
+import { useSocialLinks } from '../../../hooks/useSocialLinks'
 import './Footer.css'
 
 function Footer() {
   const [latestTreks, setLatestTreks] = useState([])
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const socialLinks = useSocialLinks()
 
   useEffect(() => {
     treksApi.getAll({ limit: 5 }).then((r) => setLatestTreks((r?.data || r || []).slice(0, 5))).catch(() => {})
@@ -121,11 +123,9 @@ function Footer() {
       <div className="footer__brand-bar">
         <div className="container footer__brand-bar-inner">
           <div className="footer__socials">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-instagram"></i></a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-twitter"></i></a>
-            <a href="https://pinterest.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-pinterest-p"></i></a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer"><i className="fa-brands fa-youtube"></i></a>
+            {socialLinks.map((link) => (
+              <a key={link._id || link.id} href={link.url} target="_blank" rel="noreferrer"><i className={link.icon || 'fa-solid fa-link'}></i></a>
+            ))}
           </div>
           <p className="footer__brand-name">Travel Adventure Nepal</p>
           <p className="footer__help">Need help? Call us <a href="tel:+61200000000">+61 2 0000 0000</a></p>
