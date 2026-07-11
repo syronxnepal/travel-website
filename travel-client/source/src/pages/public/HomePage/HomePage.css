@@ -354,7 +354,8 @@
   .hero__title { font-size: 32px; }
   .hero__arrow { display: none; }
   .hero__dots { right: 14px; }
-  .home-trek-grid, .home-tour-grid, .home-blog-grid, .home-gallery-grid { grid-template-columns: 1fr; }
+  .home-tour-grid, .home-blog-grid, .home-gallery-grid { grid-template-columns: 1fr; }
+  .home-trek-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .home-why__stat--top, .home-why__stat--bottom { left: 12px; right: 12px; }
   .home-testimonial { padding: 32px 20px; }
 }
