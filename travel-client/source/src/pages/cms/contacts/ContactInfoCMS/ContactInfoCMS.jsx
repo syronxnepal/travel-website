@@ -95,7 +95,7 @@ function ContactInfoCMS() {
           <div className="form-field"><label>Address</label><input type="text" value={info.address} onChange={(e) => setInfo({ ...info, address: e.target.value })} /></div>
           <div className="form-field"><label>Phone Number</label><input type="text" value={info.phone} onChange={(e) => setInfo({ ...info, phone: e.target.value })} /></div>
           <div className="form-field"><label>Email</label><input type="text" value={info.email} onChange={(e) => setInfo({ ...info, email: e.target.value })} /></div>
-          <div className="form-field"><label>Office Hours</label><input type="text" value={info.contactHours} onChange={(e) => setInfo({ ...info, contactHours: e.target.value })} /></div>
+          <div className="form-field"><label>Office Hours</label><textarea rows={3} value={info.contactHours} onChange={(e) => setInfo({ ...info, contactHours: e.target.value })} placeholder={'Monday - Friday: 09:00 - 17:00\nSaturday, Sunday: 09:00 - 15:00'} /></div>
           <button type="submit" className="btn btn--primary" disabled={savingInfo}>{savingInfo ? 'Saving...' : 'Save Contact Info'}</button>
         </form>
       )}

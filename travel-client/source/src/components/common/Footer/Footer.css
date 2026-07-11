@@ -48,7 +48,7 @@
 
 .footer__links li a:hover { color: var(--color-primary); }
 
-.footer__text { color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.8; margin: 0; }
+.footer__text { color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.8; margin: 0; white-space: pre-line; }
 
 /* Brand bar */
 .footer__brand-bar { padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.1); }

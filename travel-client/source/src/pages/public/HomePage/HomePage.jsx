@@ -8,6 +8,7 @@ import HeroSearchWidget from '../../../components/home/HeroSearchWidget/HeroSear
 import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi, homePageSectionsApi } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
 import { useContactInfo } from '../../../hooks/useContactInfo'
+import Lightbox from '../../../components/common/Lightbox/Lightbox'
 import './HomePage.css'
 
 function SectionHead({ badge, title, subtitle, cta, icon = 'fa-solid fa-compass' }) {
@@ -117,6 +118,7 @@ function HomePage() {
   const [testimonials, setTestimonials] = useState(SAMPLE_TESTIMONIALS)
   const [slide, setSlide] = useState(0)
   const [testiIndex, setTestiIndex] = useState(0)
+  const [galleryLightbox, setGalleryLightbox] = useState(null)
   const contactInfo = useContactInfo()
   const [sections, setSections] = useState({})
 
@@ -171,6 +173,12 @@ function HomePage() {
   const current = heroSlides[slide] || heroSlides[0]
   const combinedTours = [...tours.map((t) => ({ item: t, type: 'tour' })), ...shortTours.map((t) => ({ item: t, type: 'short-tour' }))]
   const activeTesti = testimonials[testiIndex] || testimonials[0]
+
+  const latestGallery = gallery.slice(0, 6)
+  const galleryDisplay = [
+    ...latestGallery,
+    ...Array.from({ length: Math.max(0, 6 - latestGallery.length) }, (_, i) => ({ _id: `gallery-dummy-${i}`, isDummy: true })),
+  ]
 
   function formatDate(d) {
     if (!d) return ''
@@ -377,7 +385,7 @@ function HomePage() {
       )}
 
       {/* Gallery Section */}
-      {gallery.length > 0 && (
+      {galleryDisplay.length > 0 && (
         <section className="home-section home-section--gray">
           <div className="container">
             <SectionHead
@@ -388,13 +396,26 @@ function HomePage() {
               icon="fa-solid fa-images"
             />
             <div className="home-gallery-grid">
-              {gallery.map((item, i) => (
-                <Link key={item._id || i} to="/gallery" className={`home-gallery-item home-gallery-item--${i + 1}`}>
-                  <img src={getImageUrl(item.image || item.url)} alt={item.title || ''} loading="lazy" />
-                  <div className="home-gallery-item__overlay"><i className="fa-solid fa-magnifying-glass-plus"></i></div>
-                </Link>
+              {galleryDisplay.map((item, i) => (
+                item.isDummy ? (
+                  <div key={item._id} className="home-gallery-item home-gallery-item--dummy">
+                    <i className="fa-solid fa-image"></i>
+                  </div>
+                ) : (
+                  <div key={item._id || i} className="home-gallery-item" onClick={() => setGalleryLightbox(i)}>
+                    <img src={getImageUrl(item.image || item.url)} alt={item.title || ''} loading="lazy" />
+                    <div className="home-gallery-item__overlay"><i className="fa-solid fa-magnifying-glass-plus"></i></div>
+                    {item.title && <span className="home-gallery-item__caption">{item.title}</span>}
+                  </div>
+                )
               ))}
             </div>
+            <Lightbox
+              images={latestGallery}
+              index={galleryLightbox}
+              onClose={() => setGalleryLightbox(null)}
+              onNavigate={setGalleryLightbox}
+            />
             <div className="home-section__cta">
               <Link to="/gallery" className="btn btn--outline">View Full Gallery</Link>
             </div>

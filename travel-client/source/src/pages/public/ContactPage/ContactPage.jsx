@@ -68,7 +68,7 @@ function ContactPage() {
                 <div className="contact-page__info-icon"><i className="fa-solid fa-clock"></i></div>
                 <div>
                   <strong>Working Hours</strong>
-                  <p>{contactInfo.contactHours}</p>
+                  <p style={{ whiteSpace: 'pre-line' }}>{contactInfo.contactHours}</p>
                 </div>
               </div>
             </div>

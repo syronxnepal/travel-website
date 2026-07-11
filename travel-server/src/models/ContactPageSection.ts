@@ -44,7 +44,7 @@ export class ContactPageSection implements IContactPageSection {
   @Column({ type: 'text', nullable: true })
   address?: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'text', nullable: true })
   contactHours?: string;
 
   @CreateDateColumn()
