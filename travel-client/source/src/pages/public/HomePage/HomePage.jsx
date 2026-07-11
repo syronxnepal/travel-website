@@ -296,28 +296,43 @@ function HomePage() {
             <SectionHead
               badge={sVal('testimonials-section', 'topTitle', 'TESTIMONIALS')}
               title={sVal('testimonials-section', 'heading', 'What Others Are Saying About Us')}
-              icon="fa-solid fa-quote-left"
+              icon="fa-solid fa-people-group"
             />
-            <div className="home-testimonial">
-              <i className="fa-solid fa-quote-left home-testimonial__quote-icon"></i>
-              <div className="home-testimonial__stars">
-                {[1,2,3,4,5].map((i) => <i key={i} className={`fa-${i <= (activeTesti.rating || 5) ? 'solid' : 'regular'} fa-star`}></i>)}
-              </div>
-              <p className="home-testimonial__text">"{activeTesti.comment || activeTesti.text}"</p>
+            <div className="home-testimonial__stars home-testimonial__stars--top">
+              {[1,2,3,4,5].map((i) => <i key={i} className={`fa-${i <= (activeTesti.rating || 5) ? 'solid' : 'regular'} fa-star`}></i>)}
+            </div>
+            <div className="home-testimonial" key={testiIndex}>
+              <i className="fa-solid fa-quote-left home-testimonial__quote-mark home-testimonial__quote-mark--left"></i>
+              <i className="fa-solid fa-quote-right home-testimonial__quote-mark home-testimonial__quote-mark--right"></i>
+              <p className="home-testimonial__text">{activeTesti.comment || activeTesti.text}</p>
               <div className="home-testimonial__author">
                 <div className="home-testimonial__avatar">
                   {activeTesti.image ? <img src={getImageUrl(activeTesti.image)} alt={activeTesti.name} /> : <i className="fa-solid fa-user"></i>}
                 </div>
-                <strong>{activeTesti.name}</strong>
-                {activeTesti.location && <span>{activeTesti.location}</span>}
+                <div className="home-testimonial__author-text">
+                  <strong>{activeTesti.name}</strong>
+                  <span>{activeTesti.location || activeTesti.role || 'Traveller'}</span>
+                </div>
               </div>
-              {testimonials.length > 1 && (
+            </div>
+            {testimonials.length > 1 && (
+              <div className="home-testimonial__controls">
+                <div className="home-testimonial__dots">
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`home-testimonial__dot${i === testiIndex ? ' active' : ''}`}
+                      onClick={() => setTestiIndex(i)}
+                      aria-label={`Go to testimonial ${i + 1}`}
+                    />
+                  ))}
+                </div>
                 <div className="home-testimonial__nav">
                   <button onClick={prevTesti}><i className="fa-solid fa-chevron-left"></i></button>
                   <button onClick={nextTesti}><i className="fa-solid fa-chevron-right"></i></button>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
       )}
