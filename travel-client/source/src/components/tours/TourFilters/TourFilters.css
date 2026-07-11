@@ -33,11 +33,57 @@
   margin-bottom: 6px;
 }
 
+/* Flat, neutral slider — no colored "fill" track as the thumb moves. */
 .tour-filters__range {
   width: 100%;
-  accent-color: var(--color-primary);
   cursor: pointer;
   height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--color-border);
+  border-radius: 2px;
+  outline: none;
+}
+
+.tour-filters__range::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.tour-filters__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+.tour-filters__range::-moz-range-track {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.tour-filters__range::-moz-range-progress {
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.tour-filters__range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  cursor: pointer;
 }
 
 .tour-filters__checkbox {
