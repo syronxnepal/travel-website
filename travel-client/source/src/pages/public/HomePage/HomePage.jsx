@@ -398,11 +398,11 @@ function HomePage() {
             <div className="home-gallery-grid">
               {galleryDisplay.map((item, i) => (
                 item.isDummy ? (
-                  <div key={item._id} className="home-gallery-item home-gallery-item--dummy">
+                  <div key={item._id} className={`home-gallery-item home-gallery-item--${i + 1} home-gallery-item--dummy`}>
                     <i className="fa-solid fa-image"></i>
                   </div>
                 ) : (
-                  <div key={item._id || i} className="home-gallery-item" onClick={() => setGalleryLightbox(i)}>
+                  <div key={item._id || i} className={`home-gallery-item home-gallery-item--${i + 1}`} onClick={() => setGalleryLightbox(i)}>
                     <img src={getImageUrl(item.image || item.url)} alt={item.title || ''} loading="lazy" />
                     <div className="home-gallery-item__overlay"><i className="fa-solid fa-magnifying-glass-plus"></i></div>
                     {item.title && <span className="home-gallery-item__caption">{item.title}</span>}

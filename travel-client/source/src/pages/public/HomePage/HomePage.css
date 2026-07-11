@@ -162,15 +162,25 @@
 .home-tour-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .home-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
-/* Gallery grid — 3 columns x 2 rows, 6 equal cells */
+/* Gallery collage — 5 columns x 2 rows bento layout: one big feature tile,
+   three small tiles across the top, and a wide + small tile along the
+   bottom, for 6 photos total with real visual hierarchy. */
 .home-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 160px);
   gap: 14px;
 }
 
+.home-gallery-item--1 { grid-column: 1 / 3; grid-row: 1 / 3; }
+.home-gallery-item--2 { grid-column: 3 / 4; grid-row: 1 / 2; }
+.home-gallery-item--3 { grid-column: 4 / 5; grid-row: 1 / 2; }
+.home-gallery-item--4 { grid-column: 5 / 6; grid-row: 1 / 2; }
+.home-gallery-item--5 { grid-column: 3 / 5; grid-row: 2 / 3; }
+.home-gallery-item--6 { grid-column: 5 / 6; grid-row: 2 / 3; }
+
 /* Gallery item */
-.home-gallery-item { position: relative; display: block; overflow: hidden; border-radius: var(--radius-md); aspect-ratio: 3 / 2; cursor: pointer; }
+.home-gallery-item { position: relative; display: block; overflow: hidden; border-radius: var(--radius-md); cursor: pointer; }
 .home-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .home-gallery-item:hover img { transform: scale(1.08); }
 .home-gallery-item__overlay {
@@ -347,7 +357,11 @@
 @media (max-width: 900px) {
   .hero__title { font-size: 36px; }
   .home-blog-grid { grid-template-columns: repeat(2, 1fr); }
-  .home-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
+  .home-gallery-item--1, .home-gallery-item--2, .home-gallery-item--3,
+  .home-gallery-item--4, .home-gallery-item--5, .home-gallery-item--6 {
+    grid-column: span 1; grid-row: span 1; aspect-ratio: 3 / 2;
+  }
 }
 
 @media (max-width: 768px) {
