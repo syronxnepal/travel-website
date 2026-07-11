@@ -1,11 +1,10 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ToastProvider } from './context/ToastContext'
 import { WishlistProvider } from './context/WishlistContext'
 
 // Public Pages
 import HomePage from './pages/public/HomePage/HomePage'
-import AboutPage from './pages/public/AboutPage/AboutPage'
 import BlogsPage from './pages/public/BlogsPage/BlogsPage'
 import BlogDetailPage from './pages/public/BlogDetailPage/BlogDetailPage'
 import ToursPage from './pages/public/ToursPage/ToursPage'
@@ -88,7 +87,7 @@ import ManagePagesCMS from './pages/cms/pages/ManagePagesCMS/ManagePagesCMS'
 const router = createBrowserRouter([
   // Public routes
   { path: '/', element: <HomePage /> },
-  { path: '/about', element: <AboutPage /> },
+  { path: '/about', element: <Navigate to="/our-story" replace /> },
   { path: '/blogs', element: <BlogsPage /> },
   { path: '/blog/:id', element: <BlogDetailPage /> },
   { path: '/blogs/:blogId', element: <BlogDetailPage /> },

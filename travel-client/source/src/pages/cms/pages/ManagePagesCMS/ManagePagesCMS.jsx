@@ -8,7 +8,6 @@ import { useToast } from '../../../../context/ToastContext'
 // detail pages aren't listed here — home has its own Hero Slider CMS, and
 // detail pages use the trek/tour/blog's own title + featured image instead.
 const PAGE_TYPES = [
-  { type: 'about', label: 'About Us' },
   { type: 'about-our-story', label: 'Our Story' },
   { type: 'about-why-choose-us', label: 'Why Choose Us' },
   { type: 'contact', label: 'Contact' },

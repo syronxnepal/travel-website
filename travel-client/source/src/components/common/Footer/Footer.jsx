@@ -17,7 +17,6 @@ function Footer() {
   }, [])
 
   const companyLinks = [
-    { label: 'About Us', path: '/about' },
     { label: 'Our Story', path: '/our-story' },
     { label: 'Why Choose Us', path: '/why-choose-us' },
     { label: 'Gallery', path: '/gallery' },

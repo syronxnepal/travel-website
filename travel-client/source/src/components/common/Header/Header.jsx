@@ -12,9 +12,8 @@ import './Header.css'
 const navItems = [
   { label: 'HOME', path: '/' },
   {
-    label: 'ABOUT', path: '/about',
+    label: 'ABOUT', path: '/our-story',
     dropdown: [
-      { label: 'Our Story', path: '/our-story' },
       { label: 'Why Choose Us', path: '/why-choose-us' },
     ],
   },
