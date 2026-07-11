@@ -136,6 +136,8 @@
   left: 0;
   right: 0;
   z-index: 999;
+  display: flex;
+  justify-content: center;
 }
 
 .header-nav--sticky {
@@ -145,9 +147,11 @@
 
 /* The clipped ribbon shape lives on ::before (a background layer only) so
    the clip-path doesn't also clip away real content — like nav dropdowns —
-   that needs to overflow below the nav bar. */
+   that needs to overflow below the nav bar. It hugs its own content
+   (centered by .header-nav) instead of stretching to the container width. */
 .header-nav__shape {
   position: relative;
+  padding: 0 56px;
 }
 
 .header-nav__shape::before {
@@ -161,8 +165,8 @@
 }
 
 .header-nav--sticky .header-nav__shape {
-  max-width: none;
-  padding: 0;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .header-nav--sticky .header-nav__shape::before {

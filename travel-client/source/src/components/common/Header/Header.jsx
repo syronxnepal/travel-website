@@ -205,7 +205,7 @@ function Header() {
 
       {/* Main nav bar */}
       <nav className={'header-nav' + (isScrolled ? ' header-nav--sticky' : '')}>
-        <div className="container header-nav__shape">
+        <div className="header-nav__shape">
           <div className="header-nav__inner">
             {isScrolled && (
               <Link to="/" className="header-nav__sticky-logo">
