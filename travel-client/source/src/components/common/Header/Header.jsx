@@ -166,11 +166,17 @@ function Header() {
             <div className="header-topbar__info">
               <span className="header-topbar__info-item">
                 <span className="header-topbar__info-icon"><i className="fa-solid fa-location-dot"></i></span>
-                <span><strong>OUR LOCATION</strong><br />Suite 502/155 Castlereagh Street, Sydney - Australia 2000</span>
+                <span className="header-topbar__info-text">
+                  <strong>OUR LOCATION</strong>
+                  <span>Suite 502/155 Castlereagh Street, Sydney - Australia 2000</span>
+                </span>
               </span>
               <span className="header-topbar__info-item">
                 <span className="header-topbar__info-icon"><i className="fa-regular fa-envelope"></i></span>
-                <span><strong>EMAIL US</strong><br />sales@traveladventurenepal.com.au</span>
+                <span className="header-topbar__info-text">
+                  <strong>EMAIL US</strong>
+                  <span>sales@traveladventurenepal.com.au</span>
+                </span>
               </span>
             </div>
 
