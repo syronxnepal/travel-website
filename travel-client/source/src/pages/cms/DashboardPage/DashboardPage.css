@@ -28,7 +28,7 @@
   margin: 24px 0 12px;
   display: flex; align-items: center; gap: 8px;
 }
-.dash-section-title i { color: #FFA500; }
+.dash-section-title i { color: #e79520; }
 
 /* Stat cards */
 .dash-stats-grid {
@@ -140,8 +140,8 @@
   border-bottom: 1px solid #f5f5f5;
 }
 .dash-activity-card__header h4 { font-size: 14px; font-weight: 600; color: #1B2948; margin: 0; display: flex; align-items: center; gap: 7px; }
-.dash-activity-card__header h4 i { color: #FFA500; }
-.dash-view-all { font-size: 12px; color: #FFA500; font-weight: 600; }
+.dash-activity-card__header h4 i { color: #e79520; }
+.dash-view-all { font-size: 12px; color: #e79520; font-weight: 600; }
 .dash-view-all:hover { text-decoration: underline; }
 
 .dash-table { width: 100%; border-collapse: collapse; }

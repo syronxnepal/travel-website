@@ -34,7 +34,7 @@
   display: flex; align-items: center; gap: 8px;
   font-size: 16px; font-weight: 700; color: #1B2948;
 }
-.wl-panel__title i { color: #FFA500; font-size: 16px; }
+.wl-panel__title i { color: #e79520; font-size: 16px; }
 .wl-panel__title em { font-style: normal; font-size: 14px; color: #888; font-weight: 500; }
 .wl-panel__close {
   width: 30px; height: 30px;
@@ -100,7 +100,7 @@
   padding: 2px 5px; border-radius: 3px;
   color: #fff; line-height: 1;
 }
-.wl-item__badge--trek { background: #FFA500; }
+.wl-item__badge--trek { background: #e79520; }
 .wl-item__badge--tour { background: #3b82f6; }
 .wl-item__badge--shortTour { background: #22c55e; }
 
@@ -113,18 +113,18 @@
   margin-bottom: 4px;
   transition: color .15s;
 }
-.wl-item__title:hover { color: #FFA500; }
+.wl-item__title:hover { color: #e79520; }
 
 .wl-item__location {
   font-size: 11.5px; color: #888;
   display: flex; align-items: center; gap: 4px;
   margin-bottom: 5px;
 }
-.wl-item__location i { color: #FFA500; font-size: 11px; }
+.wl-item__location i { color: #e79520; font-size: 11px; }
 
 .wl-item__price { display: flex; align-items: center; gap: 6px; }
 .wl-item__price-original { font-size: 12px; color: #bbb; text-decoration: line-through; }
-.wl-item__price-current { font-size: 14px; font-weight: 800; color: #FFA500; }
+.wl-item__price-current { font-size: 14px; font-weight: 800; color: #e79520; }
 
 /* Footer */
 .wl-panel__footer {
@@ -146,9 +146,9 @@
 .wl-panel__view-all {
   flex: 1.4;
   padding: 10px;
-  background: #FFA500; border: none;
+  background: #e79520; border: none;
   border-radius: 8px; font-size: 13px; font-weight: 700;
   color: #fff; cursor: pointer;
   transition: background .15s;
 }
-.wl-panel__view-all:hover { background: #e69400; }
+.wl-panel__view-all:hover { background: #c47e1b; }

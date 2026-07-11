@@ -140,7 +140,7 @@ function DashboardPage() {
         <StatCard icon="fa-file" iconBg="#7c3aed" value={data.pages.length} label="Pages"
           sub={`${data.pages.filter((p) => p.published !== false).length} published`}
           badge={data.pages.length > 0 ? `+${data.pages.length}` : null} />
-        <StatCard icon="fa-triangle-exclamation" iconBg="#FFA500" value={data.treks.length} label="Treks"
+        <StatCard icon="fa-triangle-exclamation" iconBg="#e79520" value={data.treks.length} label="Treks"
           sub={`${data.treks.filter((t) => t.featured).length} featured`} />
         <StatCard icon="fa-people-group" iconBg="#3b82f6" value={data.tours.length} label="Tours"
           sub={`${data.tours.filter((t) => t.featured).length} featured`} />
@@ -153,9 +153,9 @@ function DashboardPage() {
       <div className="dash-stats-grid">
         <StatCard icon="fa-blog" iconBg="#3b82f6" value={data.blogs.length} label="Blog Posts"
           sub={`${data.blogs.filter((b) => b.published !== false).length} published`} />
-        <StatCard icon="fa-quote-left" iconBg="#FFA500" value={data.testimonials.length} label="Testimonials"
+        <StatCard icon="fa-quote-left" iconBg="#e79520" value={data.testimonials.length} label="Testimonials"
           sub={`${data.testimonials.filter((t) => t.active !== false).length} active`} />
-        <StatCard icon="fa-envelope" iconBg="#17AACF" value={data.contacts.length} label="Contact Messages"
+        <StatCard icon="fa-envelope" iconBg="#31a1de" value={data.contacts.length} label="Contact Messages"
           sub={`${newContacts} new`} />
         <StatCard icon="fa-percent" iconBg="#f97316" value="78%" label="Engagement Rate" sub="+13%" />
       </div>
@@ -191,14 +191,14 @@ function DashboardPage() {
             { label: 'Pages', value: data.pages.length, color: '#7c3aed' },
             { label: 'Tours', value: data.tours.length, color: '#3b82f6' },
             { label: 'Treks', value: data.treks.length, color: '#22c55e' },
-            { label: 'Blogs', value: data.blogs.length, color: '#FFA500' },
+            { label: 'Blogs', value: data.blogs.length, color: '#e79520' },
           ]} />
         </div>
         <div className="dash-chart-card">
           <h4>Booking Status Distribution</h4>
           <StatusPie data={[
             { label: 'Confirmed', value: bookingsByStatus.confirmed, color: '#22c55e' },
-            { label: 'Pending', value: bookingsByStatus.pending, color: '#FFA500' },
+            { label: 'Pending', value: bookingsByStatus.pending, color: '#e79520' },
             { label: 'Cancelled', value: bookingsByStatus.cancelled, color: '#e63329' },
           ]} />
         </div>
@@ -262,11 +262,11 @@ function DashboardPage() {
       <div className="dash-quick-actions">
         {[
           { label: 'Manage Pages', sub: 'Create custom pages', icon: 'fa-file', path: '/cms/pages/manage', color: '#7c3aed' },
-          { label: 'Manage Treks', sub: 'Trek content', icon: 'fa-person-hiking', path: '/cms/treks/manage', color: '#FFA500' },
+          { label: 'Manage Treks', sub: 'Trek content', icon: 'fa-person-hiking', path: '/cms/treks/manage', color: '#e79520' },
           { label: 'Manage Tours', sub: 'Tour listings', icon: 'fa-route', path: '/cms/tours/manage', color: '#3b82f6' },
           { label: 'Manage Blogs', sub: 'Blog posts', icon: 'fa-blog', path: '/cms/blogs/manage', color: '#22c55e' },
           { label: 'Manage Testimonials', sub: 'Reviews', icon: 'fa-star', path: '/cms/testimonials/manage', color: '#f97316' },
-          { label: 'View Bookings', sub: 'Active bookings', icon: 'fa-calendar-check', path: '/cms/bookings/manage', color: '#FFA500' },
+          { label: 'View Bookings', sub: 'Active bookings', icon: 'fa-calendar-check', path: '/cms/bookings/manage', color: '#e79520' },
         ].map((a) => (
           <Link key={a.path} to={a.path} className="dash-quick-action" style={{ '--qa-color': a.color }}>
             <div className="dash-quick-action__icon" style={{ background: a.color }}>

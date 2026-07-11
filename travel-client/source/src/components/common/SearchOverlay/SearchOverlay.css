@@ -33,7 +33,7 @@
 .search-overlay__title {
   font-size: 22px;
   font-weight: 800;
-  color: #FFA500;
+  color: #e79520;
   margin: 0;
 }
 
@@ -73,7 +73,7 @@
 
 .search-overlay__btn {
   padding: 0 20px;
-  background: linear-gradient(135deg, #FFA500 0%, #e8c832 50%, #4caf50 100%);
+  background: linear-gradient(135deg, #e79520 0%, #e8c832 50%, #4caf50 100%);
   border: none;
   color: #fff;
   font-size: 16px;
@@ -160,7 +160,7 @@
   color: #fff;
   line-height: 1;
 }
-.search-result-item__badge--trek { background: #FFA500; }
+.search-result-item__badge--trek { background: #e79520; }
 .search-result-item__badge--tour { background: #3b82f6; }
 .search-result-item__badge--shortTour { background: #22c55e; }
 .search-result-item__badge--blog { background: #7c3aed; }
@@ -176,7 +176,7 @@
   font-size: 12px; color: #888;
   display: flex; align-items: center; gap: 4px;
 }
-.search-result-item__body span i { color: #FFA500; font-size: 11px; }
+.search-result-item__body span i { color: #e79520; font-size: 11px; }
 
 /* Popular searches */
 .search-overlay__popular { text-align: center; padding: 8px 0; }
@@ -197,4 +197,4 @@
   cursor: pointer;
   transition: all .15s;
 }
-.search-overlay__chip:hover { border-color: #FFA500; color: #FFA500; background: #fff8ee; }
+.search-overlay__chip:hover { border-color: #e79520; color: #e79520; background: #fff8ee; }

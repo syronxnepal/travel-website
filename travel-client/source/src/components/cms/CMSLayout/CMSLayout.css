@@ -28,7 +28,7 @@
 }
 .cms-layout__brand img { height: 32px; }
 .cms-layout__brand-name { font-size: 11px; font-weight: 800; color: #1B2948; line-height: 1.2; }
-.cms-layout__brand-sub { font-size: 10px; color: #FFA500; font-weight: 700; }
+.cms-layout__brand-sub { font-size: 10px; color: #e79520; font-weight: 700; }
 
 /* Nav */
 .cms-nav { padding: 12px 0; flex: 1; }
@@ -44,8 +44,8 @@
   border-left: 3px solid transparent;
   transition: all .15s;
 }
-.cms-nav__link:hover { color: #FFA500; background: #fff8ee; }
-.cms-nav__link.active { color: #FFA500; border-left-color: #FFA500; background: #fff8ee; font-weight: 600; }
+.cms-nav__link:hover { color: #e79520; background: #fff8ee; }
+.cms-nav__link.active { color: #e79520; border-left-color: #e79520; background: #fff8ee; font-weight: 600; }
 .cms-nav__link i { width: 16px; font-size: 13px; flex-shrink: 0; }
 
 .cms-nav__link--child {
@@ -53,7 +53,7 @@
   font-size: 12.5px;
   font-weight: 400;
 }
-.cms-nav__link--child.active { color: #FFA500; border-left-color: #FFA500; font-weight: 600; }
+.cms-nav__link--child.active { color: #e79520; border-left-color: #e79520; font-weight: 600; }
 
 /* Collapsible group */
 .cms-nav__group { }
@@ -73,8 +73,8 @@
   transition: all .15s;
   text-align: left;
 }
-.cms-nav__group-header:hover { color: #FFA500; background: #fff8ee; }
-.cms-nav__group-header.active { color: #FFA500; background: #fff8ee; }
+.cms-nav__group-header:hover { color: #e79520; background: #fff8ee; }
+.cms-nav__group-header.active { color: #e79520; background: #fff8ee; }
 .cms-nav__group-left { display: flex; align-items: center; gap: 10px; }
 .cms-nav__group-left i { width: 16px; font-size: 13px; flex-shrink: 0; }
 .cms-nav__chevron { font-size: 10px; color: #aaa; }
@@ -124,13 +124,13 @@
 
 .cms-back-btn {
   display: flex; align-items: center; gap: 6px;
-  background: #FFA500; color: #fff;
+  background: #e79520; color: #fff;
   padding: 8px 16px; border-radius: 6px;
   font-size: 13px; font-weight: 600;
   white-space: nowrap;
   transition: background .15s;
 }
-.cms-back-btn:hover { background: #e69400; color: #fff; }
+.cms-back-btn:hover { background: #c47e1b; color: #fff; }
 
 /* User dropdown */
 .cms-user {
@@ -143,7 +143,7 @@
 .cms-user__avatar {
   width: 32px; height: 32px;
   border-radius: 50%;
-  background: #FFA500;
+  background: #e79520;
   color: #fff; font-size: 13px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -177,7 +177,7 @@
 .cms-role-badge {
   display: inline-block;
   font-size: 10px; font-style: normal; font-weight: 700;
-  background: #fff3e0; color: #FFA500;
+  background: #fff3e0; color: #e79520;
   padding: 1px 6px; border-radius: 4px;
   margin-top: 2px; width: fit-content;
   text-transform: capitalize;

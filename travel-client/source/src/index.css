@@ -5,12 +5,12 @@
 }
 
 :root {
-  --color-primary: #FFA500;
-  --color-primary-dark: #e69400;
-  --color-nav: #17AACF;
-  --color-nav-dark: #1392b3;
+  --color-primary: #e79520;
+  --color-primary-dark: #c47e1b;
+  --color-nav: #31a1de;
+  --color-nav-dark: #2988bc;
   --color-secondary: #1B2948;
-  --color-accent: #FFA500;
+  --color-accent: #e79520;
   --color-text: #333333;
   --color-text-light: #666666;
   --color-bg: #ffffff;

@@ -5,7 +5,7 @@ import './HeroSearchWidget.css'
 
 const TYPE_BADGE = { trek: 'Trek', tour: 'Tour', shortTour: 'Short Tour' }
 const BOOKING_TYPE = { trek: 'trek', tour: 'tour', shortTour: 'short-tour' }
-const BADGE_COLOR = { trek: '#22c55e', tour: '#3b82f6', shortTour: '#FFA500' }
+const BADGE_COLOR = { trek: '#22c55e', tour: '#3b82f6', shortTour: '#e79520' }
 
 function HeroSearchWidget() {
   const [query, setQuery] = useState('')
