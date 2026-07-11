@@ -5,6 +5,7 @@ import PageHero from '../../../components/common/PageHero/PageHero'
 import { contactsApi } from '../../../services/api'
 import { usePageHero } from '../../../hooks/usePageHero'
 import { useSocialLinks } from '../../../hooks/useSocialLinks'
+import { useContactInfo } from '../../../hooks/useContactInfo'
 import './ContactPage.css'
 
 const DEFAULT_HERO = { title: 'Contact Us', subtitle: '', backgroundImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&h=400&fit=crop' }
@@ -12,6 +13,7 @@ const DEFAULT_HERO = { title: 'Contact Us', subtitle: '', backgroundImage: 'http
 function ContactPage() {
   const hero = usePageHero('contact', DEFAULT_HERO)
   const socialLinks = useSocialLinks()
+  const contactInfo = useContactInfo()
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -45,28 +47,28 @@ function ContactPage() {
                 <div className="contact-page__info-icon"><i className="fa-solid fa-location-dot"></i></div>
                 <div>
                   <strong>Address</strong>
-                  <p>21 Adventure Street, Sydney NSW 2000, Australia</p>
+                  <p>{contactInfo.address}</p>
                 </div>
               </div>
               <div className="contact-page__info-item">
                 <div className="contact-page__info-icon"><i className="fa-solid fa-phone"></i></div>
                 <div>
                   <strong>Phone</strong>
-                  <p>+61 2 0000 0000</p>
+                  <p>{contactInfo.phone}</p>
                 </div>
               </div>
               <div className="contact-page__info-item">
                 <div className="contact-page__info-icon"><i className="fa-solid fa-envelope"></i></div>
                 <div>
                   <strong>Email</strong>
-                  <p>sales@traveladventurenepal.com.au</p>
+                  <p>{contactInfo.email}</p>
                 </div>
               </div>
               <div className="contact-page__info-item">
                 <div className="contact-page__info-icon"><i className="fa-solid fa-clock"></i></div>
                 <div>
                   <strong>Working Hours</strong>
-                  <p>Mon – Fri: 9:00 AM – 6:00 PM</p>
+                  <p>{contactInfo.contactHours}</p>
                 </div>
               </div>
             </div>
@@ -134,7 +136,7 @@ function ContactPage() {
       <div className="contact-page__map">
         <iframe
           title="Google Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.6640432948337!2d151.20667!3d-33.8688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae665e892fdd%3A0x3133f8d75a1ac251!2sSydney%20NSW!5e0!3m2!1sen!2sau!4v1600000000000"
+          src={`https://www.google.com/maps?q=${encodeURIComponent(contactInfo.address)}&output=embed`}
           allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
         />
       </div>

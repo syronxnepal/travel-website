@@ -7,6 +7,7 @@ import Footer from '../../../components/common/Footer/Footer'
 import { bookingsApi, stripeApi, toursApi, treksApi, shortToursApi } from '../../../services/api'
 import { formatCurrency, getImageUrl } from '../../../utils/helpers'
 import { useToast } from '../../../context/ToastContext'
+import { useContactInfo } from '../../../hooks/useContactInfo'
 import './BookingPage.css'
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '')
@@ -316,6 +317,7 @@ function BookingPage() {
   const [searchParams] = useSearchParams()
   const [item, setItem] = useState(null)
   const [loading, setLoading] = useState(true)
+  const contactInfo = useContactInfo()
 
   const prefillDate = searchParams.get('date') || ''
   const prefillPersons = parseInt(searchParams.get('persons')) || 1
@@ -386,8 +388,8 @@ function BookingPage() {
 
             <div className="booking-page__help-card">
               <h4>Need Help?</h4>
-              <a href="tel:+61000000000"><i className="fa-solid fa-phone"></i> +61 2 0000 0000</a>
-              <a href="mailto:sales@traveladventurenepal.com.au"><i className="fa-solid fa-envelope"></i> Email Us</a>
+              <a href={`tel:${contactInfo.phone.replace(/[^\d+]/g, '')}`}><i className="fa-solid fa-phone"></i> {contactInfo.phone}</a>
+              <a href={`mailto:${contactInfo.email}`}><i className="fa-solid fa-envelope"></i> Email Us</a>
             </div>
           </aside>
         </div>

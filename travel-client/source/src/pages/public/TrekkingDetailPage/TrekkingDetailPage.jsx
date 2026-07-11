@@ -5,6 +5,7 @@ import Footer from '../../../components/common/Footer/Footer'
 import { treksApi } from '../../../services/api'
 import { formatCurrency, getImageUrl } from '../../../utils/helpers'
 import { useWishlist } from '../../../context/WishlistContext'
+import { useContactInfo } from '../../../hooks/useContactInfo'
 import '../TourDetailPage/TourDetailPage.css'
 
 function Accordion({ title, children, defaultOpen = false }) {
@@ -28,6 +29,7 @@ function TrekkingDetailPage() {
   const [persons, setPersons] = useState(1)
   const [activeImg, setActiveImg] = useState(0)
   const { isInWishlist, toggleWishlist } = useWishlist()
+  const contactInfo = useContactInfo()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -157,8 +159,8 @@ function TrekkingDetailPage() {
               <h3>Ready for the Adventure?</h3>
               <p>Contact us anytime for personalised trekking assistance</p>
               <div className="detail-contact-cta__btns">
-                <a href="tel:+61000000000" className="btn btn--primary"><i className="fa-solid fa-phone"></i> Call Us</a>
-                <a href="mailto:sales@traveladventurenepal.com.au" className="btn btn--nav"><i className="fa-solid fa-envelope"></i> Email Us</a>
+                <a href={`tel:${contactInfo.phone.replace(/[^\d+]/g, '')}`} className="btn btn--primary"><i className="fa-solid fa-phone"></i> Call Us</a>
+                <a href={`mailto:${contactInfo.email}`} className="btn btn--nav"><i className="fa-solid fa-envelope"></i> Email Us</a>
               </div>
             </div>
           </div>

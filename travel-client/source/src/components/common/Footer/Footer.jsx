@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { treksApi } from '../../../services/api'
 import { useSocialLinks } from '../../../hooks/useSocialLinks'
+import { useContactInfo } from '../../../hooks/useContactInfo'
 import './Footer.css'
 
 function Footer() {
@@ -9,6 +10,7 @@ function Footer() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
   const socialLinks = useSocialLinks()
+  const contactInfo = useContactInfo()
 
   useEffect(() => {
     treksApi.getAll({ limit: 5 }).then((r) => setLatestTreks((r?.data || r || []).slice(0, 5))).catch(() => {})
@@ -104,17 +106,17 @@ function Footer() {
 
             <div className="footer__col">
               <h4 className="footer__heading">Address</h4>
-              <p className="footer__text">Suite 502/155 Castlereagh Street, Sydney - Australia 2000</p>
+              <p className="footer__text">{contactInfo.address}</p>
             </div>
 
             <div className="footer__col">
               <h4 className="footer__heading">Contact</h4>
-              <p className="footer__text">+61 2 0000 0000<br />sales@traveladventurenepal.com.au</p>
+              <p className="footer__text">{contactInfo.phone}<br />{contactInfo.email}</p>
             </div>
 
             <div className="footer__col">
               <h4 className="footer__heading">Working Hours</h4>
-              <p className="footer__text">Monday - Friday: 09:00 - 17:00<br />Saturday, Sunday: 09:00 - 15:00</p>
+              <p className="footer__text">{contactInfo.contactHours}</p>
             </div>
           </div>
         </div>
@@ -128,7 +130,7 @@ function Footer() {
             ))}
           </div>
           <p className="footer__brand-name">Travel Adventure Nepal</p>
-          <p className="footer__help">Need help? Call us <a href="tel:+61200000000">+61 2 0000 0000</a></p>
+          <p className="footer__help">Need help? Call us <a href={`tel:${contactInfo.phone.replace(/[^\d+]/g, '')}`}>{contactInfo.phone}</a></p>
         </div>
       </div>
 

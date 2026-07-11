@@ -4,6 +4,7 @@ import { useAuth } from '../../../context/AuthContext'
 import { useWishlist } from '../../../context/WishlistContext'
 import { useScrollPosition } from '../../../hooks/useScrollPosition'
 import { useSocialLinks } from '../../../hooks/useSocialLinks'
+import { useContactInfo } from '../../../hooks/useContactInfo'
 import SearchOverlay from '../SearchOverlay/SearchOverlay'
 import WishlistPanel from '../WishlistPanel/WishlistPanel'
 import './Header.css'
@@ -111,6 +112,7 @@ function Header() {
   const { isAuthenticated, user, logout, isAdmin } = useAuth()
   const { wishlist } = useWishlist()
   const socialLinks = useSocialLinks()
+  const contactInfo = useContactInfo()
   const scrollY = useScrollPosition()
   const navigate = useNavigate()
   const topbarRef = useRef(null)
@@ -170,14 +172,14 @@ function Header() {
                 <span className="header-topbar__info-icon"><i className="fa-solid fa-location-dot"></i></span>
                 <span className="header-topbar__info-text">
                   <strong>OUR LOCATION</strong>
-                  <span>Suite 502/155 Castlereagh Street, Sydney - Australia 2000</span>
+                  <span>{contactInfo.address}</span>
                 </span>
               </span>
               <span className="header-topbar__info-item">
                 <span className="header-topbar__info-icon"><i className="fa-regular fa-envelope"></i></span>
                 <span className="header-topbar__info-text">
                   <strong>EMAIL US</strong>
-                  <span>sales@traveladventurenepal.com.au</span>
+                  <span>{contactInfo.email}</span>
                 </span>
               </span>
             </div>
@@ -265,10 +267,10 @@ function Header() {
 
             <div className="mobile-menu__contact">
               <span className="mobile-menu__contact-item">
-                <i className="fa-solid fa-location-dot"></i> Suite 502/155 Castlereagh Street, Sydney - Australia 2000
+                <i className="fa-solid fa-location-dot"></i> {contactInfo.address}
               </span>
               <span className="mobile-menu__contact-item">
-                <i className="fa-regular fa-envelope"></i> sales@traveladventurenepal.com.au
+                <i className="fa-regular fa-envelope"></i> {contactInfo.email}
               </span>
             </div>
 

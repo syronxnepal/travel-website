@@ -7,6 +7,7 @@ import TrekCard from '../../../components/tours/TrekCard/TrekCard'
 import HeroSearchWidget from '../../../components/home/HeroSearchWidget/HeroSearchWidget'
 import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi, homePageSectionsApi } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
+import { useContactInfo } from '../../../hooks/useContactInfo'
 import './HomePage.css'
 
 function SectionHead({ badge, title, subtitle, cta, icon = 'fa-solid fa-compass' }) {
@@ -116,6 +117,7 @@ function HomePage() {
   const [testimonials, setTestimonials] = useState(SAMPLE_TESTIMONIALS)
   const [slide, setSlide] = useState(0)
   const [testiIndex, setTestiIndex] = useState(0)
+  const contactInfo = useContactInfo()
   const [sections, setSections] = useState({})
 
   // Returns a CMS-editable section field, falling back to the given default
@@ -412,7 +414,7 @@ function HomePage() {
             <h2>{sVal('reach-us-section', 'heading', 'We Are Available 24/7')}</h2>
             <p>{sVal('reach-us-section', 'subtitle', 'Reach out any time and let our team craft your perfect Nepal adventure.')}</p>
             <div className="home-cta__actions">
-              <a href="tel:+61200000000" className="btn btn--outline-white btn--lg">Call Us <i className="fa-solid fa-phone"></i></a>
+              <a href={`tel:${contactInfo.phone.replace(/[^\d+]/g, '')}`} className="btn btn--outline-white btn--lg">Call Us <i className="fa-solid fa-phone"></i></a>
               <Link to="/contact" className="btn btn--primary btn--lg">{sVal('reach-us-section', 'ctaLabel', 'Book Now')} <i className="fa-solid fa-arrow-right"></i></Link>
             </div>
           </div>
