@@ -1,9 +1,9 @@
 .trek-card {
   position: relative;
   display: block;
-  border-radius: var(--radius-md);
+  border-radius: 18px;
   overflow: hidden;
-  height: 220px;
+  aspect-ratio: 3 / 4;
   text-decoration: none;
   color: #fff;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -22,7 +22,7 @@
 
 .trek-card__overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.05) 55%, rgba(0,0,0,0.15) 100%);
 }
 
 .trek-card__wishlist {
@@ -41,26 +41,32 @@
 .trek-card__info {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 14px 16px;
+  padding: 18px 18px 16px;
   z-index: 1;
 }
 
 .trek-card__title {
-  font-size: 15px; font-weight: 700;
-  margin-bottom: 6px; line-height: 1.3;
+  font-size: 19px; font-weight: 700;
+  margin-bottom: 12px; line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 .trek-card__meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.25);
 }
 
 .trek-card__duration { color: rgba(255,255,255,0.85); }
+.trek-card__duration i { color: var(--color-primary); margin-right: 4px; }
 
 .trek-card__price {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 17px;
   color: #fff;
 }
+
+.trek-card__price::before { content: '$'; }

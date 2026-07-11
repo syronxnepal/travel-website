@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from '../../../components/common/Header/Header'
 import Footer from '../../../components/common/Footer/Footer'
 import TourCard from '../../../components/tours/TourCard/TourCard'
+import TrekCard from '../../../components/tours/TrekCard/TrekCard'
 import HeroSearchWidget from '../../../components/home/HeroSearchWidget/HeroSearchWidget'
 import { treksApi, toursApi, shortToursApi, blogsApi, galleryApi, heroSlidersApi, testimonialsApi, homePageSectionsApi } from '../../../services/api'
 import { getImageUrl } from '../../../utils/helpers'
@@ -215,7 +216,7 @@ function HomePage() {
               cta={{ label: 'View More', link: '/trekking' }}
             />
             <div className="home-trek-grid">
-              {treks.map((trek) => <TourCard key={trek._id || trek.id} tour={trek} type="trek" />)}
+              {treks.map((trek) => <TrekCard key={trek._id || trek.id} trek={trek} />)}
             </div>
           </div>
         </section>
